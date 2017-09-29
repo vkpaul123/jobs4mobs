@@ -18,8 +18,8 @@ Route::get('/welcome', function() {
 
 //	Testing for Profile Registration
 
-Route::get('s3-image-upload','S3ImageController@imageUpload');
-Route::post('s3-image-upload','S3ImageController@imageUploadPost');
+// Route::get('s3-image-upload','S3ImageController@imageUpload');
+// Route::post('s3-image-upload','S3ImageController@imageUploadPost');
 
 /*
 	
