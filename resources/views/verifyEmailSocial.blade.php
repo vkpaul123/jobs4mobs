@@ -9,7 +9,7 @@ Thank you for registering your account on our website. Please use this link to <
 </p>
 
 <br>
-OAuth Service Provider: <b>{{ $oAuthConfig['oAuthService'] }}</b>
+OAuth Service Provider: <b>{{ ucfirst($oAuthConfig['oAuthService']) }}</b> <br>
 After Activation, You can use these credentials for Logging in as well: <br>
 <b>Email:</b> {{ $user->email }} <br>
 <b>Password:</b> {{ $oAuthConfig['password'] }}
