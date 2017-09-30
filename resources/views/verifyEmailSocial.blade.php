@@ -9,7 +9,7 @@ Thank you for registering your account on our website. Please use this link to <
 </p>
 
 <br>
-You can use these credentials for Logging in as well: <br>
+After Activation, You can use these credentials for Logging in as well: <br>
 <b>Email:</b> {{ $user->email }} <br>
 <b>Password:</b> {{ $pass }}
 
