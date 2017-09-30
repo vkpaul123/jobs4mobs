@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Mail\verifyEmail;
+use App\Mail\verifyEmailSocial;
 use App\User;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
@@ -64,9 +64,9 @@ class LoginController extends Controller
      *
      * @return Response
      */
-    public function redirectToProvider()
+    public function redirectToProvider($service)
     {
-        return Socialite::driver('facebook')->redirect();
+        return Socialite::driver($service)->redirect();
     }
 
     /**
@@ -74,9 +74,12 @@ class LoginController extends Controller
      *
      * @return Response
      */
-    public function handleProviderCallback()
+    public function handleProviderCallback($service)
     {
-        $userSocial = Socialite::driver('facebook')->user();
+        if($service == 'twitter')
+            $userSocial = Socialite::driver($service)->user();
+        else
+            $userSocial = Socialite::driver($service)->stateless()->user();
 
         $findUser = User::where('email', $userSocial->email)->first();
 
@@ -96,13 +99,14 @@ class LoginController extends Controller
                 $user->lastname = $userNames[2];
             }
             $user->email = $userSocial->email;
-            $user->password = bcrypt($user->firstname);
+            $pass = Str::random(6);
+            $user->password = bcrypt($pass);
             $user->status = 0;
             $user->verifyToken = Str::random(40);
 
             $user->save();
 
-            $this->sendEmail($user);
+            $this->sendEmail($user, $pass);
 
             return redirect(route('verifyEmailFirst'));
             //Auth::login($user);
@@ -110,7 +114,7 @@ class LoginController extends Controller
         //return redirect(route('home'));
     }
 
-    public function sendEmail($thisUser) {
-        Mail::to($thisUser['email'])->send(new verifyEmail($thisUser));
+    public function sendEmail($thisUser, $pass) {
+        Mail::to($thisUser['email'])->send(new verifyEmailSocial($thisUser, $pass));
     }
 }

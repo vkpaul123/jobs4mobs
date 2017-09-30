@@ -168,21 +168,9 @@ Route::group(['namespace' => 'Employer'], function() {
 	});
 });
 
-//	Socialite Facebook
-Route::get('login/facebook', 'Auth\LoginController@redirectToProvider');
-Route::get('login/facebook/callback', 'Auth\LoginController@handleProviderCallback');
-
-//	Socialite twitter
-Route::get('login/twitter', 'Auth\LoginController@redirectToProvider');
-Route::get('login/twitter/callback', 'Auth\LoginController@handleProviderCallback');
-
-//	Socialite google
-Route::get('login/google', 'Auth\LoginController@redirectToProvider');
-Route::get('login/google/callback', 'Auth\LoginController@handleProviderCallback');
-
-//	Socialite linkedin
-Route::get('login/linkedin', 'Auth\LoginController@redirectToProvider');
-Route::get('login/linkedin/callback', 'Auth\LoginController@handleProviderCallback');
+//	Socialite Login
+Route::get('login/{service}', 'Auth\LoginController@redirectToProvider');
+Route::get('login/{service}/callback', 'Auth\LoginController@handleProviderCallback');
 
 // JobSeeker Routes
 Route::group(['namespace' => 'JobSeeker'], function() {
@@ -193,6 +181,7 @@ Route::group(['namespace' => 'JobSeeker'], function() {
 	Route::get('register', 'Auth\RegisterController@showRegistrationForm')->name('register');
 	Route::get('password/reset', 'Auth\ForgotPasswordController@showLinkRequestForm')->name('password.request');
 	Route::get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.reset');
+
 
 	//	Profile
 	//Route::get('/home/profile', 'PageController@viewProfile')->name('viewProfile');
