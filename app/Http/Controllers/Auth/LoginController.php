@@ -105,8 +105,8 @@ class LoginController extends Controller
             $user->verifyToken = Str::random(40);
 
             $user->save();
-
-            $this->sendEmail($user, $pass);
+            $oAuthConfig = ['password' => $pass, 'oAuthService' => $service];
+            $this->sendEmail($user, $oAuthConfig);
 
             return redirect(route('verifyEmailFirst'));
             //Auth::login($user);
@@ -114,7 +114,7 @@ class LoginController extends Controller
         //return redirect(route('home'));
     }
 
-    public function sendEmail($thisUser, $pass) {
-        Mail::to($thisUser['email'])->send(new verifyEmailSocial($thisUser, $pass));
+    public function sendEmail($thisUser, $oAuthConfig) {
+        Mail::to($thisUser['email'])->send(new verifyEmailSocial($thisUser, $oAuthConfig));
     }
 }

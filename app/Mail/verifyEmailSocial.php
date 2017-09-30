@@ -17,12 +17,12 @@ class verifyEmailSocial extends Mailable
      * @return void
      */
     public $user;
-    public $pass;
+    public $oAuthConfig;
 
-    public function __construct($user, $pass)
+    public function __construct($user, $oAuthConfig)
     {
         $this->user = $user;
-        $this->pass = $pass;
+        $this->oAuthConfig = $oAuthConfig;
     }
 
     /**
@@ -34,6 +34,6 @@ class verifyEmailSocial extends Mailable
     {
         return $this->markdown('verifyEmailSocial')
         ->with(compact('user'))
-        ->with(compact('pass'));
+        ->with(compact('oAuthConfig'));
     }
 }
