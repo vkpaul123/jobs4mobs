@@ -16,7 +16,7 @@ class JobCategory extends Model
     ];
 
     public function jobSeekerProfile_recentJobCategory() {
-        return $this->hasMany(JobseekerProfile::class, 'recentJobCategory');
+        return $this->hasMany(JobseekerProfile::class, 'recentJobCategoryId');
     }
 
     public function jobSeekerProfile_preferedJobCategoryId1() {

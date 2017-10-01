@@ -180,7 +180,7 @@ class VacancyAddressController extends Controller
         
         $urlString = 'https://maps.googleapis.com/maps/api/geocode/json?address='
             .urlencode($request->address.', '.$request->cityName)
-            .'&key=AIzaSyAvqZVAd1Z2utIGG4W8qhHcoc8PLyaFZTU';
+            .'&key=AIzaSyAS7wZg-KLMUWnonuxXQLnYd5yHETxrKDQ';
 
         $geocode = file_get_contents($urlString);
 
@@ -192,7 +192,7 @@ class VacancyAddressController extends Controller
         else {
             $urlString = 'https://maps.googleapis.com/maps/api/geocode/json?address='
                 .urlencode($request->cityName)
-                .'&key=AIzaSyAvqZVAd1Z2utIGG4W8qhHcoc8PLyaFZTU';
+                .'&key=AIzaSyAS7wZg-KLMUWnonuxXQLnYd5yHETxrKDQ';
 
             $geocode = file_get_contents($urlString);
 
@@ -207,6 +207,14 @@ class VacancyAddressController extends Controller
         }
 
         $address->save();
+
+        $vacancy = Vacancy::find($address->vacancy->first()->id);
+        
+        $tempDescr = $vacancy->vacancydescription;
+        $vacancy->vacancydescription = null;
+        $vacancy->save();
+        $vacancy->vacancydescription = $tempDescr;
+        $vacancy->save();
 
         return redirect(route('vacancy.show', $request->id));
     }

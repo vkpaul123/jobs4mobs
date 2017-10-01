@@ -34,7 +34,7 @@
 				<div class="row">
 					<div class="col-md-2">
 						@isset (Auth::user()->photo)
-	        				<img src="{{ asset('storage/upload/employer/DPs/'.Auth::user()->photo) }}"  class="img-rounded img-responsive" alt="Profile Image">
+	        				<img src="{{ Auth::user()->photo }}"  class="img-rounded img-responsive" alt="Profile Image">
         				@else
     						<img src="{{ asset('assets/staticImages/user.png') }}"  class="img-rounded img-responsive" alt="Profile Image">
         				@endisset

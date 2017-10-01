@@ -3,9 +3,37 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Laravel\Scout\Searchable;
 
 class Vacancy extends Model
 {
+    use Searchable;
+
+    /**
+     * Get the index name for the model.
+     *
+     * @return string
+     */
+    public function searchableAs()
+    {
+        return 'vacancies';
+    }
+
+    public function toSearchableArray()
+    {
+        $vacancy = $this->toArray();
+
+        $vacancy['jobcategoryId'] = $this->jobCategory->name;
+
+        if($this->address)
+            $vacancy['addresses_id'] = $this->address->toArray();
+
+        $skills = $this->vacancySkill->toArray();
+        array_push($vacancy, $skills);
+
+        return $vacancy;
+    }
+
 	public function jobCategory() {
     	return $this->belongsTo(JobCategory::class, 'jobcategoryId');
     }

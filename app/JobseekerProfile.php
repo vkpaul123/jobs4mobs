@@ -3,9 +3,41 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Laravel\Scout\Searchable;
 
 class JobseekerProfile extends Model
 {
+    use Searchable;
+    /**
+     * Get the index name for the model.
+     *
+     * @return string
+     */
+    public function searchableAs()
+    {
+        return 'jobseeker_profiles';
+    }
+
+    public function toSearchableArray()
+    {
+        $jobseeker = $this->toArray();
+
+        if($this->jobCategory_recentJobCategory)
+            $jobseeker['recentJobCategoryId'] = $this->jobCategory_recentJobCategory->name;
+
+        $jobseeker['preferedJobCategoryId1'] = $this->jobCategory_preferedJobCategoryId1->name;
+        $jobseeker['preferedJobCategoryId2'] = $this->jobCategory_preferedJobCategoryId2->name;
+
+        if($this->address)
+            $jobseeker['address_id'] = $this->address->toArray();
+
+        $skills = $this->jobseekerSkill->toArray();
+        array_push($jobseeker, $skills);
+
+        return $jobseeker;
+    }
+
+
     public function user() {
     	return $this->belongsTo(User::class);
     }
@@ -39,7 +71,7 @@ class JobseekerProfile extends Model
     }
     
     public function jobseekerSkill() {
-        return $this->hasMany(JobseekerSkill::class);
+        return $this->hasMany(JobseekerSkill::class, 'jobseeker_profiles_id');
     }
 
     public function results() {

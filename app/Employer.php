@@ -5,10 +5,12 @@ namespace App;
 use App\Notifications\EmployerResetPasswordNotification;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Laravel\Scout\Searchable;
 
 class Employer extends Authenticatable
 {
     use Notifiable;
+    use Searchable;
 
     /**
      * Send the password reset notification.
@@ -19,6 +21,29 @@ class Employer extends Authenticatable
     public function sendPasswordResetNotification($token)
     {
         $this->notify(new EmployerResetPasswordNotification($token));
+    }
+
+    /**
+     * Get the index name for the model.
+     *
+     * @return string
+     */
+    public function searchableAs()
+    {
+        return 'employers';
+    }
+
+    public function toSearchableArray()
+    {
+        $employer = $this->toArray();
+
+        if($this->address)
+            $employer['address_id'] = $this->address->toArray();
+
+        if($this->jobcategory)
+            $employer['jobCategoryId'] = $this->jobcategory->name;
+
+        return $employer;
     }
 
     /**
@@ -36,7 +61,7 @@ class Employer extends Authenticatable
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token',
+        'password', 'remember_token', 'verifyToken',
     ];
 
     public function address() {

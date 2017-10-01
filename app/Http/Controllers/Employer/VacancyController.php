@@ -8,6 +8,7 @@ use App\JobCategory;
 use App\Vacancy;
 use App\VacancySkill;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class VacancyController extends Controller
 {
@@ -194,8 +195,13 @@ class VacancyController extends Controller
     public function toggleVacancyStatus(Request $request, $id)
     {
         $vacancy = Vacancy::find($id);
-        $vacancy->vacancyStatus = $request->vacancyStatus;
 
+        if($vacancy->addresses_id) 
+            $vacancy->vacancyStatus = $request->vacancyStatus;
+        else {
+            Session::flash('message', 'Please Add Address!');
+        }
+        
         $vacancy->save();
 
         return redirect(route('vacancy.show', $id));

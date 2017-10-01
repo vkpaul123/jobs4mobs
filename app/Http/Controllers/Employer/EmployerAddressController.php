@@ -106,7 +106,7 @@ class EmployerAddressController extends Controller
      */
     public function edit($id)
     {
-        $employer = Employer::find($id)->get()->first();
+        $employer = Employer::where('id', $id)->get()->first();
 
         $address = Address::find($employer->address_id);
 
@@ -147,6 +147,14 @@ class EmployerAddressController extends Controller
         $address->website = $request->website;
         
         $address->save();
+
+        $employer = Employer::find($address->employer->first()->id);
+        
+        $tempDescr = $employer->description;
+        $employer->description = null;
+        $employer->save();
+        $employer->description = $tempDescr;
+        $employer->save();
 
         return redirect(route('employerProfile.show', $request->id));
     }

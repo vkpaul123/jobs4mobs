@@ -49,7 +49,7 @@
 	 		});
 	 	}
 	 </script>
-	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAvqZVAd1Z2utIGG4W8qhHcoc8PLyaFZTU&callback=loadMap"></script>
+	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAS7wZg-KLMUWnonuxXQLnYd5yHETxrKDQ&callback=loadMap"></script>
  
 <!-- *****************************************************************************************************************
  CONTACT FORMS

@@ -138,6 +138,14 @@ class JobseekerAddressController extends Controller
         
         $address->save();
 
+        $jobseekerProfile = JobseekerProfile::find($address->jobseekerProfile->first()->id);
+        
+        $tempDescr = $jobseekerProfile->tagline;
+        $jobseekerProfile->tagline = "";
+        $jobseekerProfile->save();
+        $jobseekerProfile->tagline = $tempDescr;
+        $jobseekerProfile->save();
+
         return redirect()->back();
     }
 

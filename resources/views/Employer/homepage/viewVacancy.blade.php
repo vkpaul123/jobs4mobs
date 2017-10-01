@@ -54,8 +54,11 @@
 			<div class="container-fluid">
 				<div class="row">
 					<div class="col-md-2">
-						<img src="{{asset('storage/upload/employer/DPs/'.Auth::user()->photo)}}" class="img-rounded img-responsive" alt="Profile Image">
-
+						@isset (Auth::user()->photo)
+	        				<img src="{{ Auth::user()->photo }}"  class="img-rounded img-responsive" alt="Profile Image">
+        				@else
+    						<img src="{{ asset('assets/staticImages/user.png') }}"  class="img-rounded img-responsive" alt="Profile Image">
+        				@endisset
 					</img>
 				</div>
 				<div class="col-md-7">
@@ -85,6 +88,9 @@
 								@endif
 							</div>
 							<div class="box-footer">
+								@if (Session::has('message'))
+									<div class="alert alert-danger">{{ Session::get('message') }}</div>
+								@endif
 								<form action="{{ route('vacancy.toggleVacancyStatus', $vacancy->id) }}" method="post">
 								{{ csrf_field() }}
 								{{ method_field('PUT') }}
@@ -328,7 +334,7 @@
 								 		});
 								 	}
 								 </script>
-								<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAvqZVAd1Z2utIGG4W8qhHcoc8PLyaFZTU&callback=loadMap"></script>
+								<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAS7wZg-KLMUWnonuxXQLnYd5yHETxrKDQ&callback=loadMap"></script>
 							@else
 								<div class="container-fluid">
 									<div class="jumbotron">

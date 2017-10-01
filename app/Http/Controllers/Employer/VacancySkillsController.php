@@ -62,6 +62,12 @@ class VacancySkillsController extends Controller
 
         $vacancySkill->save();
 
+        $vacancydescription = $vacancy->vacancydescription;
+        $vacancy->vacancydescription = "";
+        $vacancy->save();
+        $vacancy->vacancydescription = $vacancydescription;
+        $vacancy->save();
+
         return redirect()->back();
     }
 
@@ -118,6 +124,12 @@ class VacancySkillsController extends Controller
 
         $vacancySkill->save();
 
+        $vacancy = Vacancy::find($vacancySkill->vacancies_id);
+        $vacancy->vacancydescription = "";
+        $vacancy->save();
+        $vacancy->vacancydescription = $vacancydescription;
+        $vacancy->save();
+
         return redirect(route('vacancySkills.show', $id));
     }
 
@@ -129,6 +141,14 @@ class VacancySkillsController extends Controller
      */
     public function destroy($id)
     {
+        $vacancySkill = VacancySkill::find($id);
+
+        $vacancy = Vacancy::find($vacancySkill->vacancies_id);
+        $vacancy->vacancydescription = "";
+        $vacancy->save();
+        $vacancy->vacancydescription = $vacancydescription;
+        $vacancy->save();
+
         VacancySkill::where('id', $id)->delete();
 
         return redirect()->back();
