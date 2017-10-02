@@ -34,6 +34,12 @@ class JobseekerProfile extends Model
         $skills = $this->jobseekerSkill->toArray();
         array_push($jobseeker, $skills);
 
+        $experiences = $this->jobseekerExperience->toArray();
+        array_push($jobseeker, $experiences);
+
+        $academics = $this->jobseekerAcademics->toArray();
+        array_push($jobseeker, $academics);
+
         return $jobseeker;
     }
 
@@ -59,11 +65,11 @@ class JobseekerProfile extends Model
     }
 
     public function jobseekerExperience() {
-        return $this->hasMany(JobseekerExperience::class);
+        return $this->hasMany(JobseekerExperience::class, 'jobseeker_profiles_id');
     }
 
     public function jobseekerAcademics() {
-        return $this->hasMany(JobseekerAcademics::class);
+        return $this->hasMany(JobseekerAcademics::class, 'jobseeker_profiles_id');
     }
     
     public function jobseekerAchievements() {

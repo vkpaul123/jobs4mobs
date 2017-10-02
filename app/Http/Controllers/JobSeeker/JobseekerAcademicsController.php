@@ -67,6 +67,12 @@ class JobseekerAcademicsController extends Controller
 
         $jobseekerAcademics->save();
 
+        $t = $jobseekerResume->tagline;
+        $jobseekerResume->tagline = "";
+        $jobseekerResume->save();
+        $jobseekerResume->tagline = $t;
+        $jobseekerResume->save();
+
         return redirect()->back();
     }
 
@@ -125,6 +131,13 @@ class JobseekerAcademicsController extends Controller
 
         $jobseekerAcademics->save();
 
+        $jobseekerResume = JobseekerProfile::find($jobseekerAcademics->jobseeker_profiles_id);
+        $t = $jobseekerResume->tagline;
+        $jobseekerResume->tagline = "";
+        $jobseekerResume->save();
+        $jobseekerResume->tagline = $t;
+        $jobseekerResume->save();
+
         return redirect(route('resume.show', $jobseekerAcademics->jobseeker_profiles_id));
     }
 
@@ -136,7 +149,16 @@ class JobseekerAcademicsController extends Controller
      */
     public function destroy($id)
     {
+        $jp_id = JobseekerAcademics::find($id)->jobseeker_profiles_id;
+
         JobseekerAcademics::where('id', $id)->delete();
+
+        $jobseekerResume = JobseekerProfile::find($jp_id);
+        $t = $jobseekerResume->tagline;
+        $jobseekerResume->tagline = "";
+        $jobseekerResume->save();
+        $jobseekerResume->tagline = $t;
+        $jobseekerResume->save();
 
         return redirect()->back();
     }

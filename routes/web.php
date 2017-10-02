@@ -158,7 +158,7 @@ Route::group(['namespace' => 'Employer'], function() {
 
 		//	Search Jobseeker
 		Route::get('/jobseekerSearchResults', 'PageController@jobseekerSearchResults');
-		Route::get('/viewJobseekerProfile', 'PageController@viewJobseekerProfile');
+		Route::get('/viewJobseekerProfile/{id}', 'PageController@viewJobseekerProfile')->name('employer.viewJobseekerProfile');
 		Route::get('/viewJobseekerResume', 'PageController@viewJobseekerResume');
 
 		Route::get('/home/contactAdmin', 'PageController@contactAdmin');
@@ -214,11 +214,11 @@ Route::group(['namespace' => 'JobSeeker'], function() {
 
 	Route::get('/home/searchEmployer', 'PageController@searchEmployer');
 	Route::get('/home/employerSearchResults', 'PageController@employerSearchResults');
-	Route::get('/home/viewEmployerProfile', 'PageController@viewEmployerProfile');
+	Route::get('/home/viewEmployerProfile/{id}', 'PageController@viewEmployerProfile');
 
 	Route::get('/home/searchVacancy', 'PageController@searchVacancy');
 	Route::get('/home/vacancySearchResults', 'PageController@vacancySearchResults');
-	Route::get('/home/viewVacancy', 'PageController@viewVacancy');
+	Route::get('/home/viewVacancy/{id}', 'PageController@viewVacancy');
 	
 	Route::get('/home/contactAdmin', 'PageController@contactAdmin');
 

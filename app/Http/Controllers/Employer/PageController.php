@@ -2,8 +2,14 @@
 
 namespace App\Http\Controllers\Employer;
 
-use Illuminate\Http\Request;
+use App\Address;
 use App\Http\Controllers\Controller;
+use App\JobseekerAcademics;
+use App\JobseekerExperience;
+use App\JobseekerProfile;
+use App\JobseekerSkill;
+use App\User;
+use Illuminate\Http\Request;
 
 class PageController extends Controller
 {
@@ -43,8 +49,25 @@ class PageController extends Controller
         return view('Employer.homepage.jobseekerSearchResults');
     }
 
-    public function viewJobseekerProfile() {
-        return view('Employer.homepage.viewJobseekerProfile');
+    public function viewJobseekerProfile($id) {
+        $jobseekerProfile = JobseekerProfile::find($id);
+
+        $user = User::where('id', $jobseekerProfile->user_id)->get()->first();
+        $academics = JobseekerAcademics::where('jobseeker_profiles_id', $id)->get();
+        $skills = JobseekerSkill::where('jobseeker_profiles_id', $id)->get();
+        $experiences = JobseekerExperience::where('jobseeker_profiles_id', $id)->get()->last();
+
+        $address = null;
+        if($jobseekerProfile->address_id)
+            $address = Address::find($jobseekerProfile->address_id)->get()->first();
+
+        return view('Employer.homepage.viewJobseekerProfile')
+        ->with(compact('jobseekerProfile'))
+        ->with(compact('address'))
+        ->with(compact('academics'))
+        ->with(compact('skills'))
+        ->with(compact('experiences'))
+        ->with(compact('user'));
     }
 
     public function viewJobseekerResume() {

@@ -73,7 +73,7 @@ class VacancyAddressController extends Controller
         
             $urlString = 'https://maps.googleapis.com/maps/api/geocode/json?address='
                 .urlencode($request->address.', '.$request->cityName)
-                .'&key=AIzaSyAvqZVAd1Z2utIGG4W8qhHcoc8PLyaFZTU';
+                .'&key=AIzaSyDhhJHWbRp_rh15XKRS-t8zwfZLX-KuSIU';
 
             $geocode = file_get_contents($urlString);
 
@@ -85,7 +85,7 @@ class VacancyAddressController extends Controller
             else {
                 $urlString = 'https://maps.googleapis.com/maps/api/geocode/json?address='
                     .urlencode($request->cityName)
-                    .'&key=AIzaSyAvqZVAd1Z2utIGG4W8qhHcoc8PLyaFZTU';
+                    .'&key=AIzaSyDhhJHWbRp_rh15XKRS-t8zwfZLX-KuSIU';
 
                 $geocode = file_get_contents($urlString);
 

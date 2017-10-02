@@ -38,12 +38,12 @@
 <!-- Content Header (Page header) -->
 <section class="content-header">
 	<h1>
-		<span style="color:#367fa9;"><b>JobSeeker</b> </span> Vacancy Search Results
-		<small>View Vacancy Search Results</small>
+		<span style="color:#367fa9;"><b>JobSeeker</b> </span> Vacancy Search
+		<small>Search Job Vacancies</small>
 	</h1>
 	<ol class="breadcrumb">
 		<li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-		<li class="active">Vacancy Search Results</li>
+		<li class="active">Vacancy Search</li>
 	</ol>
 </section>
 
@@ -54,62 +54,16 @@
 		<div class="box-body">
 			<div class="container-fluid">
 				<div class="row">
-					<div id="search-box">
-						
-					</div>
-					{{-- 
-					<form action="" method="post" class="form-horizontal">
-						{{csrf_field()}}
-						<div class="form-group">
-							<div class="col-md-12">
-								<div class="row">
-									<div class="col-md-4">
-										<input type="text" id="jobType" name="jobType" class="form-control" placeholder="Job Type">
-									</div>
-
-									<div class="col-md-3">
-										<select style="width: 100%;" class="select2 form-control" id="location" name="location">
-											<option value="">Location…</option>
-
-											@foreach($jobcategories as $jobcategory)
-
-											<option value="{{ $jobcategory->id }}">{{ $jobcategory->name }}</option>
-
-											@endforeach
-
-										</select>	
-									</div>
-
-									<div class="col-md-3">
-										<select style="width: 100%;" class="select2 form-control" id="experience" name="experience">
-											<option value="">Experience…</option>
-
-											@foreach($jobcategories as $jobcategory)
-											
-											<option value="{{ $jobcategory->id }}">{{ $jobcategory->name }}</option>
-
-											@endforeach
-
-										</select>	
-									</div>
-
-									<div class="col-lg-2 pull-right">
-										<button type="submit" class="form-control btn btn-info"><i class="fa fa-search"></i> &nbsp <strong>Search</strong></button>
-									</div>
-								</div>
-							</div>
-						</div>
-					</form>
-					 --}}
+					<div id="search-box"></div>
 				</div>
 			</div>
 		</div>
 	</div>
 
-	<hr>
+	<h3>Results</h3>
 
-	<div id="hits-container"></div>
-	<div id="pagination-container"></div>
+	<div id="hits-container" class="container-fluid"></div>
+	<div class="panel" id="pagination-container" style="text-align: center; font-size: 1.5em;"></div>
 
 </section>
 <!-- /.content -->
@@ -164,7 +118,10 @@
 								</div>
 
 								<div class="col-md-2">
-									<button class="btn btn-primary btn-block"><b class="glyphicon glyphicon-copy"></b> <strong>Apply</strong></button>
+									<a href="/home/viewVacancy/@{{id}}">
+									<button class="btn btn-primary btn-block"><b class="glyphicon glyphicon-copy"></b> <strong>Apply</strong>
+									</button>
+									</a>
 								</div>
 							</div>
 

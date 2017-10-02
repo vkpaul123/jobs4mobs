@@ -2,8 +2,13 @@
 
 namespace App\Http\Controllers\JobSeeker;
 
-use Illuminate\Http\Request;
+use App\Address;
+use App\Employer;
 use App\Http\Controllers\Controller;
+use App\JobCategory;
+use App\Vacancy;
+use App\VacancySkill;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class PageController extends Controller
@@ -40,8 +45,22 @@ class PageController extends Controller
         return view('JobSeeker.homepage.searchEmployer');
     }
 
-    public function viewVacancy() {
-        return view('JobSeeker.homepage.viewVacancy');
+    public function viewVacancy($id) {
+        $vacancy = Vacancy::where('id', $id)->get()->first();
+        $skills = VacancySkill::where('vacancies_id', $vacancy->id)->get();
+        $employer = Employer::where('id', $vacancy->employers_id)->get()->first();
+        $jobcategories = JobCategory::all();
+
+        $address = null;
+        if($vacancy->addresses_id)
+            $address = Address::where('id', $vacancy->addresses_id)->get()->first();
+
+        return view('JobSeeker.homepage.viewVacancy')
+        ->with(compact('vacancy'))
+        ->with(compact('address'))
+        ->with(compact('skills'))
+        ->with(compact('jobcategories'))
+        ->with(compact('employer'));
     }
 
     public function contactAdmin() {
@@ -88,8 +107,18 @@ class PageController extends Controller
         return view('JobSeeker.homepage.searchVacancy');
     }
 
-    public function viewEmployerProfile() {
-        return view('JobSeeker.homepage.viewEmployerProfile');
+    public function viewEmployerProfile($id) {
+        $employer = Employer::where('id', $id)->get()->first();
+        $jobcategories = JobCategory::all();
+
+        $address = null;
+        if($employer->address_id)
+            $address = Address::find($employer->address_id)->get()->first();
+
+        return view('JobSeeker.homepage.viewEmployerProfile')
+        ->with(compact('employer'))
+        ->with(compact('address'))
+        ->with(compact('jobcategories'));
     }
 
     public function employerSearchResults() {
