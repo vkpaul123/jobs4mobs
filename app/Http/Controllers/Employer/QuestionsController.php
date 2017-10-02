@@ -8,6 +8,8 @@ use App\Question;
 use App\Questionnaire;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
+use Maatwebsite\Excel\Facades\Excel;
 
 class QuestionsController extends Controller
 {
@@ -153,5 +155,47 @@ class QuestionsController extends Controller
         Question::find($id)->delete();
 
         return redirect()->back();
+    }
+
+    public function uploadQuestions(Request $request) {
+        $this->validate($request, [
+            'import_file' => 'required',
+            ]);
+
+        if($request->hasFile('import_file')){
+            $path = $request->file('import_file')->getRealPath();
+
+            $data = Excel::load($path, function($reader) {})->get(['questext', 'correctans', 'wrongans1', 'wrongans2', 'wrongans3']);
+
+            if(!empty($data) && $data->count()) {
+                foreach ($data as $value) {
+                    if (!empty($value)) {
+                        foreach ($value as $key) {
+                            if($key == null) {
+                                Session::flash('message', 'One of the Fields in the File is EMPTY! Please upload a valid file.');
+                                return redirect()->back();
+                            }
+                        }
+                    }
+                }
+            }
+
+            if(!empty($data) && $data->count()){
+                foreach ($data as $value) {
+                    if(!empty($value)) {
+                        $question = new Question;
+                        $question->quesText = $value['questext'];
+                        $question->correctAns = $value['correctans'];
+                        $question->WrongAns1 = $value['wrongans1'];
+                        $question->WrongAns2 = $value['wrongans2'];
+                        $question->WrongAns3 = $value['wrongans3'];
+                        $question->questionnaire_id = $request->questionnaire_id;
+                        $question->save();
+                    }
+                }
+            }
+        }
+
+        return redirect(route('question.show',$request->questionnaire_id));
     }
 }

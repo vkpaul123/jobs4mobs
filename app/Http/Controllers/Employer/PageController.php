@@ -98,8 +98,9 @@ class PageController extends Controller
         return view('Employer.homepage.questionnareBuilder');
     }
 
-    public function questionnareUpload() {
-        return view('Employer.homepage.questionnareUpload');
+    public function questionnareUpload($id) {
+        return view('Employer.homepage.questionnareUpload')
+        ->with(compact('id'));
     }
 
     public function vacancyLinkQuestion() {

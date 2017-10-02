@@ -154,7 +154,8 @@ Route::group(['namespace' => 'Employer'], function() {
 
 		//	Questionnare Builder
 		Route::resource('/home/tests/questionnareBuilder', 'QuestionnaireController');
-		Route::get('/home/tests/questionnareUpload', 'PageController@questionnareUpload')->name('questionnare.upload');
+		Route::get('/home/tests/questionnareUpload/{id}', 'PageController@questionnareUpload')->name('questionnare.upload');
+		Route::post('/home/tests/questionnareUpload/upload', 'QuestionsController@uploadQuestions')->name('questionnare.uploadQuestions');
 		Route::get('/home/tests/addQuestion', 'PageController@addQuestion');
 		Route::get('/home/tests/editQuestion', 'PageController@editQuestion');
 		Route::get('/home/tests/viewQuestions', 'PageController@viewQuestions');

@@ -67,7 +67,7 @@ class QuestionnaireController extends Controller
         $questionnare->save();
 
         if($request->buildOrUpload == 'upload')
-            return redirect(route('questionnare.upload'));
+            return redirect(route('questionnare.upload', Questionnaire::orderBy('created_at', 'desc')->get()->first()->id));
         else
             return redirect(route('question.show', Questionnaire::orderBy('created_at', 'desc')->get()->first()->id));
     }
