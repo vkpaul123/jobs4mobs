@@ -97,6 +97,10 @@ Route::group(['namespace' => 'Admin'], function() {
 		Route::get('tests/editQuestion', 'PageController@editQuestion');
 		Route::get('tests/viewQuestions', 'PageController@viewQuestions');
 
+		//	Job Categories
+		Route::resource('/viewJobCategories', 'JobCategoriesController');
+		Route::post('/viewJobCategories/upload', 'JobCategoriesController@uploadCategories')->name('viewJobCategories.upload');
+
 
 		//	Reports
 		Route::get('reports/showReport/vacancyDetails','Reports\ReportsController@showVacancyReport')->name('admin.reports.vacancyDetails');

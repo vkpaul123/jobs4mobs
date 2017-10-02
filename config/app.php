@@ -182,6 +182,8 @@ return [
         Geocoder\Laravel\Providers\GeocoderService::class,
         Laravel\Socialite\SocialiteServiceProvider::class,
         Algolia\Settings\ServiceProvider::class,
+        Maatwebsite\Excel\ExcelServiceProvider::class,
+
 
     ],
 
@@ -233,6 +235,7 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         'Geocoder' => Toin0u\Geocoder\Facade\Geocoder::class,
         'Socialite' => Laravel\Socialite\Facades\Socialite::class,
+        'Excel' => Maatwebsite\Excel\Facades\Excel::class,
     ],
 
 ];
