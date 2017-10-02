@@ -116,7 +116,7 @@ class JobCategoriesController extends Controller
         if($request->hasFile('import_file')){
             $path = $request->file('import_file')->getRealPath();
 
-            $data = Excel::load($path, function($reader) {})->get();
+            $data = Excel::load($path, function($reader) {})->get(['name']);
 
             if(!empty($data) && $data->count()){
 
