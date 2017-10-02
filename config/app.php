@@ -181,6 +181,8 @@ return [
         Laravel\Scout\ScoutServiceProvider::class,
         Geocoder\Laravel\Providers\GeocoderService::class,
         Laravel\Socialite\SocialiteServiceProvider::class,
+        Algolia\Settings\ServiceProvider::class,
+
     ],
 
     /*

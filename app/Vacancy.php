@@ -25,6 +25,8 @@ class Vacancy extends Model
 
         $vacancy['jobcategoryId'] = $this->jobCategory->name;
 
+        $vacancy['employers_id'] = $this->employer->companyname;
+
         if($this->address)
             $vacancy['addresses_id'] = $this->address->toArray();
 
