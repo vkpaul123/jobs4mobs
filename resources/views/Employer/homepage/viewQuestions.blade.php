@@ -25,67 +25,76 @@
 	<div class="box">
 		<div class="box-header with-border">
 			<h3>Questionnare ID: <strong class="text-warning">{{ $id }}</strong>
-        <a href="{{ route('question.create') }}"><button class="btn btn-success btn-lg pull-right"><i class="glyphicon glyphicon-plus-sign">&nbsp</i><strong>Add Question</strong></button></a>
+        <div class="pull-right">
+          <a href="{{ route('question.create') }}"><button class="btn btn-success btn-lg"><i class="glyphicon glyphicon-plus-sign">&nbsp</i><strong>Add Question</strong></button></a>       
+        </div>
       </h3>
-		</div>
-		<div class="box-body">
-			<table id="questionnare" class="table table-bordered table-hover">
-                <thead>
-                <tr>
-                  <th><span class="text-warning">Question</span></th>
-                  <th><span class="text-warning">Correct Ans.</span></th>
-                  <th><span class="text-warning">Wrong Ans. 1</span></th>
-                  <th><span class="text-warning">Wrong Ans. 2</span></th>
-                  <th><span class="text-warning">Wrong Ans. 3</span></th>
-                  <th><span class="text-warning">Options</span></th>
-                </tr>
-                </thead>
-                <tbody>
-                @foreach($questions as $question)
-                <tr>
-                  <td>
-                  	<p>
-                  		{{ $question->quesText }}
-                  	</p>
-                  </td>
-                  <td><b>{{ $question->correctAns }}</b></td>
-                  <td>{{ $question->WrongAns1 }}</td>
-                  <td>{{ $question->WrongAns2 }}</td>
-                  <td>{{ $question->WrongAns3 }}</td>
-                  <td>
-                  	<a href="{{ route('question.edit', $question->id) }}"><span class="glyphicon glyphicon-edit"></span></a> | <a href="#" onclick="
-                  if(confirm('Are You Sure, you want to delete this record?')) {
-                    event.preventDefault();
-                    document.getElementById('delete-question-{{ $question->id }}').submit();
-                  }
-                  else {
-                    event.preventDefault();
-                  }
-                  "><span class="glyphicon glyphicon-trash"></span></a>
+    </div>
+    <div class="box-body">
+     <table id="questionnare" class="table table-bordered table-hover">
+      <thead>
+        <tr>
+          <th><span class="text-warning">Question</span></th>
+          <th><span class="text-warning">Correct Ans.</span></th>
+          <th><span class="text-warning">Wrong Ans. 1</span></th>
+          <th><span class="text-warning">Wrong Ans. 2</span></th>
+          <th><span class="text-warning">Wrong Ans. 3</span></th>
+          <th><span class="text-warning">Options</span></th>
+        </tr>
+      </thead>
+      <tbody>
+        @foreach($questions as $question)
+        <tr>
+          <td>
+           <p>
+            {{ $question->quesText }}
+          </p>
+        </td>
+        <td><b>{{ $question->correctAns }}</b></td>
+        <td>{{ $question->WrongAns1 }}</td>
+        <td>{{ $question->WrongAns2 }}</td>
+        <td>{{ $question->WrongAns3 }}</td>
+        <td>
+         <a href="{{ route('question.edit', $question->id) }}"><span class="glyphicon glyphicon-edit"></span></a> | <a href="#" onclick="
+         if(confirm('Are You Sure, you want to delete this record?')) {
+          event.preventDefault();
+          document.getElementById('delete-question-{{ $question->id }}').submit();
+        }
+        else {
+          event.preventDefault();
+        }
+        "><span class="glyphicon glyphicon-trash"></span></a>
 
-                  <form method="post" id="delete-question-{{ $question->id }}" action="{{ route('question.destroy', $question->id) }}" style="display: none;">
-                    {{ csrf_field() }}
-                    {{ method_field('DELETE') }}
-                  </form>
-                  </td>
-                </tr>
-                @endforeach
-                
-                </tbody>
-                <tfoot>
-                <tr>
-                  <th><span class="text-warning">Question</span></th>
-                  <th><span class="text-warning">Correct Ans.</span></th>
-                  <th><span class="text-warning">Wrong Ans. 1</span></th>
-                  <th><span class="text-warning">Wrong Ans. 2</span></th>
-                  <th><span class="text-warning">Wrong Ans. 3</span></th>
-                  <th><span class="text-warning">Options</span></th>
-                </tr>
-                </tfoot>
-              </table>
-		</div>
-	</div>
-	<!-- /.box -->
+        <form method="post" id="delete-question-{{ $question->id }}" action="{{ route('question.destroy', $question->id) }}" style="display: none;">
+          {{ csrf_field() }}
+          {{ method_field('DELETE') }}
+        </form>
+      </td>
+    </tr>
+    @endforeach
+    
+  </tbody>
+  <tfoot>
+    <tr>
+      <th><span class="text-warning">Question</span></th>
+      <th><span class="text-warning">Correct Ans.</span></th>
+      <th><span class="text-warning">Wrong Ans. 1</span></th>
+      <th><span class="text-warning">Wrong Ans. 2</span></th>
+      <th><span class="text-warning">Wrong Ans. 3</span></th>
+      <th><span class="text-warning">Options</span></th>
+    </tr>
+  </tfoot>
+</table>
+</div>
+<div class="box-footer">
+  <div class="pull-right">
+    <a href="{{ route('questionnare.upload', $id) }}">
+      <button class="btn btn-primary btn-lg"><i class="glyphicon glyphicon-upload">&nbsp</i><strong>Upload Questions</strong></button>
+    </a>
+  </div>
+</div>
+</div>
+<!-- /.box -->
 
 </section>
 <!-- /.content -->

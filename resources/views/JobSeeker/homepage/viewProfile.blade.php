@@ -49,9 +49,16 @@
 	        			</div>
         			</div>
         			<div class="col-md-3">
-        				<a href="{{ route('resume.show', $jobseekerProfile->id) }}">
-        					<button class="pull-right btn btn-info btn-lg"><strong>View Resume</strong></button>
-        				</a>
+        				<div class="pull-right">
+	        				<a href="{{ route('jobseekerProfile.resume.showUploadForm', $jobseekerProfile->id) }}">
+	        					<button class="btn-primary btn btn-block"><strong>Upload Resume</strong></button>
+	        				</a><br>
+	        				<a href="{{ route('resume.show', $jobseekerProfile->id) }}"><button class="btn-block btn-success btn"><strong>Build Resume</strong></button></a><hr>
+	        				<a href="@if($jobseekerProfile->resume == "on") {{ route('resume.show', $jobseekerProfile->id) }} @elseif($jobseekerProfile->resume) {{$jobseekerProfile->resume}} @endif" target="_blank">
+	        					<button class="btn btn-info btn-lg btn-block"><strong>View Resume</strong></button>
+	        				</a>
+        					
+        				</div>
         			</div>
         		</div>
 

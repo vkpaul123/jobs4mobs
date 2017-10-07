@@ -179,6 +179,10 @@ class QuestionsController extends Controller
                     }
                 }
             }
+            else {
+                Session::flash('message', 'No Questions found in the file! Please upload a valid file.');
+                return redirect()->back();
+            }
 
             if(!empty($data) && $data->count()){
                 foreach ($data as $value) {

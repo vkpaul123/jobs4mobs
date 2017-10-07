@@ -75,8 +75,8 @@ class PageController extends Controller
         return view('JobSeeker.homepage.registerExperience');
     }
 
-    public function uploadResume() {
-        return view('JobSeeker.homepage.resumeUpload');
+    public function uploadResume($id) {
+        return view('JobSeeker.homepage.resumeUpload')->with(compact('id'));
     }
 
     public function academicDetails() {

@@ -106,7 +106,7 @@
 											</label>
 										</div>
 									</center>
-									<input type="submit" class="pull-right btn-block btn btn-success" value="Toggle Vacancy Status">
+									<input type="submit" class="pull-right btn-block btn btn-success" value="@if($vacancy->vacancyStatus) Deactivate @else Activate @endif Vacancy">
 								</form>
 							</div>
 						</div>

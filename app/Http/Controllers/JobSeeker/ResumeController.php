@@ -10,6 +10,8 @@ use App\JobseekerExperience;
 use App\JobseekerProfile;
 use App\JobseekerSkill;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Storage;
 
 class ResumeController extends Controller
 {
@@ -80,5 +82,50 @@ class ResumeController extends Controller
     	->with(compact('jobseekerAchievements'))
         ->with(compact('address'))
         ->with(compact('resumeCompletion'));
+    }
+
+    public function attachResume(Request $request, $id) {
+        $jobseekerProfile = JobseekerProfile::find($id);
+
+        if($request->resumeCompletion >= 60) {
+            $address = null;
+            if($jobseekerProfile->address_id)
+                $address = Address::where('id', $jobseekerProfile->address_id)->get()->first();
+
+            if(count($address) == 0) {
+                Session::flash('message', 'Address is required for contacting you. Please add your address.');
+                return redirect()->back();
+            }
+
+            $jobseekerProfile->resume = $request->attachResume;
+            $jobseekerProfile->save();
+        }
+        else {
+            Session::flash('message', 'Your Resume looks too Empty! Please add a few more Aspects to it.');
+        }
+
+        return redirect()->back();
+    }
+
+    public function uploadResume(Request $request, $id) {
+        $this->validate($request, [
+            'resumePath' => 'required|mimes:pdf',
+            ]);
+
+        $user = JobseekerProfile::where('id', $id)->get()->first();
+
+        if($request->hasFile('resumePath')){
+            $filename = "jobseeker_Resume_".$id.".".$request->resumePath->getClientOriginalExtension();
+            $image = $request->file('resumePath');
+            $t = Storage::disk('s3')->put('jobseeker/Resumes/'.$filename, file_get_contents($image), 'public');
+            $filename = Storage::disk('s3')->url('jobseeker/Resumes/'.$filename);
+            //$request->profilePic->storeAs('public/upload/jobseeker/DPs', $filename);
+
+            $user->resume = $filename;
+
+            $user->save();
+            
+            return redirect(route('profile.show', $id));
+        }
     }
 }

@@ -167,7 +167,8 @@ Route::group(['namespace' => 'Employer'], function() {
 		//	Search Jobseeker
 		Route::get('/jobseekerSearchResults', 'PageController@jobseekerSearchResults');
 		Route::get('/viewJobseekerProfile/{id}', 'PageController@viewJobseekerProfile')->name('employer.viewJobseekerProfile');
-		Route::get('/viewJobseekerResume', 'PageController@viewJobseekerResume');
+		Route::get('/viewJobseekerResume/{id}', 'JobSeekerResumeController@showResume')->name('employer.viewJobseekerResume');
+		Route::get('/viewJobseekerResumeNotFound', 'JobSeekerResumeController@showResumeNotFound')->name('employer.viewJobseekerResumeNotFound');
 
 		Route::get('/home/contactAdmin', 'PageController@contactAdmin');
 
@@ -202,7 +203,8 @@ Route::group(['namespace' => 'JobSeeker'], function() {
 
 	//	Resume Builder
 	Route::get('/home/resumeBuilder', 'PageController@resumeBuilder');
-	Route::get('/home/resumeBuilder/uploadResume', 'PageController@uploadResume');
+	Route::get('/home/resumeBuilder/uploadResume/showForm/{id}', 'PageController@uploadResume')->name('jobseekerProfile.resume.showUploadForm');
+	Route::put('/home/resumeBuilder/uploadResume/upload/{id}', 'ResumeController@uploadResume')->name('jobseekerProfile.uploadResume');
 	//Route::get('/home/resumeBuilder/registerAddress', 'PageController@registerAddress');
 	Route::resource('/home/profile/address', 'JobseekerAddressController');
 	//Route::get('/home/resumeBuilder/academicDetails', 'PageController@academicDetails');
@@ -219,6 +221,7 @@ Route::group(['namespace' => 'JobSeeker'], function() {
 	//Route::get('/home/resumeBuilder/viewResume', 'PageController@viewResume');
 	//Route::resource('/home/resumeBuilder/resume', 'JobseekerResumeController');
 	Route::get('/home/resumeBuilder/resume/{id}', 'ResumeController@show')->name('resume.show');
+	Route::put('/home/resumeBuilder/attatchResume/{id}','ResumeController@attachResume')->name('resumeBuilder.attatchResume');
 
 	Route::get('/home/searchEmployer', 'PageController@searchEmployer');
 	Route::get('/home/employerSearchResults', 'PageController@employerSearchResults');

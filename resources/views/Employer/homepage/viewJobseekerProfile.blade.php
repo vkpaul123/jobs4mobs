@@ -47,9 +47,12 @@
 	    				</div>
         			</div>
         			<div class="col-md-3">
-        				<a href="/employer/viewJobseekerResume">
-        					<button class="pull-right btn btn-warning btn-lg"><strong>View Resume</strong></button>
-        				</a>
+        				<div class="pull-right">
+	        				<a href="@if($jobseekerProfile->resume == "on") {{ route('employer.viewJobseekerResume', $jobseekerProfile->id) }} @elseif($jobseekerProfile->resume) {{$jobseekerProfile->resume}} @else {{ route('employer.viewJobseekerResumeNotFound') }} @endif" target="_blank">
+	        					<button class="btn btn-primary btn-lg btn-block"><strong>View Resume</strong></button>
+	        				</a>
+        					
+        				</div>
         			</div>
         		</div>
 

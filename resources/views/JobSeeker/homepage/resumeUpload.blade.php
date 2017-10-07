@@ -52,11 +52,21 @@
 	<div class="box">
 
 		<div class="box-body">
+			@if(count($errors) > 0)
+				<center>
+					<p class="alert alert-danger">
+						<strong>
+							You Have Errors while submitting. Please Fill up the information in the Fields that are Highlighted in Red.
+						</strong>
+					</p>
+				</center>
+			@endif
 		<br>
-			<form action="" method="post" class="form-horizontal">
+			<form action="{{ route('jobseekerProfile.uploadResume', $id) }}" method="post" class="form-horizontal" enctype="multipart/form-data">
 				{{csrf_field()}}
+				{{method_field('PUT')}}
 
-				<div class="form-group">
+				<div class="form-group{{ $errors->has('resumePath') ? ' has-error' : '' }}">
 					<label for="resumePath" class="col-md-3 control-label">Select Resume (.PDF)</label>
 					<div class="col-md-6">
 						<input type="file" id="resumePath" name="resumePath" class="form-control pull-right">

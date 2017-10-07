@@ -152,6 +152,28 @@
                             <a href="{{ route('miscDetails.edit', $resume->id) }}"><button class="btn btn-default btn-lg btn-block"><strong>Miscellaneous</strong></button></a><br>
                             
                         </div>
+                        <div class="box-footer">
+                            @if (Session::has('message'))
+                                <div class="alert alert-danger">{!! Session::get('message') !!}</div>
+                            @endif
+                            <form action="{{ route('resumeBuilder.attatchResume', $resume->id) }}" method="post">
+                            {{ csrf_field() }}
+                            {{ method_field('PUT') }}
+                                <center>
+                                    <div class="checkbox icheck">
+                                        <label>
+                                            <input type="checkbox" name="attachResume"
+                                            @if($resume->resume == "on")
+                                                checked
+                                            @endif 
+                                            > &nbsp Resume Attached
+                                        </label>
+                                    </div>
+                                </center>
+                                <input type="hidden" name="resumeCompletion" value="{{$resumeCompletion}}">
+                                <button type="submit" class="pull-right btn-block btn btn-info"><strong>@if($resume->resume == "on") Remove @else Attach @endif Resume</strong></button>
+                            </form>
+                        </div>
                     </div>
 
                 </div>
