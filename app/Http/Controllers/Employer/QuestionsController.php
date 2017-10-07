@@ -163,6 +163,10 @@ class QuestionsController extends Controller
             ]);
 
         if($request->hasFile('import_file')){
+            if($request->file('import_file')->getClientOriginalExtension() != "xlsx") {
+                Session::flash('message', 'Invalid File Type! Please upload a file with <b>.xlsx</b> format only.');
+                return redirect()->back();
+            }
             $path = $request->file('import_file')->getRealPath();
 
             $data = Excel::load($path, function($reader) {})->get(['questext', 'correctans', 'wrongans1', 'wrongans2', 'wrongans3']);
@@ -172,7 +176,7 @@ class QuestionsController extends Controller
                     if (!empty($value)) {
                         foreach ($value as $key) {
                             if($key == null) {
-                                Session::flash('message', 'One of the Fields in the File is EMPTY! Please upload a valid file.');
+                                Session::flash('message', 'One of the Fields in the File is <b>empty</b>! Please upload a valid file.');
                                 return redirect()->back();
                             }
                         }
@@ -180,7 +184,7 @@ class QuestionsController extends Controller
                 }
             }
             else {
-                Session::flash('message', 'No Questions found in the file! Please upload a valid file.');
+                Session::flash('message', '<b>No Questions found</b> in the file! Please upload a valid file.');
                 return redirect()->back();
             }
 

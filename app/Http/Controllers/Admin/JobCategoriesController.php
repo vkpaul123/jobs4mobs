@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\JobCategory;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 use Maatwebsite\Excel\Facades\Excel;
 
 class JobCategoriesController extends Controller
@@ -117,6 +118,11 @@ class JobCategoriesController extends Controller
             $path = $request->file('import_file')->getRealPath();
 
             $data = Excel::load($path, function($reader) {})->get(['name']);
+
+            if($request->file('import_file')->getClientOriginalExtension() != "xlsx") {
+                Session::flash('message', 'Invalid File Type! Please upload a file with <b>.xlsx</b> format only.');
+                return redirect()->back();
+            }
 
             if(!empty($data) && $data->count()){
 

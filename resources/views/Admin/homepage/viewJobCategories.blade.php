@@ -48,6 +48,9 @@
         </div>
         <div class="box-header with-border">
           <h4 class="text-danger"><strong>Upload Category Excel File</strong></h4>
+          @if (Session::has('message'))
+            <div class="alert alert-danger">{!! Session::get('message') !!}</div>
+          @endif
           <form action="{{ route('viewJobCategories.upload') }}" class="form-horizontal" enctype="multipart/form-data" method="post">
             {{csrf_field()}}
             {{-- {{ print_r($errors) }} --}}
