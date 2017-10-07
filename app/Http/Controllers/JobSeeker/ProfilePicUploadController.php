@@ -26,8 +26,8 @@ class ProfilePicUploadController extends Controller
     	if($request->hasFile('profilePic')){
     		$filename = "jobseeker_DP_".$id.".".$request->profilePic->getClientOriginalExtension();
             $image = $request->file('profilePic');
-            $t = Storage::disk('s3')->put('jobseeker/DPs'.$filename, file_get_contents($image), 'public');
-            $filename = Storage::disk('s3')->url('jobseeker/DPs'.$filename);
+            $t = Storage::disk('s3')->put('jobseeker/DPs/'.$filename, file_get_contents($image), 'public');
+            $filename = Storage::disk('s3')->url('jobseeker/DPs/'.$filename);
     		//$request->profilePic->storeAs('public/upload/jobseeker/DPs', $filename);
 
     		$user->photo = $filename;

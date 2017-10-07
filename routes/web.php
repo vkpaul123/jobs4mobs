@@ -91,6 +91,8 @@ Route::group(['namespace' => 'Admin'], function() {
 		Route::get('search/vacancySearchResults', 'PageController@vacancySearchResults');
 
 		//	Questionnare
+		Route::get('questionnaireTemplateUpload/showUploadForm','QuestionnaireTemplateUploadController@showUploadForm')->name('questionnaireTemplateUpload.showUploadForm');
+		Route::post('questionnaireTemplateUpload/showUploadForm/upload','QuestionnaireTemplateUploadController@uploadTemplate')->name('questionnaireTemplateUpload.uploadTemplate');
 		Route::get('tests/questionnareBuilder', 'PageController@questionnareBuilder');
 		Route::get('tests/questionnareUpload', 'PageController@questionnareUpload');
 		Route::get('tests/addQuestion', 'PageController@addQuestion');
@@ -156,6 +158,7 @@ Route::group(['namespace' => 'Employer'], function() {
 		Route::resource('/home/tests/questionnareBuilder', 'QuestionnaireController');
 		Route::get('/home/tests/questionnareUpload/{id}', 'PageController@questionnareUpload')->name('questionnare.upload');
 		Route::post('/home/tests/questionnareUpload/upload', 'QuestionsController@uploadQuestions')->name('questionnare.uploadQuestions');
+		Route::get('/home/tests/downloadTemplate', 'QuestionnaireTemplateDownloadController@downloadQuesTemplate')->name('questionnare.downloadTemplate');
 		Route::get('/home/tests/addQuestion', 'PageController@addQuestion');
 		Route::get('/home/tests/editQuestion', 'PageController@editQuestion');
 		Route::get('/home/tests/viewQuestions', 'PageController@viewQuestions');

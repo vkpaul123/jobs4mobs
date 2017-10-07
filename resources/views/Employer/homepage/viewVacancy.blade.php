@@ -84,6 +84,7 @@
 								
 								@if($vacancy->testrequired)
 									<br><hr>
+									<strong class="text-warning">Linked Questionnaire ID: <span class="text-info">{{$vacancy->questionnaire_id}}</span></strong>
 									<a href="{{ route('vacancy.questionnare.link', $vacancy->id) }}"><button class="pull-right btn-block btn btn-info"><strong>Link Questionnare</strong></button></a>
 								@endif
 							</div>

@@ -108,7 +108,6 @@ class VacancyController extends Controller
         $vacancySkills = VacancySkill::where('vacancies_id', $id)->get();
 
         $address = null;
-
         if($vacancy->addresses_id)
             $address = Address::where('id', $vacancy->addresses_id)->get()->first();
 
@@ -196,8 +195,17 @@ class VacancyController extends Controller
     {
         $vacancy = Vacancy::find($id);
 
-        if($vacancy->addresses_id) 
-            $vacancy->vacancyStatus = $request->vacancyStatus;
+        if($vacancy->addresses_id) {
+            if($vacancy->testrequired) {
+                if($vacancy->questionnaire_id) {
+                    $vacancy->vacancyStatus = $request->vacancyStatus;
+                }
+                else
+                    Session::flash('message', 'Please Link a Questionnaire!');
+            }
+            else
+                $vacancy->vacancyStatus = $request->vacancyStatus;
+        }
         else {
             Session::flash('message', 'Please Add Address!');
         }

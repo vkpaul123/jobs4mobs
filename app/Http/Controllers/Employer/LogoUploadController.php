@@ -36,8 +36,8 @@ class LogoUploadController extends Controller
     	if($request->hasFile('logo')){
     		$filename = "employer_logo_DP_".$id.".".$request->logo->getClientOriginalExtension();
             $image = $request->file('logo');
-            $t = Storage::disk('s3')->put('employer/DPs'.$filename, file_get_contents($image), 'public');
-            $filename = Storage::disk('s3')->url('employer/DPs'.$filename);
+            $t = Storage::disk('s3')->put('employer/DPs/'.$filename, file_get_contents($image), 'public');
+            $filename = Storage::disk('s3')->url('employer/DPs/'.$filename);
     		//$request->logo->storeAs('public/upload/employer/DPs', $filename);
 
     		$user->photo = $filename;
