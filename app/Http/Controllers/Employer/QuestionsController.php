@@ -88,10 +88,15 @@ class QuestionsController extends Controller
     public function show($id)
     {
         $questions = Question::where('questionnaire_id', $id)->get();
+        $questionnare = Questionnaire::where('id', $id)->get()->first();
+        $questionnare->job_category_id = JobCategory::where('id', $questionnare->job_category_id)->get()->first()->name;
+
+        $questionsCount = $questions->count();
 
         return view('Employer.homepage.viewQuestions')
         ->with(compact('questions'))
-        ->with(compact('id'));
+        ->with(compact('questionsCount'))
+        ->with(compact('questionnare'));
     }
 
     /**

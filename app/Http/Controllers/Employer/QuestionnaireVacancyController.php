@@ -8,6 +8,7 @@ use App\Questionnaire;
 use App\Vacancy;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 
 class QuestionnaireVacancyController extends Controller
 {
@@ -46,18 +47,25 @@ class QuestionnaireVacancyController extends Controller
             'questionnaire_id' => 'required',
             ]);
 
-    	$vacancy = Vacancy::find($request->vacancy_id);
-    	$vacancy->questionnaire_id = $request->questionnaire_id;
-    	$vacancy->save();
+        $questionnaire = Questionnaire::find($request->questionnaire_id);
+
+        if($questionnaire->passingMarks) {
+        	$vacancy = Vacancy::find($request->vacancy_id);
+        	$vacancy->questionnaire_id = $request->questionnaire_id;
+        	$vacancy->save();
+            Session::flash('messageSuccess', 'Questionnaire Linked successfully!');
+        }
+        else
+            Session::flash('messageFail', '<b>Passing Marks</b> is either not set or is set to Zero. Please Select a Questionnaire with valid Passing Marks.');
 
     	return redirect()->back();
     }
 
-    public function setVacancyNull($id) {
-    	$vacancy = Vacancy::find($request->vacancy_id);
+    public function setVacancyNull(Request $request, $id) {
+    	$vacancy = Vacancy::find($id);
     	$vacancy->questionnaire_id = null;
     	$vacancy->save();
-
+        Session::flash('messageSuccess', 'Questionnaire Unlinked successfully!');
     	return redirect()->back();
     }
 }

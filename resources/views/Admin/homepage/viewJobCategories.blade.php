@@ -21,53 +21,56 @@
 <!-- Main content -->
 <section class="content">
 
+  <div class="box box-danger">
+    <div class="box-header with-border">
+      <h4 class="text-danger"><strong>Add/Edit Category</strong></h4>
+      <form action="{{ route('viewJobCategories.store') }}" method="post" class="form-horizontal">
+        {{csrf_field()}}
+        <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
+          <label for="name" class="col-md-3 control-label">Category Name</label>
+          <div class="col-md-6">
+            <input type="text" class="form-control pull-right" id="name" name="name" placeholder="Category Name" value="{{ old('name') }}">
+          </div>
+        </div>
+        <input type="hidden" name="id" id="id" value="">
+        <div class="form-group">
+          <div class="col-md-offset-5 col-md-2">
+            <button type="submit" class="btn btn-danger btn-block pull-right">Submit</button>
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="box-header with-border">
+      <h4 class="text-danger"><strong>Upload Category Excel File</strong></h4>
+      @if (Session::has('message'))
+        <div class="alert alert-danger">{!! Session::get('message') !!}
+          <button type="button" class="close" data-dismiss="alert"><i class="fa fa-times"></i></button>
+        </div>
+      @endif
+      <form action="{{ route('viewJobCategories.upload') }}" class="form-horizontal" enctype="multipart/form-data" method="post">
+        {{csrf_field()}}
+        {{-- {{ print_r($errors) }} --}}
+        <div class="form-group{{ $errors->has('import_file') ? ' has-error' : '' }}">
+          <label for="import_file" class="col-md-3 control-label">File Upload (.XLSX)</label>
+          <div class="col-md-6">
+            <input type="file" id="import_file" name="import_file" class="form-control pull-right">
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="col-md-offset-5 col-md-2">
+            <button type="submit" class="btn btn-danger btn-block pull-right">Upload</button>
+          </div>
+        </div>          
+      </form>
+    </div>
+  </div>
+
 	<!-- Default box -->
 	<div class="box">
 		<div class="box-header with-border">
-			<h3>All Job Categories</h3>
+			<h3><strong>All Job Categories</strong></h3>
 		</div>
 		<div class="box-body">
-      <div class="box box-danger">
-        <div class="box-header with-border">
-          <h4 class="text-danger"><strong>Add/Edit Category</strong></h4>
-          <form action="{{ route('viewJobCategories.store') }}" method="post" class="form-horizontal">
-            {{csrf_field()}}
-            <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
-              <label for="name" class="col-md-3 control-label">Category Name</label>
-              <div class="col-md-6">
-                <input type="text" class="form-control pull-right" id="name" name="name" placeholder="Category Name" value="{{ old('name') }}">
-              </div>
-            </div>
-            <input type="hidden" name="id" id="id" value="">
-            <div class="form-group">
-              <div class="col-md-offset-5 col-md-2">
-                <button type="submit" class="btn btn-danger btn-block pull-right">Submit</button>
-              </div>
-            </div>
-          </form>
-        </div>
-        <div class="box-header with-border">
-          <h4 class="text-danger"><strong>Upload Category Excel File</strong></h4>
-          @if (Session::has('message'))
-            <div class="alert alert-danger">{!! Session::get('message') !!}</div>
-          @endif
-          <form action="{{ route('viewJobCategories.upload') }}" class="form-horizontal" enctype="multipart/form-data" method="post">
-            {{csrf_field()}}
-            {{-- {{ print_r($errors) }} --}}
-            <div class="form-group{{ $errors->has('import_file') ? ' has-error' : '' }}">
-              <label for="import_file" class="col-md-3 control-label">File Upload (.XLSX)</label>
-              <div class="col-md-6">
-                <input type="file" id="import_file" name="import_file" class="form-control pull-right">
-              </div>
-            </div>
-            <div class="form-group">
-              <div class="col-md-offset-5 col-md-2">
-                <button type="submit" class="btn btn-danger btn-block pull-right">Upload</button>
-              </div>
-            </div>          
-          </form>
-        </div>
-      </div>
 			<table id="questionnare" class="table table-bordered table-hover">
         <thead>
           <tr>

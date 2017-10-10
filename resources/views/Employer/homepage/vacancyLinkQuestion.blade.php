@@ -52,10 +52,23 @@
 	<div class="box">
 		<div class="box-header with-border">
 			<h3 class="box-title"><b>Select Questionnare</b></h3>
+			<a href="{{ route('questionnareBuilder.index') }}">
+				<button class="btn btn-info btn-lg pull-right"><strong><i class="fa fa-file-text-o"></i> &nbspQuestionnaire Builder</strong></button>
+			</a>
 		</div>
 
 		<div class="box-body">
 			<h3 class="text-warning"><strong>Vacancy ID: </strong>{{ $id }}</h3>
+			@if (Session::has('messageFail'))
+			  <div class="alert alert-danger">{!! Session::get('messageFail') !!}
+			    <button type="button" class="close" data-dismiss="alert"><i class="fa fa-times"></i></button>
+			  </div>
+			@endif
+			@if (Session::has('messageSuccess'))
+			  <div class="alert alert-success">{!! Session::get('messageSuccess') !!}
+			    <button type="button" class="close" data-dismiss="alert"><i class="fa fa-times"></i></button>
+			  </div>
+			@endif
 			<form action="{{ route('vacancy.questionnare.storeLink') }}" method="post" class="form-horizontal">
 				{{csrf_field()}}
 
@@ -89,7 +102,7 @@
 	<!-- /.box -->
 
 	{{-- Entered Detials --}}
-	<h4>Details Entered</h4>
+	<h4>Linked Questionnarie</h4>
 
 	<div class="container">
 		@isset($questionnaire_vacancy)
@@ -115,7 +128,20 @@
 								</div>
 
 								<div class="col-md-2 pull-right">
-									<a href="{{ route('vacancy.questionnare.storeUnLink', $id) }}"><span class="glyphicon glyphicon-trash"></span></a>
+									<a href="#" onclick="
+									         if(confirm('Are You Sure, you want to delete this record?')) {
+									          event.preventDefault();
+									          document.getElementById('delete-question').submit();
+									        }
+									        else {
+									          event.preventDefault();
+									        }
+									        "><span class="glyphicon glyphicon-trash"></span></a>
+
+									        <form method="post" id="delete-question" action="{{ route('vacancy.questionnare.storeUnLink', $id) }}" style="display: none;">
+									          {{ csrf_field() }}
+									          {{ method_field('PUT') }}
+									        </form>
 								</div>
 							</div>
 						</div>

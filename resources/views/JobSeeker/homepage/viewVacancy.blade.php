@@ -84,7 +84,7 @@
 								</span></h4>
 							</div>
 							<div class="box-body">
-								<a href=""><button class="pull-right btn-block btn btn-success btn-lg"><strong>Apply Now!</strong></button></a>
+								<a href="{{ route('applyForJob.profileSelectForm.show', $vacancy->id) }}"><button class="pull-right btn-block btn btn-success btn-lg"><strong>Apply Now!</strong></button></a>
 							</div>
 						</div>
 					</div>
@@ -254,7 +254,7 @@
 									<strong>Website</strong>
 								</div>
 								<div class="col-md-8">
-									<a href="https://{{$address->website}}">{{ $address->website }}</a>
+									<a href="https://{{$address->website}}" target="_blank">{{ $address->website }}</a>
 								</div>
 							</div>
 							<input type="hidden" name="lat" id="lat" value="{{ $address->lat }}">

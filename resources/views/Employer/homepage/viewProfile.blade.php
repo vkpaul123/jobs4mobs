@@ -172,7 +172,7 @@
 							
 							<div class="box-body">
 								<div class="col-md-5"><strong>Website</strong></div>
-								<div class="col-md-5 col-md-offset-1"><a href="http://{{$address->website}}">{{$address->website}}</a></div>
+								<div class="col-md-5 col-md-offset-1"><a href="http://{{$address->website}}" target="_blank">{{$address->website}}</a></div>
 							</div>	
 							
 							<div class="box-body">

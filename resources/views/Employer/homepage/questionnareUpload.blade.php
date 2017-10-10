@@ -92,7 +92,9 @@
 		<div class="box-body">
 			<br>
 			@if (Session::has('message'))
-				<div class="alert alert-danger">{!! Session::get('message') !!}</div>
+				<div class="alert alert-danger">{!! Session::get('message') !!}
+					<button type="button" class="close" data-dismiss="alert"><i class="fa fa-times"></i></button>
+				</div>
 			@endif
 			@if(count($errors) > 0)
 				<center>
@@ -100,6 +102,7 @@
 						<strong>
 							You Have Errors while submitting. Please Fill up the information in the Fields that are Highlighted in Red.
 						</strong>
+						<button type="button" class="close" data-dismiss="alert"><i class="fa fa-times"></i></button>
 					</p>
 				</center>
 			@endif

@@ -109,6 +109,11 @@
 									<input type="submit" class="pull-right btn-block btn btn-success" value="@if($vacancy->vacancyStatus) Deactivate @else Activate @endif Vacancy">
 								</form>
 							</div>
+							<div class="box-footer">
+								<a href="{{ route('vacancy.viewJobApplications', $vacancy->id) }}">
+									<button class="btn-block btn btn-warning pull-right"><strong>View Job Applications</strong></button>
+								</a>
+							</div>
 						</div>
 					</div>
 				</div>

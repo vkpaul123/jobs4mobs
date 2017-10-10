@@ -28,7 +28,7 @@ class LogoUploadController extends Controller
 
     public function uploadPicture(Request $request, $id) {
     	$this->validate($request, [
-    		'logo' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+    		'logo' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048|dimensions:ratio=1/1',
     		]);
 
     	$user = Employer::where('id', $id)->get()->first();

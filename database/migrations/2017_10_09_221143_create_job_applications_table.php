@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateQuestionnairesTable extends Migration
+class CreateJobApplicationsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,14 @@ class CreateQuestionnairesTable extends Migration
      */
     public function up()
     {
-        Schema::create('questionnaires', function (Blueprint $table) {
+        Schema::create('job_applications', function (Blueprint $table) {
             $table->increments('id');
 
-            $table->integer('job_category_id')->nullable();
-            $table->integer('passingMarks')->nullable();
-            $table->integer('employers_id')->nullable();
-            
+            $table->integer('vacancy_id')->nullable();
+            $table->integer('jobseeker_profile_id')->nullable();
+            $table->string('applicationStatus')->nullable();
+            $table->string('testResult')->nullable();
+
             $table->timestamps();
         });
     }
@@ -31,6 +32,6 @@ class CreateQuestionnairesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('questionnaires');
+        Schema::dropIfExists('job_applications');
     }
 }

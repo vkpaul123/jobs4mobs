@@ -156,6 +156,9 @@
                             @if (Session::has('message'))
                                 <div class="alert alert-danger">{!! Session::get('message') !!}</div>
                             @endif
+                            @if($resume->resume)
+                                <h5><strong class="text-yellow"><i class="fa fa-info-circle"></i><i>&nbsp Resume Already Uploaded</i></strong></h5>
+                            @endif
                             <form action="{{ route('resumeBuilder.attatchResume', $resume->id) }}" method="post">
                             {{ csrf_field() }}
                             {{ method_field('PUT') }}

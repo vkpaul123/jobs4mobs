@@ -18,7 +18,7 @@ class ProfilePicUploadController extends Controller
 
     public function uploadPicture(Request $request, $id) {
     	$this->validate($request, [
-    		'profilePic' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+    		'profilePic' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048|dimensions:ratio=1/1',
     		]);
 
     	$user = User::where('id', $id)->get()->first();

@@ -152,7 +152,10 @@ Route::group(['namespace' => 'Employer'], function() {
 		Route::get('/home/vacancyBuilder/vacancyAddress', 'PageController@vacancyAddress');
 		Route::get('/home/vacancyBuilder/vacancyLinkQuestion/{id}', 'QuestionnaireVacancyController@showLinkingPage')->name('vacancy.questionnare.link');
 		Route::post('/home/vacancyBuilder/vacancyLinkQuestion', 'QuestionnaireVacancyController@storeLink')->name('vacancy.questionnare.storeLink');
-		Route::post('/home/vacancyBuilder/vacancyLinkQuestion/{id}', 'QuestionnaireVacancyController@storeLink')->name('vacancy.questionnare.storeUnLink');
+		Route::put('/home/vacancyBuilder/vacancyLinkQuestion/{id}/unlink', 'QuestionnaireVacancyController@setVacancyNull')->name('vacancy.questionnare.storeUnLink');
+
+		Route::get('/home/vacancyBuilder/vacancy/{id}/viewJobApplications', 'JobApplicationsController@showJobApplications')->name('vacancy.viewJobApplications');
+		Route::put('/home/vacancyBuilder/vacancy/viewJobApplications/setAppStatus/{id}', 'JobApplicationsController@setApplicationStatus')->name('vacancy.setApplicationStatus');
 
 		//	Questionnare Builder
 		Route::resource('/home/tests/questionnareBuilder', 'QuestionnaireController');
@@ -163,6 +166,7 @@ Route::group(['namespace' => 'Employer'], function() {
 		Route::get('/home/tests/editQuestion', 'PageController@editQuestion');
 		Route::get('/home/tests/viewQuestions', 'PageController@viewQuestions');
 		Route::resource('/home/tests/questionnareBuilder/question', 'QuestionsController');
+		Route::put('/home/tests/questionnareBuilderUpdate/updatePassingMarks/{id}', 'QuestionnaireController@updatePassingMarks')->name('questionnare.updatePassingMarks');
 
 		//	Search Jobseeker
 		Route::get('/jobseekerSearchResults', 'PageController@jobseekerSearchResults');
@@ -222,6 +226,9 @@ Route::group(['namespace' => 'JobSeeker'], function() {
 	//Route::resource('/home/resumeBuilder/resume', 'JobseekerResumeController');
 	Route::get('/home/resumeBuilder/resume/{id}', 'ResumeController@show')->name('resume.show');
 	Route::put('/home/resumeBuilder/attatchResume/{id}','ResumeController@attachResume')->name('resumeBuilder.attatchResume');
+
+	Route::get('/home/vacancySearchResults/vacancy/apply/{id}/profileSelect','ApplyJobVacancyController@showApplyForm')->name('applyForJob.profileSelectForm.show');
+	Route::post('/home/vacancySearchResults/vacancy/apply','ApplyJobVacancyController@applyForVacancy')->name('applyForJob.profileSelectForm.apply');
 
 	Route::get('/home/searchEmployer', 'PageController@searchEmployer');
 	Route::get('/home/employerSearchResults', 'PageController@employerSearchResults');
