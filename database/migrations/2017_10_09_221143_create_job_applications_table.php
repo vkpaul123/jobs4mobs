@@ -19,6 +19,7 @@ class CreateJobApplicationsTable extends Migration
             $table->integer('vacancy_id')->nullable();
             $table->integer('jobseeker_profile_id')->nullable();
             $table->string('applicationStatus')->nullable();
+            $table->integer('marks')->nullable();
             $table->string('testResult')->nullable();
 
             $table->timestamps();

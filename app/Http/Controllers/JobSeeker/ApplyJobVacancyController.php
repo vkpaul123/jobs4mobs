@@ -78,7 +78,7 @@ class ApplyJobVacancyController extends Controller
             }
     	}
     	else {
-    		Session::flash('messageFail', 'You had already applied for this vacancy. You cannot Apply again!');
+    		Session::flash('messageFail', 'You have already applied for this vacancy. You cannot Apply again!');
     	}
 
     	return redirect()->back();
@@ -86,34 +86,73 @@ class ApplyJobVacancyController extends Controller
 
     public function startTest($id){
         $jobApplication = JobApplication::find($id);
-        $jobApplication->applicationStatus = "Started Test";
+        if(($jobApplication->applicationStatus == "Started Test" || $jobApplication->applicationStatus == "Finished Test")) {
+            Session::flash('messageFail', 'You have already given the Test for this vacancy. You cannot Apply again!');
+            return redirect()->back();
+        }
+        else {
+            $jobApplication->applicationStatus = "Started Test";
+
+            $questionnaire = Questionnaire::find(Vacancy::find($jobApplication->vacancy_id)->questionnaire_id);
+            $questions = Question::where('questionnaire_id', $questionnaire->id)->get();
+
+            foreach ($questions as $question) {
+                $alternatives = [
+                    'one' => $question->correctAns,
+                    'two' => $question->WrongAns1,
+                    'three' => $question->WrongAns2,
+                    'four' => $question->WrongAns3,
+                ];
+
+                shuffle($alternatives);
+
+                $question->correctAns = $alternatives;
+            }
+
+            $jobApplication->save();
+            
+            return view('JobSeeker.homepage.questionnaireShow')
+            ->with(compact('jobApplication'))
+            ->with(compact('questionnaire'))
+            ->with(compact('questions'));
+        }
+    }
+
+    public function submitTest(Request $request, $id) {
+        $jobApplication = JobApplication::find($id);
 
         $questionnaire = Questionnaire::find(Vacancy::find($jobApplication->vacancy_id)->questionnaire_id);
         $questions = Question::where('questionnaire_id', $questionnaire->id)->get();
 
-        foreach ($questions as $question) {
-            $alternatives = [
-                'one' => $question->correctAns,
-                'two' => $question->WrongAns1,
-                'three' => $question->WrongAns2,
-                'four' => $question->WrongAns3,
-            ];
+        if($jobApplication->updated_at->diffInSeconds() > $questionnaire->timelimit*60+20) {
+            Session::flash('messageFail', 'You refreshed the test page while answering. This is not Allowed and so you have been Disqualified!');
 
-            shuffle($alternatives);
+            $jobApplication->applicationStatus = "Disqualified";
+            $jobApplication->save();
 
-            $question->correctAns = $alternatives;
+            return redirect(route('jobseeker.test.showTestStart', $jobApplication->id));
         }
 
-        $jobApplication->save();
-        
-        return view('JobSeeker.homepage.questionnaireShow')
-        ->with(compact('jobApplication'))
-        ->with(compact('questionnaire'))
-        ->with(compact('questions'));
-    }
+        $marks = 0;
 
-    public function submitTest(Request $request, $id)
-    {
-        return $request->all();
+        foreach ($questions as $question) {
+            if(isset($request->optionsRadios[$question->id]))
+                if($request->optionsRadios[$question->id] == $question->correctAns)
+                    $marks++;
+        }
+
+        $jobApplication->marks = $marks;
+
+        if($marks >= $questionnaire->passingMarks)
+            $jobApplication->testResult = "Pass";
+        else
+            $jobApplication->testResult = "Fail";
+
+        $jobApplication->applicationStatus = "Finished Test";
+
+        $jobApplication->save();
+
+        Session::flash('messageSuccess', 'You have successfully applied for this vacancy.');
+        return redirect(route('applyForJob.profileSelectForm.show', $jobApplication->vacancy_id));
     }
 }

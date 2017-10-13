@@ -37,6 +37,7 @@
           <th><span class="text-warning">ID</span></th>
           <th><span class="text-warning">Name</span></th>
           @if($vacancy->testrequired)
+          <th><span class="text-warning">Marks</span></th>
           <th><span class="text-warning">Test Result</span></th>
           @endif
           <th><span class="text-warning">Application Status</span></th>
@@ -53,6 +54,7 @@
             </a>
           </td>
           @if($vacancy->testrequired)
+          <td>{{ $jobApplication->marks }}</td>
           <td>{{ $jobApplication->testResult }}</td>
           @endif
           <td><span class="@if($jobApplication->applicationStatus == 'Applied') text-yellow @elseif($jobApplication->applicationStatus == 'Rejected') text-red @elseif($jobApplication->applicationStatus == 'Approved') text-green @else text-muted @endif">
@@ -84,6 +86,7 @@
           <th><span class="text-warning">ID</span></th>
           <th><span class="text-warning">Name</span></th>
           @if($vacancy->testrequired)
+          <th><span class="text-warning">Marks</span></th>
           <th><span class="text-warning">Test Result</span></th>
           @endif
           <th><span class="text-warning">Application Status</span></th>

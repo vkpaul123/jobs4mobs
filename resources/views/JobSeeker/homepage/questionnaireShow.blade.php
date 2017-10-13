@@ -34,6 +34,7 @@
 
 				<form role="form" action="{{ route('jobseeker.test.submitTest', $jobApplication->id) }}" method="post" id="testForm">
 					{{csrf_field()}}
+					{{method_field('PUT')}}
 					<div class="box-body">
 						<table id="example4" class="table table-bordered table-striped">
 							<tbody>
@@ -50,13 +51,13 @@
 												<div class="col-md-3 col-md-offset-1">
 													<div class="radio">
 														<label>
-															<input type="radio" name="optionsRadios[{{$loop->index}}][]" id="optionsRadios1" value="{{$question->correctAns[0] }}">
+															<input type="radio" name="optionsRadios[{{$question->id}}]" id="optionsRadios1" value="{{$question->correctAns[0] }}">
 															{{$question->correctAns[0] }}
 														</label>
 													</div>
 													<div class="radio">
 														<label>
-															<input type="radio" name="optionsRadios[{{$loop->index}}][]" id="optionsRadios1" value="{{$question->correctAns[1] }}">
+															<input type="radio" name="optionsRadios[{{$question->id}}]" id="optionsRadios1" value="{{$question->correctAns[1] }}">
 															{{$question->correctAns[1] }}
 														</label>
 													</div>
@@ -64,13 +65,13 @@
 												<div class="col-md-3">
 													<div class="radio">
 														<label>
-															<input type="radio" name="optionsRadios[{{$loop->index}}][]" id="optionsRadios1" value="{{$question->correctAns[2] }}">
+															<input type="radio" name="optionsRadios[{{$question->id}}]" id="optionsRadios1" value="{{$question->correctAns[2] }}">
 															{{$question->correctAns[2] }}
 														</label>
 													</div>
 													<div class="radio">
 														<label>
-															<input type="radio" name="optionsRadios[{{$loop->index}}][]" id="optionsRadios1" value="{{$question->correctAns[3] }}">
+															<input type="radio" name="optionsRadios[{{$question->id}}]" id="optionsRadios1" value="{{$question->correctAns[3] }}">
 															{{$question->correctAns[3] }}
 														</label>
 													</div>
@@ -79,6 +80,7 @@
 										</div>
 									</td>
 								</tr>
+								{{-- <input type="hidden" name="question_id[]" value="{{ $question->id }}"> --}}
 								@endforeach
 								
 							</tbody>

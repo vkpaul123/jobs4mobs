@@ -62,6 +62,11 @@
                                 <h3><i class="fa fa-thumbs-o-up"></i><i class="text-green" style="font-weight: bold;">&nbsp All the Best!</i></h3>
                             </p>
                             <br> <br>
+                            @if (Session::has('messageFail'))
+                              <div class="alert alert-danger">{!! Session::get('messageFail') !!}
+                                <button type="button" class="close" data-dismiss="alert"><i class="fa fa-times"></i></button>
+                              </div>
+                            @endif
                             <form action="{{ route('jobseeker.test.startTest', $id) }}" method="post" class="form-horizontal">
                                 {{csrf_field()}}
                                 {{method_field('PUT')}}
