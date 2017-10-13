@@ -55,9 +55,9 @@
           </td>
           @if($vacancy->testrequired)
           <td>{{ $jobApplication->marks }}</td>
-          <td>{{ $jobApplication->testResult }}</td>
+          <td><span class="@if($jobApplication->testResult == 'Pass') text-success @else text-danger @endif">{{ $jobApplication->testResult }}</span></td>
           @endif
-          <td><span class="@if($jobApplication->applicationStatus == 'Applied') text-yellow @elseif($jobApplication->applicationStatus == 'Rejected') text-red @elseif($jobApplication->applicationStatus == 'Approved') text-green @else text-muted @endif">
+          <td><span class="@if($jobApplication->applicationStatus == 'Applied' || $jobApplication->applicationStatus == 'Finished Test') text-yellow @elseif($jobApplication->applicationStatus == 'Rejected' || $jobApplication->applicationStatus=='Disqualified') text-red @elseif($jobApplication->applicationStatus == 'Approved') text-green @else text-muted @endif">
                     <strong>{{ $jobApplication->applicationStatus }}</strong>
                   </span></td>
           <td>
@@ -118,6 +118,9 @@
       'searching'   : true,
       'ordering'    : true,
       'info'        : true,
+      @if($vacancy->testrequired)
+      'order' : '2, desc',
+      @endif
       'autoWidth'   : true
     })
   })

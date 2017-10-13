@@ -16,6 +16,11 @@
 
 <section class="content">
     <div class="box">
+        <div class="box-header with-border">
+            <a href="/home/vacancySearchResults">
+                <button class="btn btn-primary pull-right"><strong>Back</strong></button>
+            </a>
+        </div>
         <div class="box-body">
             <div class="box-body">
                 <div class="container-fluid">
@@ -55,6 +60,8 @@
                             <br>
                             You can also submit the questionnaire before time is up.
                             <br>
+                            <b>Do Not</b> Refresh the page. Doing So will disqualify your candidature.
+                            <br>
                             The questions that are not attempted will not be considered for scoring.
                             <br>There is No Negative Marking sceme in this test.
 
@@ -63,9 +70,9 @@
                             </p>
                             <br> <br>
                             @if (Session::has('messageFail'))
-                              <div class="alert alert-danger">{!! Session::get('messageFail') !!}
+                            <div class="alert alert-danger">{!! Session::get('messageFail') !!}
                                 <button type="button" class="close" data-dismiss="alert"><i class="fa fa-times"></i></button>
-                              </div>
+                            </div>
                             @endif
                             <form action="{{ route('jobseeker.test.startTest', $id) }}" method="post" class="form-horizontal">
                                 {{csrf_field()}}
@@ -82,6 +89,7 @@
                 </div>
             </div>
         </div>
-    </section>
+    </div>
+</section>
 
-    @endsection
+@endsection

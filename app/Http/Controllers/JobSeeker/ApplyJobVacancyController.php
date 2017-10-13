@@ -86,9 +86,20 @@ class ApplyJobVacancyController extends Controller
 
     public function startTest($id){
         $jobApplication = JobApplication::find($id);
-        if(($jobApplication->applicationStatus == "Started Test" || $jobApplication->applicationStatus == "Finished Test")) {
+        if($jobApplication->applicationStatus == "Finished Test") {
             Session::flash('messageFail', 'You have already given the Test for this vacancy. You cannot Apply again!');
             return redirect()->back();
+        }
+        elseif ($jobApplication->applicationStatus == "Started Test") {
+            Session::flash('messageFail', 'You refreshed the test page while answering. This is not Allowed and so you have been Disqualified!');
+
+            $jobApplication->applicationStatus = "Disqualified";
+            $jobApplication->marks = 0;
+            $jobApplication->testResult = "Fail";
+
+            $jobApplication->save();
+
+            return redirect(route('jobseeker.test.showTestStart', $jobApplication->id));
         }
         else {
             $jobApplication->applicationStatus = "Started Test";
@@ -124,7 +135,7 @@ class ApplyJobVacancyController extends Controller
         $questionnaire = Questionnaire::find(Vacancy::find($jobApplication->vacancy_id)->questionnaire_id);
         $questions = Question::where('questionnaire_id', $questionnaire->id)->get();
 
-        if($jobApplication->updated_at->diffInSeconds() > $questionnaire->timelimit*60+20) {
+        if($jobApplication->updated_at->diffInSeconds() > $questionnaire->timelimit*60+60) {
             Session::flash('messageFail', 'You refreshed the test page while answering. This is not Allowed and so you have been Disqualified!');
 
             $jobApplication->applicationStatus = "Disqualified";
