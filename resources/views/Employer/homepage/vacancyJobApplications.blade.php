@@ -55,7 +55,7 @@
           @if($vacancy->testrequired)
           <td>{{ $jobApplication->testResult }}</td>
           @endif
-          <td><span class="@if($jobApplication->applicationStatus == 'Applied') text-yellow @elseif($jobApplication->applicationStatus == 'Rejected') text-red @elseif($jobApplication->applicationStatus == 'Approved') text-green @endif">
+          <td><span class="@if($jobApplication->applicationStatus == 'Applied') text-yellow @elseif($jobApplication->applicationStatus == 'Rejected') text-red @elseif($jobApplication->applicationStatus == 'Approved') text-green @else text-muted @endif">
                     <strong>{{ $jobApplication->applicationStatus }}</strong>
                   </span></td>
           <td>

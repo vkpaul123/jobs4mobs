@@ -53,7 +53,7 @@
 
 	<div class="box">
 		<div class="box-header with-border">
-			<h3 class="box-title"><strong><span style="color: #367fa9;">{{ $jobseekerProfile->firstname." ".$jobseekerProfile->middlename." ".$jobseekerProfile->lastname }}</span></strong> &nbsp <small>"{{ $jobseekerProfile->tagline }}"</small></h3>
+			<h3 class="box-title"><strong><span class="text-blue"><span class="text-muted">{{ $loop->iteration }}</span> &nbsp &nbsp {{ $jobseekerProfile->firstname." ".$jobseekerProfile->middlename." ".$jobseekerProfile->lastname }}</span></strong> &nbsp <small>"{{ $jobseekerProfile->tagline }}"</small></h3>
 
 			<div class="box-tools pull-right">
 				<button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip"

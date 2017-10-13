@@ -87,7 +87,7 @@
 
 							@foreach($jobseekerProfiles as $jobseekerProfile)
 							
-							<option value="{{ $jobseekerProfile->id }}">{{ $jobseekerProfile->id }} - {{ $jobseekerProfile->preferedJobCategoryId1 }}</option>
+							<option value="{{ $jobseekerProfile->id }}">{{ $loop->iteration }} - {{ $jobseekerProfile->preferedJobCategoryId1 }}</option>
 
 							@endforeach
 
@@ -133,17 +133,17 @@
 							<div class="row">
 								<div class="col-md-4" id="boardNameShow">
 									<h4>Jobseeker Profile ID:</h4>
-									<strong class="text-primary">{{ $jobApplication->jobseeker_profile_id }}</strong> &nbsp &nbsp
+									<strong class="text-primary" style="font-size: 2em;">{{ $jobApplication->jobseeker_profile_id }}</strong> &nbsp &nbsp
 									<a href="{{ route('profile.show', $jobApplication->jobseeker_profile_id) }}"><button class="btn-primary btn btn-xs"><strong>View Profile</strong></button></a><hr>
 								</div>
 								<div class="col-md-4" id="academyNameShow">
 									<h4>Vacancy ID:</h4>
-									<strong class="text-info">{{ $jobApplication->vacancy_id }}</strong> &nbsp &nbsp
+									<strong class="text-info" style="font-size: 2em;">{{ $jobApplication->vacancy_id }}</strong> &nbsp &nbsp
 									<a href="/home/viewVacancy/{{$jobApplication->vacancy_id}}"><button class="btn-info btn btn-xs"><strong>View Vacancy</strong></button></a><hr>
 								</div>
 								<div class="col-md-4">
 									<h4>Application Status:</h4>
-									<span class="@if($jobApplication->applicationStatus == 'Applied') text-yellow @elseif($jobApplication->applicationStatus == 'Rejected') text-red @elseif($jobApplication->applicationStatus == 'Approved') text-green @endif">
+									<span class="@if($jobApplication->applicationStatus == 'Applied') text-yellow @elseif($jobApplication->applicationStatus == 'Rejected') text-red @elseif($jobApplication->applicationStatus == 'Approved') text-green @else text-muted @endif">
 										<strong>{{ $jobApplication->applicationStatus }}</strong>
 									</span><hr>
 								</div>

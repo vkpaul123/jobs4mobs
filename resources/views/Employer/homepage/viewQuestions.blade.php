@@ -51,26 +51,28 @@
           @endif
           <div class="container-fluid">
             <div class="row">
-              <div class="col-md-5">
+              <div class="col-md-7">
                 <h5>  
-                <form action="{{ route('questionnare.updatePassingMarks', $questionnare->id) }}" class="form-inline" method="post">
+                <form action="{{ route('questionnare.updatePassingMarks', $questionnare->id) }}" class="form-vertical" method="post">
                   {{csrf_field()}}
                   {{method_field('PUT')}}
                   <div class="form-group{{ $errors->has('passingMarks') ? ' has-error' : '' }}">
-                    <label for="passingMarks">Passing Marks</label>
+                    <label for="passingMarks">Passing Marks</label><span class="text-red" style="font-weight: bold;">*</span>
                     <input type="number" name="passingMarks" id="passingMarks" placeholder="Passing Marks" value="{{ $questionnare->passingMarks }}" class="form-control" min="0">
                   </div>
+                  <div class="form-group{{ $errors->has('timelimit') ? ' has-error' : '' }}">
+                    <label for="timelimit">Time Limit</label><span class="text-red" style="font-weight: bold;">*</span>
+                    <input type="number" name="timelimit" id="timelimit" placeholder="Time Limit" value="{{ $questionnare->timelimit }}" class="form-control" min="0">
+                  </div>
                   <input type="hidden" name="questionsCount" value="{{ $questionsCount }}">
-                  <div class="form-group">
-                    <input type="submit" class="btn btn-warning">
+                  <div class="form-group pull-right">
+                    <button class="btn btn-warning" type="submit"><strong>Save</strong></button>
                   </div>
                 </form>
                 </h5>
               </div>
-              <div class="col-md-4">
-                <h4><span class="text-warning">Industry:</span><span class="text-yellow">&nbsp{{ $questionnare->job_category_id }}</span></h4>
-              </div>
-              <div class="col-md-3">
+              <div class="col-md-4 col-md-offset-1">
+                <h4><span class="text-warning">Industry:</span><span class="text-yellow">&nbsp{{ $questionnare->job_category_id }}</span></h4><hr>
                 <h4><span class="text-warning">Questions Count:</span><strong class="text-yellow">&nbsp{{ $questionsCount }}</strong></h4>
               </div>
             </div>

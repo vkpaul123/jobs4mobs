@@ -135,13 +135,15 @@ class QuestionnaireController extends Controller
     {
         $this->validate($request, [
             'passingMarks' => 'required',
+            'timelimit' => 'required',
             ]);
 
         if(($request->questionsCount >= $request->passingMarks) && $request->passingMarks != 0) {
             $questionnare = Questionnaire::find($id);
             $questionnare->passingMarks = $request->passingMarks;
+            $questionnare->timelimit = $request->timelimit;
             $questionnare->save();
-            Session::flash('messageSuccess', 'Passing Marks set Successfully!');
+            Session::flash('messageSuccess', 'Questionnare Attributes set Successfully!');
         }
         else
             Session::flash('messageFail', 'Passing Marks was <b>zero</b> or <b>greater</b> than <b>Questions Count</b> in this Questionnaire. Please Add more questions or reduce Passing Marks');

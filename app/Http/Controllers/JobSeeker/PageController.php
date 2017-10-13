@@ -5,7 +5,10 @@ namespace App\Http\Controllers\JobSeeker;
 use App\Address;
 use App\Employer;
 use App\Http\Controllers\Controller;
+use App\JobApplication;
 use App\JobCategory;
+use App\Question;
+use App\Questionnaire;
 use App\Vacancy;
 use App\VacancySkill;
 use Illuminate\Http\Request;
@@ -132,5 +135,20 @@ class PageController extends Controller
     public function questionnaireShow()
     {
         return view('JobSeeker.homepage.questionnaireShow');
+    }
+
+    public function showTestStart($id)
+    {
+        $jobApplication = JobApplication::find($id);
+
+        $questionnaire = Questionnaire::find(Vacancy::find($jobApplication->vacancy_id)->questionnaire_id);
+        $questionnaire->job_category_id = JobCategory::find($questionnaire->job_category_id)->name;
+
+        $questionsCount = Question::where('questionnaire_id', $questionnaire->id)->count();
+
+        return view('JobSeeker.homepage.testStartMessage')
+        ->with(compact('id'))
+        ->with(compact('questionsCount'))
+        ->with(compact('questionnaire'));
     }
 }

@@ -6,6 +6,9 @@ use App\Http\Controllers\Controller;
 use App\JobApplication;
 use App\JobCategory;
 use App\JobseekerProfile;
+use App\Question;
+use App\Questionnaire;
+use App\Vacancy;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
@@ -50,19 +53,67 @@ class ApplyJobVacancyController extends Controller
     		return redirect()->back();
     	}
 
-    	if(count($jobApplication) == 0) {
-    		$jobApplication1 = new JobApplication;
-    		$jobApplication1->jobseeker_profile_id = $request->jobseeker_profile_id;
-    		$jobApplication1->vacancy_id = $request->vacancy_id;
-    		$jobApplication1->applicationStatus = "Applied";
-    		$jobApplication1->save();
+        $vacancy = Vacancy::find($request->vacancy_id);
 
-    		Session::flash('messageSuccess', 'You have successfully applied for this vacancy.');
+    	if(count($jobApplication) == 0) {
+            if($vacancy->testrequired == null) {
+        		$jobApplication1 = new JobApplication;
+        		$jobApplication1->jobseeker_profile_id = $request->jobseeker_profile_id;
+        		$jobApplication1->vacancy_id = $request->vacancy_id;
+        		$jobApplication1->applicationStatus = "Applied";
+        		$jobApplication1->save();
+
+        		Session::flash('messageSuccess', 'You have successfully applied for this vacancy.');
+            }
+            else {
+                $jobApplication1 = new JobApplication;
+                $jobApplication1->jobseeker_profile_id = $request->jobseeker_profile_id;
+                $jobApplication1->vacancy_id = $request->vacancy_id;
+                $jobApplication1->applicationStatus = "Applied for Test";
+                $jobApplication1->save();
+
+                $jobApplication2 = JobApplication::all()->last();
+
+                return redirect(route('jobseeker.test.showTestStart', $jobApplication2->id));
+            }
     	}
     	else {
     		Session::flash('messageFail', 'You had already applied for this vacancy. You cannot Apply again!');
     	}
 
     	return redirect()->back();
+    }
+
+    public function startTest($id){
+        $jobApplication = JobApplication::find($id);
+        $jobApplication->applicationStatus = "Started Test";
+
+        $questionnaire = Questionnaire::find(Vacancy::find($jobApplication->vacancy_id)->questionnaire_id);
+        $questions = Question::where('questionnaire_id', $questionnaire->id)->get();
+
+        foreach ($questions as $question) {
+            $alternatives = [
+                'one' => $question->correctAns,
+                'two' => $question->WrongAns1,
+                'three' => $question->WrongAns2,
+                'four' => $question->WrongAns3,
+            ];
+
+            shuffle($alternatives);
+
+            $question->correctAns = $alternatives;
+        }
+
+        $jobApplication->save();
+        
+        return view('JobSeeker.homepage.questionnaireShow')
+        ->with(compact('jobApplication'))
+        ->with(compact('questionnaire'))
+        ->with(compact('questions'));
+    }
+
+    public function submitTest(Request $request, $id)
+    {
+        return $request->all();
     }
 }

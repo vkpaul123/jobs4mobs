@@ -18,6 +18,7 @@ class CreateQuestionnairesTable extends Migration
 
             $table->integer('job_category_id')->nullable();
             $table->integer('passingMarks')->nullable();
+            $table->integer('timelimit')->nullable();
             $table->integer('employers_id')->nullable();
             
             $table->timestamps();

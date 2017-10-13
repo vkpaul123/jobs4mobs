@@ -1,17 +1,18 @@
 @extends('JobSeeker.homepage.layouts.app')
 @section('title', 'JobSeekers')
 
+@section('startBodyScripts', 'onLoad=begintimer()')
+
 @section('body')
 
 <section class="content-header">
 	<h1>
-		EVALUATION TIME!
-
+		<span style="color:#367fa9;"><b>JobSeeker</b> </span> Screening Test
+		<small>Evaluation Time</small>
 	</h1>
 	<ol class="breadcrumb">
 		<li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-		<li><a href="#">Forms</a></li>
-		<li class="active">General Elements</li>
+		<li class="active">Screening Test</li>
 	</ol>
 </section>
 
@@ -21,12 +22,19 @@
 		<div class="col-md-12">
 			<div class="box box-primary">
 				<div class="box-header with-border">
-					<h3 class="box-title">Select the right option !</h3>
+					<h3 class="box-title">Select the right option.</h3>
+					<span class="pull-right text-muted">
+						Time Remaining: &nbsp
+						<span class="text-danger"><strong style="font-size: 1.5em;" id="time1">
+							
+						</strong></span>
+					</span>
 				</div>
 				<!-- /.box-header -->
 
-				<div class="box-body">
-					<form role="form">
+				<form role="form" action="{{ route('jobseeker.test.submitTest', $jobApplication->id) }}" method="post" id="testForm">
+					{{csrf_field()}}
+					<div class="box-body">
 						<table id="example4" class="table table-bordered table-striped">
 							<tbody>
 								<!-- q 1 -->
@@ -34,7 +42,7 @@
 								<tr>
 									<td>
 										<h4><strong><span>Q{{ $loop->iteration }}.</span> &nbsp
-											{{ $question->text }}
+											{{ $question->quesText }}
 										</strong> &nbsp</h4>
 
 										<div class="container-fluid">
@@ -42,28 +50,28 @@
 												<div class="col-md-3 col-md-offset-1">
 													<div class="radio">
 														<label>
-															<input type="radio" name="optionsRadios" id="optionsRadios1" value="option1">
-															Coder
+															<input type="radio" name="optionsRadios[{{$loop->index}}][]" id="optionsRadios1" value="{{$question->correctAns[0] }}">
+															{{$question->correctAns[0] }}
 														</label>
 													</div>
 													<div class="radio">
 														<label>
-															<input type="radio" name="optionsRadios" id="optionsRadios1" value="option1">
-															Deigner
+															<input type="radio" name="optionsRadios[{{$loop->index}}][]" id="optionsRadios1" value="{{$question->correctAns[1] }}">
+															{{$question->correctAns[1] }}
 														</label>
 													</div>
 												</div>
 												<div class="col-md-3">
 													<div class="radio">
 														<label>
-															<input type="radio" name="optionsRadios" id="optionsRadios1" value="option1">
-															Administartor
+															<input type="radio" name="optionsRadios[{{$loop->index}}][]" id="optionsRadios1" value="{{$question->correctAns[2] }}">
+															{{$question->correctAns[2] }}
 														</label>
 													</div>
 													<div class="radio">
 														<label>
-															<input type="radio" name="optionsRadios" id="optionsRadios1" value="option1">
-															None
+															<input type="radio" name="optionsRadios[{{$loop->index}}][]" id="optionsRadios1" value="{{$question->correctAns[3] }}">
+															{{$question->correctAns[3] }}
 														</label>
 													</div>
 												</div>
@@ -71,848 +79,65 @@
 										</div>
 									</td>
 								</tr>
-
-								<tr>
-									<td>
-										<h4><strong><span>Q1.</span> &nbsp
-											You Are a...?
-										</strong> &nbsp</h4>
-
-										<div class="container-fluid">
-											<div class="row">
-												<div class="col-md-3 col-md-offset-1">
-													<div class="radio">
-														<label>
-															<input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked>
-															Coder
-														</label>
-													</div>
-													<div class="radio">
-														<label>
-															<input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked>
-															Deigner
-														</label>
-													</div>
-												</div>
-												<div class="col-md-3">
-													<div class="radio">
-														<label>
-															<input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked>
-															Administartor
-														</label>
-													</div>
-													<div class="radio">
-														<label>
-															<input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked>
-															None
-														</label>
-													</div>
-												</div>
-											</div>
-										</div>
-									</td>
-								</tr>
-
-								<tr>
-									<td>
-										<h4><strong><span>Q1.</span> &nbsp
-											You Are a...?
-										</strong> &nbsp</h4>
-
-										<div class="container-fluid">
-											<div class="row">
-												<div class="col-md-3 col-md-offset-1">
-													<div class="radio">
-														<label>
-															<input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked>
-															Coder
-														</label>
-													</div>
-													<div class="radio">
-														<label>
-															<input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked>
-															Deigner
-														</label>
-													</div>
-												</div>
-												<div class="col-md-3">
-													<div class="radio">
-														<label>
-															<input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked>
-															Administartor
-														</label>
-													</div>
-													<div class="radio">
-														<label>
-															<input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked>
-															None
-														</label>
-													</div>
-												</div>
-											</div>
-										</div>
-									</td>
-								</tr>
-
-								<tr>
-									<td>
-										<h4><strong><span>Q1.</span> &nbsp
-											You Are a...?
-										</strong> &nbsp</h4>
-
-										<div class="container-fluid">
-											<div class="row">
-												<div class="col-md-3 col-md-offset-1">
-													<div class="radio">
-														<label>
-															<input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked>
-															Coder
-														</label>
-													</div>
-													<div class="radio">
-														<label>
-															<input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked>
-															Deigner
-														</label>
-													</div>
-												</div>
-												<div class="col-md-3">
-													<div class="radio">
-														<label>
-															<input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked>
-															Administartor
-														</label>
-													</div>
-													<div class="radio">
-														<label>
-															<input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked>
-															None
-														</label>
-													</div>
-												</div>
-											</div>
-										</div>
-									</td>
-								</tr>
-
-								<tr>
-									<td>
-										<h4><strong><span>Q1.</span> &nbsp
-											You Are a...?
-										</strong> &nbsp</h4>
-
-										<div class="container-fluid">
-											<div class="row">
-												<div class="col-md-3 col-md-offset-1">
-													<div class="radio">
-														<label>
-															<input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked>
-															Coder
-														</label>
-													</div>
-													<div class="radio">
-														<label>
-															<input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked>
-															Deigner
-														</label>
-													</div>
-												</div>
-												<div class="col-md-3">
-													<div class="radio">
-														<label>
-															<input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked>
-															Administartor
-														</label>
-													</div>
-													<div class="radio">
-														<label>
-															<input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked>
-															None
-														</label>
-													</div>
-												</div>
-											</div>
-										</div>
-									</td>
-								</tr>
-
-								<tr>
-									<td>
-										<h4><strong><span>Q1.</span> &nbsp
-											You Are a...?
-										</strong> &nbsp</h4>
-
-										<div class="container-fluid">
-											<div class="row">
-												<div class="col-md-3 col-md-offset-1">
-													<div class="radio">
-														<label>
-															<input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked>
-															Coder
-														</label>
-													</div>
-													<div class="radio">
-														<label>
-															<input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked>
-															Deigner
-														</label>
-													</div>
-												</div>
-												<div class="col-md-3">
-													<div class="radio">
-														<label>
-															<input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked>
-															Administartor
-														</label>
-													</div>
-													<div class="radio">
-														<label>
-															<input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked>
-															None
-														</label>
-													</div>
-												</div>
-											</div>
-										</div>
-									</td>
-								</tr>
-
-								<tr>
-									<td>
-										<h4><strong><span>Q1.</span> &nbsp
-											You Are a...?
-										</strong> &nbsp</h4>
-
-										<div class="container-fluid">
-											<div class="row">
-												<div class="col-md-3 col-md-offset-1">
-													<div class="radio">
-														<label>
-															<input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked>
-															Coder
-														</label>
-													</div>
-													<div class="radio">
-														<label>
-															<input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked>
-															Deigner
-														</label>
-													</div>
-												</div>
-												<div class="col-md-3">
-													<div class="radio">
-														<label>
-															<input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked>
-															Administartor
-														</label>
-													</div>
-													<div class="radio">
-														<label>
-															<input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked>
-															None
-														</label>
-													</div>
-												</div>
-											</div>
-										</div>
-									</td>
-								</tr>
-
-								<tr>
-									<td>
-										<h4><strong><span>Q1.</span> &nbsp
-											You Are a...?
-										</strong> &nbsp</h4>
-
-										<div class="container-fluid">
-											<div class="row">
-												<div class="col-md-3 col-md-offset-1">
-													<div class="radio">
-														<label>
-															<input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked>
-															Coder
-														</label>
-													</div>
-													<div class="radio">
-														<label>
-															<input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked>
-															Deigner
-														</label>
-													</div>
-												</div>
-												<div class="col-md-3">
-													<div class="radio">
-														<label>
-															<input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked>
-															Administartor
-														</label>
-													</div>
-													<div class="radio">
-														<label>
-															<input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked>
-															None
-														</label>
-													</div>
-												</div>
-											</div>
-										</div>
-									</td>
-								</tr>
-
-								<tr>
-									<td>
-										<h4><strong><span>Q1.</span> &nbsp
-											You Are a...?
-										</strong> &nbsp</h4>
-
-										<div class="container-fluid">
-											<div class="row">
-												<div class="col-md-3 col-md-offset-1">
-													<div class="radio">
-														<label>
-															<input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked>
-															Coder
-														</label>
-													</div>
-													<div class="radio">
-														<label>
-															<input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked>
-															Deigner
-														</label>
-													</div>
-												</div>
-												<div class="col-md-3">
-													<div class="radio">
-														<label>
-															<input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked>
-															Administartor
-														</label>
-													</div>
-													<div class="radio">
-														<label>
-															<input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked>
-															None
-														</label>
-													</div>
-												</div>
-											</div>
-										</div>
-									</td>
-								</tr>
-
-								<tr>
-									<td>
-										<h4><strong><span>Q1.</span> &nbsp
-											You Are a...?
-										</strong> &nbsp</h4>
-
-										<div class="container-fluid">
-											<div class="row">
-												<div class="col-md-3 col-md-offset-1">
-													<div class="radio">
-														<label>
-															<input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked>
-															Coder
-														</label>
-													</div>
-													<div class="radio">
-														<label>
-															<input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked>
-															Deigner
-														</label>
-													</div>
-												</div>
-												<div class="col-md-3">
-													<div class="radio">
-														<label>
-															<input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked>
-															Administartor
-														</label>
-													</div>
-													<div class="radio">
-														<label>
-															<input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked>
-															None
-														</label>
-													</div>
-												</div>
-											</div>
-										</div>
-									</td>
-								</tr>
-
-								<tr>
-									<td>
-										<h4><strong><span>Q1.</span> &nbsp
-											You Are a...?
-										</strong> &nbsp</h4>
-
-										<div class="container-fluid">
-											<div class="row">
-												<div class="col-md-3 col-md-offset-1">
-													<div class="radio">
-														<label>
-															<input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked>
-															Coder
-														</label>
-													</div>
-													<div class="radio">
-														<label>
-															<input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked>
-															Deigner
-														</label>
-													</div>
-												</div>
-												<div class="col-md-3">
-													<div class="radio">
-														<label>
-															<input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked>
-															Administartor
-														</label>
-													</div>
-													<div class="radio">
-														<label>
-															<input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked>
-															None
-														</label>
-													</div>
-												</div>
-											</div>
-										</div>
-									</td>
-								</tr>
-
-								<tr>
-									<td>
-										<h4><strong><span>Q1.</span> &nbsp
-											You Are a...?
-										</strong> &nbsp</h4>
-
-										<div class="container-fluid">
-											<div class="row">
-												<div class="col-md-3 col-md-offset-1">
-													<div class="radio">
-														<label>
-															<input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked>
-															Coder
-														</label>
-													</div>
-													<div class="radio">
-														<label>
-															<input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked>
-															Deigner
-														</label>
-													</div>
-												</div>
-												<div class="col-md-3">
-													<div class="radio">
-														<label>
-															<input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked>
-															Administartor
-														</label>
-													</div>
-													<div class="radio">
-														<label>
-															<input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked>
-															None
-														</label>
-													</div>
-												</div>
-											</div>
-										</div>
-									</td>
-								</tr>
-
-								<tr>
-									<td>
-										<h4><strong><span>Q1.</span> &nbsp
-											You Are a...?
-										</strong> &nbsp</h4>
-
-										<div class="container-fluid">
-											<div class="row">
-												<div class="col-md-3 col-md-offset-1">
-													<div class="radio">
-														<label>
-															<input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked>
-															Coder
-														</label>
-													</div>
-													<div class="radio">
-														<label>
-															<input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked>
-															Deigner
-														</label>
-													</div>
-												</div>
-												<div class="col-md-3">
-													<div class="radio">
-														<label>
-															<input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked>
-															Administartor
-														</label>
-													</div>
-													<div class="radio">
-														<label>
-															<input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked>
-															None
-														</label>
-													</div>
-												</div>
-											</div>
-										</div>
-									</td>
-								</tr>
-
-								<tr>
-									<td>
-										<h4><strong><span>Q1.</span> &nbsp
-											You Are a...?
-										</strong> &nbsp</h4>
-
-										<div class="container-fluid">
-											<div class="row">
-												<div class="col-md-3 col-md-offset-1">
-													<div class="radio">
-														<label>
-															<input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked>
-															Coder
-														</label>
-													</div>
-													<div class="radio">
-														<label>
-															<input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked>
-															Deigner
-														</label>
-													</div>
-												</div>
-												<div class="col-md-3">
-													<div class="radio">
-														<label>
-															<input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked>
-															Administartor
-														</label>
-													</div>
-													<div class="radio">
-														<label>
-															<input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked>
-															None
-														</label>
-													</div>
-												</div>
-											</div>
-										</div>
-									</td>
-								</tr>
-
-								<tr>
-									<td>
-										<h4><strong><span>Q1.</span> &nbsp
-											You Are a...?
-										</strong> &nbsp</h4>
-
-										<div class="container-fluid">
-											<div class="row">
-												<div class="col-md-3 col-md-offset-1">
-													<div class="radio">
-														<label>
-															<input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked>
-															Coder
-														</label>
-													</div>
-													<div class="radio">
-														<label>
-															<input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked>
-															Deigner
-														</label>
-													</div>
-												</div>
-												<div class="col-md-3">
-													<div class="radio">
-														<label>
-															<input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked>
-															Administartor
-														</label>
-													</div>
-													<div class="radio">
-														<label>
-															<input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked>
-															None
-														</label>
-													</div>
-												</div>
-											</div>
-										</div>
-									</td>
-								</tr>
-
-								<tr>
-									<td>
-										<h4><strong><span>Q1.</span> &nbsp
-											You Are a...?
-										</strong> &nbsp</h4>
-
-										<div class="container-fluid">
-											<div class="row">
-												<div class="col-md-3 col-md-offset-1">
-													<div class="radio">
-														<label>
-															<input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked>
-															Coder
-														</label>
-													</div>
-													<div class="radio">
-														<label>
-															<input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked>
-															Deigner
-														</label>
-													</div>
-												</div>
-												<div class="col-md-3">
-													<div class="radio">
-														<label>
-															<input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked>
-															Administartor
-														</label>
-													</div>
-													<div class="radio">
-														<label>
-															<input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked>
-															None
-														</label>
-													</div>
-												</div>
-											</div>
-										</div>
-									</td>
-								</tr>
-
-								<tr>
-									<td>
-										<h4><strong><span>Q1.</span> &nbsp
-											You Are a...?
-										</strong> &nbsp</h4>
-
-										<div class="container-fluid">
-											<div class="row">
-												<div class="col-md-3 col-md-offset-1">
-													<div class="radio">
-														<label>
-															<input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked>
-															Coder
-														</label>
-													</div>
-													<div class="radio">
-														<label>
-															<input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked>
-															Deigner
-														</label>
-													</div>
-												</div>
-												<div class="col-md-3">
-													<div class="radio">
-														<label>
-															<input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked>
-															Administartor
-														</label>
-													</div>
-													<div class="radio">
-														<label>
-															<input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked>
-															None
-														</label>
-													</div>
-												</div>
-											</div>
-										</div>
-									</td>
-								</tr>
-
-								<tr>
-									<td>
-										<h4><strong><span>Q1.</span> &nbsp
-											You Are a...?
-										</strong> &nbsp</h4>
-
-										<div class="container-fluid">
-											<div class="row">
-												<div class="col-md-3 col-md-offset-1">
-													<div class="radio">
-														<label>
-															<input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked>
-															Coder
-														</label>
-													</div>
-													<div class="radio">
-														<label>
-															<input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked>
-															Deigner
-														</label>
-													</div>
-												</div>
-												<div class="col-md-3">
-													<div class="radio">
-														<label>
-															<input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked>
-															Administartor
-														</label>
-													</div>
-													<div class="radio">
-														<label>
-															<input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked>
-															None
-														</label>
-													</div>
-												</div>
-											</div>
-										</div>
-									</td>
-								</tr>
-
-								<tr>
-									<td>
-										<h4><strong><span>Q1.</span> &nbsp
-											You Are a...?
-										</strong> &nbsp</h4>
-
-										<div class="container-fluid">
-											<div class="row">
-												<div class="col-md-3 col-md-offset-1">
-													<div class="radio">
-														<label>
-															<input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked>
-															Coder
-														</label>
-													</div>
-													<div class="radio">
-														<label>
-															<input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked>
-															Deigner
-														</label>
-													</div>
-												</div>
-												<div class="col-md-3">
-													<div class="radio">
-														<label>
-															<input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked>
-															Administartor
-														</label>
-													</div>
-													<div class="radio">
-														<label>
-															<input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked>
-															None
-														</label>
-													</div>
-												</div>
-											</div>
-										</div>
-									</td>
-								</tr>
-
-								<tr>
-									<td>
-										<h4><strong><span>Q1.</span> &nbsp
-											You Are a...?
-										</strong> &nbsp</h4>
-
-										<div class="container-fluid">
-											<div class="row">
-												<div class="col-md-3 col-md-offset-1">
-													<div class="radio">
-														<label>
-															<input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked>
-															Coder
-														</label>
-													</div>
-													<div class="radio">
-														<label>
-															<input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked>
-															Deigner
-														</label>
-													</div>
-												</div>
-												<div class="col-md-3">
-													<div class="radio">
-														<label>
-															<input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked>
-															Administartor
-														</label>
-													</div>
-													<div class="radio">
-														<label>
-															<input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked>
-															None
-														</label>
-													</div>
-												</div>
-											</div>
-										</div>
-									</td>
-								</tr>
-
-								<tr>
-									<td>
-										<h4><strong><span>Q1.</span> &nbsp
-											You Are a...?
-										</strong> &nbsp</h4>
-
-										<div class="container-fluid">
-											<div class="row">
-												<div class="col-md-3 col-md-offset-1">
-													<div class="radio">
-														<label>
-															<input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked>
-															Coder
-														</label>
-													</div>
-													<div class="radio">
-														<label>
-															<input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked>
-															Deigner
-														</label>
-													</div>
-												</div>
-												<div class="col-md-3">
-													<div class="radio">
-														<label>
-															<input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked>
-															Administartor
-														</label>
-													</div>
-													<div class="radio">
-														<label>
-															<input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked>
-															None
-														</label>
-													</div>
-												</div>
-											</div>
-										</div>
-									</td>
-								</tr>
-
+								@endforeach
+								
 							</tbody>
 						</table>
-					</form>
-				</div>
+					</div>
 
-				<div class="box-footer">
-					<button type="submit" class="btn btn-primary pull-right">Submit</button>
-				</div>
+					<div class="box-footer">
+						<div class="col-md-offset-4 col-md-4">
+							<button type="submit" class="btn btn-primary btn-lg btn-block pull-right"><strong>Submit</strong></button>
+						</div>
+						<span class="pull-right text-muted">
+							Time Remaining: &nbsp
+							<span class="text-danger"><strong style="font-size: 1.5em;" id="time2">
+								
+							</strong></span>
+						</span>
+					</div>
 
-			</form>
+				</form>
+			</div>
+			<!-- /.box-body -->
 		</div>
-		<!-- /.box-body -->
+		<!-- /.box -->
 	</div>
-	<!-- /.box -->
-</div>
-<!--/.col (right) -->
+	<!--/.col (right) -->
 
-<!-- /.row -->
+	<!-- /.row -->
 </section>
 
+<script>
+	var limit = "{{$questionnaire->timelimit}}:00";
+	if(document.images) {
+		var parselimit = limit.split(":");
+		parselimit = parselimit[0]*60 + parselimit[1]*1;
+	}
 
-</section>
+	function begintimer() {
+		if (!document.images)
+			return;
+		
+		if (parselimit == 1)
+			document.getElementById('testForm').submit();
+		else { 
+			parselimit -= 1;
+			curmin = Math.floor(parselimit / 60);
+			cursec = parselimit%60;
+			if (curmin != 0) {
+				curtime = curmin + ":" + cursec + " ";
+			}
+			else {
+				curtime = "0:" + cursec + " ";
+			}
+
+			document.getElementById("time1").innerHTML = curtime;
+			document.getElementById("time2").innerHTML = curtime;
+			setTimeout("begintimer()", 1000);
+		}
+	}
+
+</script>
 
 @endsection

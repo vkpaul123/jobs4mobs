@@ -3,7 +3,7 @@
 <head>
 	@include('JobSeeker.homepage.layouts.headcontent')
 </head>
-<body class="hold-transition skin-blue sidebar-mini">
+<body class="hold-transition skin-blue sidebar-mini" @yield('startBodyScripts')>
 	<div class="wrapper">
 		@include('JobSeeker.homepage.layouts.header')
 

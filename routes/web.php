@@ -241,5 +241,8 @@ Route::group(['namespace' => 'JobSeeker'], function() {
 	Route::get('/home/contactAdmin', 'PageController@contactAdmin');
 
 	//test
+	Route::get('/home/tests/showTestStart/{id}', 'PageController@showTestStart')->name('jobseeker.test.showTestStart');
+	Route::put('/home/tests/showTestStart/{id}/startTest', 'ApplyJobVacancyController@startTest')->name('jobseeker.test.startTest');
+	Route::post('/home/tests/showTestStart/{id}/submitTest', 'ApplyJobVacancyController@submitTest')->name('jobseeker.test.submitTest');
 	Route::get('/home/tests/questionnaireShow', 'PageController@questionnaireShow');
 });
