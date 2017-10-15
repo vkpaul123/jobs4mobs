@@ -161,7 +161,7 @@
 		</div>
 		<div class="row">
 			<div class="col-md-offset-2 col-md-5">
-				<a href="/home/viewEmployerProfile/{{ $employer->id }}">
+				<a href="/admin/viewEmployerProfile/{{ $employer->id }}">
 					<button class="pull-right btn btn-primary btn-md"><strong>View Employer Profile</strong></button>
 				</a>
 			</div>

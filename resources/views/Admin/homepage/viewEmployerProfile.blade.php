@@ -1,12 +1,12 @@
-@extends('JobSeeker.homepage.layouts.app')
-@section('title', 'JobSeekers')
+@extends('Admin.homepage.layouts.app')
+@section('title', 'Admins')
 
 
 @section('body')
 <!-- Content Header (Page header) -->
 <section class="content-header">
 	<h1>
-		<span style="color:#367fa9;"><b>JobSeeker</b> </span> View Employer Profile
+		<span style="color:#d73925;"><b>Admin</b> </span> View Employer Profile
 		<small>see Employer's Profile</small>
 	</h1>
 	<ol class="breadcrumb">
