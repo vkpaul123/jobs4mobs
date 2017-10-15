@@ -107,7 +107,7 @@
               <th>Name</th>
               <th>Company Name</th>
               <th>Email</th>
-              <th>Created At</th>
+              <th>Created</th>
             </tr>              
           </thead>
           <tbody>
@@ -117,7 +117,7 @@
               <td>{{ $employer->firstname }} {{ $employer->lastname }}</td>
               <td>{{ $employer->companyname }}</td>
               <td>{{ $employer->email }}</td>
-              <td>{{ $employer->created_at }}/td>
+              <td>{{ $employer->created_at->diffForHumans() }}</td>
               </tr>
               @empty
               <tr>
@@ -155,7 +155,7 @@
                   <th>Company Name</th>
                   <th>Industry</th>
                   <th>Status</th>
-                  <th>Created At</th>
+                  <th>Created</th>
                 </tr>
               </thead>
 
@@ -171,7 +171,7 @@
                     @else
                     inactive
                   @endif</td>
-                  <td>{{ $vacancy->created_at }}/td>
+                  <td>{{ $vacancy->created_at->diffForHumans() }}</td>
                   </tr>
                   @empty
                   <tr>
@@ -199,7 +199,7 @@
                       <th>ID</th>
                       <th>Name</th>
                       <th>Email</th>
-                      <th>Created At</th>
+                      <th>Created</th>
                     </tr>
                   </thead>
 
@@ -209,7 +209,7 @@
                       <td>{{ $user->id }}</td>
                       <td>{{ $user->firstname }} {{$user->lastname}}</td>
                       <td>{{ $user->email }}</td>
-                      <td>{{ $user->created_at }}/td>
+                      <td>{{ $user->created_at->diffForHumans() }}</td>
                       </tr>
                       @empty
                       <tr>
