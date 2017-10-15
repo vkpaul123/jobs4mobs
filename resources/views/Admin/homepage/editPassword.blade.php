@@ -5,10 +5,10 @@
 @section('body')
 
 <section class="content-header">
-  <h1><span style="color: #d73925;"><strong>Admin</strong></span> Add New Admin<small> &nbsp create new Sub-Admin</small></h1>
+  <h1><span style="color: #d73925;"><strong>Admin</strong></span> Change Password<small> &nbsp Set New Password</small></h1>
   <ol class="breadcrumb">
 		<li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-		<li class="active">Add New Admin</li>
+		<li class="active">Change Password</li>
 	</ol>
 </section>
 
@@ -17,7 +17,7 @@
 	<!-- Default box -->
 	<div class="box">
 		<div class="box-header with-border">
-			<h3 class="box-title"><b>New Sub-Admin</b></h3>
+			<h3 class="box-title"><b>Change existing Password</b></h3>
 		</div>
 
 		<div class="box-body">
@@ -41,26 +41,32 @@
 					</p>
 				</center>
 			@endif
-			<form action="{{ route('admin.addAdmin.add') }}" method="post" class="form-horizontal">
+			<form action="{{ route('admin.editPassword') }}" method="post" class="form-horizontal">
 				{{csrf_field()}}
+				{{method_field('PUT')}}
 				
-				<h4><span style="color: #d73925;">Name</span></h4>
+				<div class="row">
+					<div class="col-md-offset-2 col-xs-8">
+						<div class="box box-danger">
+							<div class="box-header with-border">
+								<h4 class="text-danger"><strong>Your Current Password</strong></h4>
+							</div>
+							<div class="box-body">
+								<div class="form-group{{ $errors->has('yourPassword') ? ' has-error' : '' }}">
+									<div class="col-md-10 col-md-offset-1">
+										<input type="password" class="form-control pull-right" id="yourPassword" name="yourPassword" placeholder="Your Current Password">
+									</div>
+								</div>
+							</div>
+						</div>
+						
+					</div>
+					
+				</div>
 
-				<div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
-					<label for="name" class="col-md-3 control-label">Admin Name</label>
-					<div class="col-md-6">
-						<input type="text" class="form-control pull-right" id="name" name="name" placeholder="Admin Name" value="{{ old('name') }}">
-					</div>
-				</div>
+
 				<hr>
-				<h4><span style="color: #d73925;">Credentials</span></h4>
-				
-				<div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-					<label for="email" class="col-md-3 control-label">E-Mail</label>
-					<div class="col-md-6">
-						<input type="email" class="form-control pull-right" id="email" name="email" placeholder="E-Mail" value="{{ old('email') }}">
-					</div>
-				</div>
+				<h4><span style="color: #d73925;">New Password</span></h4>
 
 				<div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
 					<label for="password" class="col-md-3 control-label">Password</label>
@@ -77,35 +83,8 @@
 				</div>
 
 				<hr>
-				<h4><span style="color: #d73925;">Contact</span></h4>
 
-				
-				<div class="form-group{{ $errors->has('phoneNo') ? ' has-error' : '' }}">
-					<label for="phoneNo" class="col-md-3 control-label">Phone Number</label>
-					<div class="col-md-6">
-						<input type="number" class="form-control pull-right" id="phoneNo" name="phoneNo" placeholder="(Phone Number)" min="0" maxlength="16" value="{{ old('phoneNo') }}">
-					</div>
-				</div>
-
-				<hr>
-				
-				<div class="col-md-offset-2 col-xs-8">
-					<div class="box box-danger">
-						<div class="box-header with-border">
-							<h4 class="text-danger"><strong>Your Password</strong></h4>
-						</div>
-						<div class="box-body">
-							<div class="form-group{{ $errors->has('yourPassword') ? ' has-error' : '' }}">
-								<div class="col-md-10 col-md-offset-1">
-									<input type="password" class="form-control pull-right" id="yourPassword" name="yourPassword" placeholder="Your Password">
-								</div>
-							</div>
-						</div>
-					</div>
-					
-				</div>
-
-				<div class="form-group">
+				<div class="form-group{{ $errors->has('remember') ? ' has-error' : '' }}">
 					<div class="col-xs-10 col-md-offset-3">
 					<div class="checkbox icheck col-md-6">
 						<label>

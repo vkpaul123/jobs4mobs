@@ -29,32 +29,32 @@
           </span>
         </a>
         <ul class="treeview-menu">
-          <li><a href="pages/layout/top-nav.html"><i class="fa fa-circle-o"></i> Send E-Mail</a></li>
-          <li><a href="pages/layout/boxed.html"><i class="fa fa-circle-o"></i> Inbox</a></li>
+          <li><a href="{{ route('admin.adminEMail') }}"><i class="fa fa-circle-o"></i> Send E-Mail</a></li>
+          <li><a href="{{ route('admin.contact.inbox') }}"><i class="fa fa-circle-o"></i> Inbox</a></li>
         </ul>
       </li>
       <li>
-        <a href="">
+        <a href="{{ route('viewJobCategories.index') }}">
           <i class="fa fa-dashboard"></i> <span>Job Categories</span>
         </a>
       </li>
       <li>
-        <a href="">
+        <a href="{{ route('questionnaireTemplateUpload.showUploadForm') }}">
           <i class="fa fa-dashboard"></i> <span>Questionnaire Template</span>
         </a>
       </li>
       <li class="treeview">
         <a href="#">
           <i class="fa fa-files-o"></i>
-          <span>View Profiles</span>
+          <span>Search &amp View Profiles</span>
           <span class="pull-right-container">
             <i class="fa fa-angle-left pull-right"></i>
           </span>
         </a>
         <ul class="treeview-menu">
-          <li><a href="pages/layout/top-nav.html"><i class="fa fa-circle-o"></i> Jobseeker Profiles</a></li>
-          <li><a href="pages/layout/boxed.html"><i class="fa fa-circle-o"></i> Employer Profiles</a></li>
-          <li><a href="pages/layout/boxed.html"><i class="fa fa-circle-o"></i> Vacancies</a></li>
+          <li><a href="{{ route('admin.jobseekerSearchResults') }}"><i class="fa fa-circle-o"></i> Jobseeker Profiles</a></li>
+          <li><a href="{{ route('admin.employerSearchResults') }}"><i class="fa fa-circle-o"></i> Employer Profiles</a></li>
+          <li><a href="{{ route('admin.vacancySearchResults') }}"><i class="fa fa-circle-o"></i> Vacancies</a></li>
         </ul>
       </li>
       <li class="treeview">
@@ -68,8 +68,8 @@
         <ul class="treeview-menu">
           <li><a href="pages/layout/top-nav.html"><i class="fa fa-circle-o"></i> Jobseekers</a></li>
           <li><a href="pages/layout/top-nav.html"><i class="fa fa-circle-o"></i> Jobseeker Profiles</a></li>
-          <li><a href="pages/layout/boxed.html"><i class="fa fa-circle-o"></i> Employer Profiles</a></li>
-          <li><a href="pages/layout/boxed.html"><i class="fa fa-circle-o"></i> Vacancies</a></li>
+          <li><a href="{{ route('admin.reports.employerDetails') }}"><i class="fa fa-circle-o"></i> Employer Profiles</a></li>
+          <li><a href="{{ route('admin.reports.vacancyDetails') }}"><i class="fa fa-circle-o"></i> Vacancies</a></li>
           <li class="treeview">
             <a href="#">
               <i class="fa fa-files-o"></i>
@@ -81,7 +81,8 @@
             <ul class="treeview-menu">
               <li><a href="pages/layout/top-nav.html"><i class="fa fa-circle-o"></i> Jobseeker Profiles</a></li>
               <li><a href="pages/layout/boxed.html"><i class="fa fa-circle-o"></i> Employer Profiles</a></li>
-              <li><a href="pages/layout/boxed.html"><i class="fa fa-circle-o"></i> Vacancies</a></li>
+              <li><a href="{{ route('admin.reports.categoryWiseVacancyReport') }}"><i class="fa fa-circle-o"></i> Vacancies</a></li>
+              <li><a href="{{ route('admin.reports.categoryWiseQuestionnaireReport') }}"><i class="fa fa-circle-o"></i> Questionnaire</a></li>
             </ul>
           </li>
           <li class="treeview">
@@ -95,17 +96,26 @@
             <ul class="treeview-menu">
               <li><a href="pages/layout/top-nav.html"><i class="fa fa-circle-o"></i> Jobseeker Profiles</a></li>
               <li><a href="pages/layout/boxed.html"><i class="fa fa-circle-o"></i> Employer Profiles</a></li>
-              <li><a href="pages/layout/boxed.html"><i class="fa fa-circle-o"></i> Vacancies</a></li>
+              <li><a href="{{ route('admin.reports.locationWiseVacancyReport') }}"><i class="fa fa-circle-o"></i> Vacancies</a></li>
             </ul>
           </li>
           <li><a href="pages/layout/boxed.html"><i class="fa fa-circle-o"></i> Test Reports</a></li>
         </ul>
       </li>
-      <li>
-        <a href="">
-          <i class="fa fa-dashboard"></i> <span>Add Admin</span>
-        </a>
-      </li>
+      <li class="treeview">
+            <a href="#">
+              <i class="fa fa-files-o"></i>
+              <span>Admins</span>
+              <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+              </span>
+            </a>
+            <ul class="treeview-menu">
+              <li><a href="{{ route('admin.editPasswordForm') }}"><i class="fa fa-circle-o"></i> Change My Password</a></li>
+              <li><a href="{{ route('admin.viewAdmins') }}"><i class="fa fa-circle-o"></i> View All Admins</a></li>
+              <li><a href="{{ route('admin.addAdmin') }}"><i class="fa fa-circle-o"></i> Add Admin</a></li>
+            </ul>
+          </li>
     </ul>
   </section>
   <!-- /.sidebar -->

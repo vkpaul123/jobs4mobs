@@ -6,10 +6,12 @@ use App\Admin;
 use App\Employer;
 use App\Http\Controllers\Controller;
 use App\JobApplication;
+use App\JobCategory;
 use App\JobseekerProfile;
 use App\Question;
 use App\User;
 use App\Vacancy;
+use App\VacancySkill;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 
@@ -73,20 +75,61 @@ class PageController extends Controller
         return view('Admin.homepage.adminEMail');
     }
 
-    public function viewJobseekerProfile() {
-        return view('Admin.homepage.viewJobseekerProfile');
+    public function viewJobseekerProfile($id) {
+        $jobseekerProfile = JobseekerProfile::find($id);
+
+        $user = User::where('id', $jobseekerProfile->user_id)->get()->first();
+        $academics = JobseekerAcademics::where('jobseeker_profiles_id', $id)->get();
+        $skills = JobseekerSkill::where('jobseeker_profiles_id', $id)->get();
+        $experiences = JobseekerExperience::where('jobseeker_profiles_id', $id)->get()->last();
+
+        $address = null;
+        if($jobseekerProfile->address_id)
+            $address = Address::find($jobseekerProfile->address_id)->get()->first();
+
+        return view('Employer.homepage.viewJobseekerProfile')
+        ->with(compact('jobseekerProfile'))
+        ->with(compact('address'))
+        ->with(compact('academics'))
+        ->with(compact('skills'))
+        ->with(compact('experiences'))
+        ->with(compact('user'));
     }
 
     public function viewJobseekerResume() {
         return view('Admin.homepage.viewJobseekerResume');
     }
 
-    public function viewEmployerProfile() {
-        return view('Admin.homepage.viewEmployerProfile');
+    public function viewEmployerProfile($id) {
+        $employer = Employer::where('id', $id)->get()->first();
+        $jobcategories = JobCategory::all();
+
+        $address = null;
+        if($employer->address_id)
+            $address = Address::find($employer->address_id)->get()->first();
+
+        return view('JobSeeker.homepage.viewEmployerProfile')
+        ->with(compact('employer'))
+        ->with(compact('address'))
+        ->with(compact('jobcategories'));
     }
 
-    public function viewVacancy() {
-        return view('Admin.homepage.viewVacancy');
+    public function viewVacancy($id) {
+        $vacancy = Vacancy::where('id', $id)->get()->first();
+        $skills = VacancySkill::where('vacancies_id', $vacancy->id)->get();
+        $employer = Employer::where('id', $vacancy->employers_id)->get()->first();
+        $jobcategories = JobCategory::all();
+
+        $address = null;
+        if($vacancy->addresses_id)
+            $address = Address::where('id', $vacancy->addresses_id)->get()->first();
+
+        return view('Admin.homepage.viewVacancy')
+        ->with(compact('vacancy'))
+        ->with(compact('address'))
+        ->with(compact('skills'))
+        ->with(compact('jobcategories'))
+        ->with(compact('employer'));
     }
 
     public function jobseekerSearchResults() {

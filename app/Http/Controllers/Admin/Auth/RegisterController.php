@@ -68,6 +68,7 @@ class RegisterController extends Controller
         return Admin::create([
             'name' => $data['name'],
             'email' => $data['email'],
+            'phoneNo' => $data['phoneNo'],
             'password' => bcrypt($data['password']),
         ]);
     }

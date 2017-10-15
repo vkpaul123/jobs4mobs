@@ -7,7 +7,7 @@ FOOTER
 			<div class="col-lg-4">
 				<h4>About</h4>
 				<div class="hline-w" style="border-bottom: 2px solid #ffffff; margin-bottom: 25px;"></div>
-				<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.</p>
+				<p>Jobs4mobs is  the easiest way for you to find your dream job and also finding the perfect employee for your company.Register and choose your eliible candidate and companies!</p>
 			</div>
 			<div class="col-lg-4">
 				<h4>Social Links</h4>
@@ -24,9 +24,9 @@ FOOTER
 				<h4>Our Bunker</h4>
 				<div class="hline-w" style="border-bottom: 2px solid #ffffff; margin-bottom: 25px;"></div>
 				<p>
-					Some Ave, 987,<br/>
-					23890, New York,<br/>
-					United States.<br/>
+					Christ University<br/>
+					Hosur Road, Bengaluru,<br/>
+					Karnataka - 560029<br/>
 				</p>
 			</div>
 

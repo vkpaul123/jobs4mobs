@@ -1,12 +1,12 @@
-@extends('Admin.homepage.layouts.app')
-@section('title', 'Admins')
+@extends('Employer.homepage.layouts.app')
+@section('title', 'Employers')
 
 @section('body')
 <!-- Content Header (Page header) -->
 <section class="content-header">
 	<h1>
-		<span style="color:#d73925;"><b>Admin</b> </span> View JobSeeker Profile
-		<small>see JobSeeker's Profile</small>
+		<span style="color:#e08e0b;"><b>Employer</b> </span> View JobSeeker Profile
+		<small>see Jobseeker's Profile</small>
 	</h1>
 	<ol class="breadcrumb">
 		<li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
@@ -32,28 +32,33 @@
         	<div class="container-fluid">
         		<div class="row">
         			<div class="col-md-2">
-        				<img src="{{ asset('assets/welcomePage/img/team/team01.jpg') }}"  class="img-rounded img-responsive" alt="Profile Image">
-        					
-        				</img>
+        				@if(isset($user->photo))
+        				<img src="{{ $user->photo }}"  class="img-rounded img-responsive" alt="Profile Image">
+						@else
+							<img src="{{ asset('assets/staticImages/user.png') }}"  class="img-rounded img-responsive" alt="Profile Image">
+						@endif
         			</div>
         			<div class="col-md-7">
 	        			<div class="row">
-	    					<h2><strong>Vikram Paul</strong></h2>
-	    					<h4>"Because I can."</h4>
+	    					<h2><strong>{{ $user->firstname }} {{ $user->middlename}} {{ $user->lastname }}</strong></h2>
+	    					<h4>"{{ $jobseekerProfile->tagline }}"</h4>
 
 	        			</div>
 	    				<div class="row">
-		    				<h5>BCA</h5>
+		    				<h5>
+		    					@if(count($academics))
+		    					{{ $academics->last()->qualificationText }}
+		    					@endif
+		    				</h5>
 	    				</div>
         			</div>
         			<div class="col-md-3">
-        				<a href="/admin/viewProfile/viewJobseekerProfile/viewJobseekerResume">
-        					<button class="pull-right btn btn-danger btn-block btn-lg"><strong>View Resume</strong></button>
-        				</a>
-        				<br><br><br>
-        				<a href="/admin/adminEMail">
-        					<button class="pull-right btn btn-danger btn-block btn-lg"><strong>Contact</strong></button>
-        				</a>
+        				<div class="pull-right">
+	        				<a href="@if($jobseekerProfile->resume == "on") {{ route('employer.viewJobseekerResume', $jobseekerProfile->id) }} @elseif($jobseekerProfile->resume) {{$jobseekerProfile->resume}} @else {{ route('employer.viewJobseekerResumeNotFound') }} @endif" target="_blank">
+	        					<button class="btn btn-primary btn-lg btn-block"><strong>View Resume</strong></button>
+	        				</a>
+        					
+        				</div>
         			</div>
         		</div>
 
@@ -67,22 +72,22 @@
 
 						<div class="row box-header">
 							<div class="col-md-5"><strong>Gender</strong></div>
-							<div class="col-md-7">Male</div>
+							<div class="col-md-7">{{ $jobseekerProfile->gender }}</div>
 						</div>
 
 						<div class="row box-header">
 							<div class="col-md-5"><strong>Date of Birth</strong></div>
-							<div class="col-md-7">13 July 1995</div>
+							<div class="col-md-7">{{ $jobseekerProfile->dateOfBirth }}</div>
 						</div>
 
 						<div class="row box-header">
 							<div class="col-md-5"><strong>Contact No</strong></div>
-							<div class="col-md-7">8296765476</div>
+							<div class="col-md-7">@isset($address) {{ $address->primaryPhoneNo }} @endisset</div>
 						</div>
 
 						<div class="row box-header">
 							<div class="col-md-5"><strong>Email</strong></div>
-							<div class="col-md-7">vkpaul123@gmail.com</div>
+							<div class="col-md-7">{{ $user->email }}</div>
 						</div>
 						
 						</div>
@@ -95,12 +100,28 @@
 
 						<div class="row box-header">
 							<div class="col-md-5"><strong>Wroking as</strong></div>
-							<div class="col-md-7">Software Developer</div>
+							<div class="col-md-7">
+								@if(isset($experiences->jobTitle))
+									{{ $experiences->jobTitle }}
+								@else
+									<span class="text-muted">
+										N/A
+									</span>
+								@endif
+							</div>
 						</div>
 
 						<div class="row box-header">
 							<div class="col-md-5"><strong>Working at</strong></div>
-							<div class="col-md-7">Google Inc.</div>
+							<div class="col-md-7">
+								@if(isset($experiences->companyName))
+									{{ $experiences->companyName }}
+								@else
+									<span class="text-muted">
+										N/A
+									</span>
+								@endif
+							</div>
 						</div>
 
 						</div>
@@ -128,10 +149,17 @@
 
         			<div class="col-md-12">
 
-							{{-- use @foreach here --}}
-							<div class="btn btn-default">Laravel</div> &nbsp
-							<div class="btn btn-default">Java</div> &nbsp
-							<div class="btn btn-default">C</div> &nbsp
+							@forelse($skills as $skill)
+								<div class="btn btn-default">{{ $skill->skillName }}</div> &nbsp
+							@empty
+								<div class="container-fluid">
+									<div class="jumbotron">
+										<center>
+											<h4><span class="fa fa-exclamation-triangle"></span> &nbsp <span class="text-danger">No Skills details found.<br><small>No Skills details given by Jobseeker Profile.</small></span></h4>
+										</center>
+									</div>
+								</div>
+							@endforelse
 						
         			</div>
         		</div>
@@ -157,48 +185,36 @@
         			<div class="col-md-12">
         				
 						<div class="box box-border box-body">
-
-								{{-- use @foreach here --}}
-								<div class="box-body">
-									{{-- EXAMPLE 1 --}}
-				        			<div class="col-md-4" id="boardNameShow">
-										CBSE
-									</div>
-									<div class="col-md-6" id="academyNameShow">
-										Army Public School, Jaipur
-									</div>
-									<div class="col-md-2" id="yearOfPassingShow">
-										<b>2011</b>
-									</div>
-									
+							@forelse($academics as $academic)
+							<div class="box-body">
+								{{-- EXAMPLE 1 --}}
+			        			<div class="col-md-3" id="boardNameShow">
+									{{ $academic->qualificationText }}
+								</div>
+								<div class="col-md-4" id="academyNameShow">
+									{{ $academic->academyName }}
+								</div>
+								<div class="col-md-4" id="academyNameShow">
+									{{ $academic->boardName }}
+								</div>
+								<div class="col-md-1" id="yearOfPassingShow">
+									<b class="pull-right">{{ $academic->yearOfPassing }}</b>
 								</div>
 								
-								<div class="box-body">
-				        			{{-- EXAMPLE 2 --}}
-				        			<div class="col-md-4" id="boardNameShow">
-										CBSE
-									</div>
-									<div class="col-md-6" id="academyNameShow">
-										Army Public School, Jaipur
-									</div>
-									<div class="col-md-2" id="yearOfPassingShow">
-										<b>2013</b>
-									</div>									
-								</div>
-
-								<div class="box-body">
-									<div class="col-md-4" id="boardNameShow">
-										University of Pune
-									</div>
-									<div class="col-md-6" id="academyNameShow">
-										MAEER's MIT-SOM College, Pune
-									</div>
-									<div class="col-md-2" id="yearOfPassingShow">
-										<b>2015</b>
-									</div>
-									
-								</div>
 							</div>
+							@empty
+								<div class="box-body">
+									<div class="container-fluid">
+										<div class="jumbotron">
+											<center>
+												<h4><span class="fa fa-exclamation-triangle"></span> &nbsp <span class="text-danger">No Academics Detials given.<br><small>There are no academics records for this Jobseeker Profile.</small></span></h4>
+											</center>
+										</div>
+									</div>
+								</div>
+							@endforelse
+								
+						</div>
         			</div>
         		</div>
 			</div>

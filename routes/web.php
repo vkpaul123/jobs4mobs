@@ -80,9 +80,11 @@ Route::group(['namespace' => 'Admin'], function() {
 		Route::post('logout', 'Auth\LoginController@logout')->name('admin.logout');
 
 		//	Add Admin
-		Route::get('addAdmin', 'PageController@addAdmin');
-		Route::get('editAdmin', 'PageController@editAdmin');
-		Route::get('viewAdmins', 'PageController@viewAdmins');
+		Route::get('addAdmin', 'AdminEditController@showAddAdminForm')->name('admin.addAdmin');
+		Route::post('addNewAdmin', 'AdminEditController@addNewAdmin')->name('admin.addAdmin.add');
+		Route::get('viewAdmins', 'AdminEditController@viewAdmins')->name('admin.viewAdmins');
+		Route::get('adminProfile/changePassword', 'AdminEditController@editPasswordForm')->name('admin.editPasswordForm');
+		Route::put('adminProfile/changePassword/change', 'AdminEditController@editPassword')->name('admin.editPassword');
 
 		//	Contact Us
 		Route::get('adminInbox', 'UserMessagesController@loadInbox')->name('admin.contact.inbox');
@@ -91,7 +93,7 @@ Route::group(['namespace' => 'Admin'], function() {
 		Route::delete('adminInbox/{id}', 'UserMessagesController@deleteMessage')->name('admin.contact.deleteMessage');
 		Route::post('send', 'MailController@send')->name('admin.contact.sendEmail');
 
-		Route::get('adminEMail', 'PageController@adminEMail');
+		Route::get('adminEMail', 'PageController@adminEMail')->name('admin.adminEMail');
 
 		//	View Profiles
 		Route::get('viewProfile/viewJobseekerProfile', 'PageController@viewJobseekerProfile');
@@ -100,9 +102,14 @@ Route::group(['namespace' => 'Admin'], function() {
 		Route::get('viewProfile/viewVacancy', 'PageController@viewVacancy');
 
 		//	Searches
-		Route::get('search/jobseekerSearchResults', 'PageController@jobseekerSearchResults');
-		Route::get('search/employerSearchResults', 'PageController@employerSearchResults');
-		Route::get('search/vacancySearchResults', 'PageController@vacancySearchResults');
+		Route::get('search/jobseekerSearchResults', 'PageController@jobseekerSearchResults')->name('admin.jobseekerSearchResults');
+		Route::get('/viewJobseekerProfile/{id}', 'PageController@viewJobseekerProfile')->name('admin.viewJobseekerProfile');
+		Route::get('/viewJobseekerResume/{id}', 'JobSeekerResumeController@showResume')->name('admin.viewJobseekerResume');
+		Route::get('/viewJobseekerResumeNotFound', 'JobSeekerResumeController@showResumeNotFound')->name('admin.viewJobseekerResumeNotFound');
+		Route::get('search/employerSearchResults', 'PageController@employerSearchResults')->name('admin.employerSearchResults');
+		Route::get('/viewEmployerProfile/{id}', 'PageController@viewEmployerProfile')->name('admin.viewEmployerProfile');
+		Route::get('search/vacancySearchResults', 'PageController@vacancySearchResults')->name('admin.vacancySearchResults');
+		Route::get('/viewVacancy/{id}', 'PageController@viewVacancy')->name('admin.viewVacancy');
 
 		//	Questionnare
 		Route::get('questionnaireTemplateUpload/showUploadForm','QuestionnaireTemplateUploadController@showUploadForm')->name('questionnaireTemplateUpload.showUploadForm');

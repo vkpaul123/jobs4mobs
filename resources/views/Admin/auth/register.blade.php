@@ -23,6 +23,15 @@
 			</span>
 			@endif
 		</div>
+		<div class="form-group has-feedback{{ $errors->has('phoneNo') ? ' has-error' : '' }}">
+			<input type="text" name="phoneNo" class="form-control" placeholder="Phone Number" value="{{ old('phoneNo') }}" required autofocus>
+			<span class="glyphicon glyphicon-phone form-control-feedback"></span>
+			@if ($errors->has('phoneNo'))
+			<span class="help-block">
+				<strong>{{ $errors->first('phoneNo') }}</strong>
+			</span>
+			@endif
+		</div>
 		<div class="form-group has-feedback{{ $errors->has('email') ? ' has-error' : '' }}">
 			<input type="email" name="email" class="form-control" placeholder="Email" value="{{ old('email') }}" required autofocus>
 			<span class="glyphicon glyphicon-envelope form-control-feedback"></span>

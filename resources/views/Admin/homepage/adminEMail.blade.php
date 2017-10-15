@@ -23,43 +23,42 @@
 
   <div class="box">
     <div class="box-header with-border">
-      <h3><span style="color: #d73925;"><strong>Reply</strong></span></h3>
+      <h3><span style="color: #d73925;"><strong>Email</strong></span></h3>
     </div>
 
     <div class="box-body">
-      <form action="" method="post" class="form-horizontal">
-        <div class="form-group">
-          <label for="mailFrom" class="col-md-2 control-label">From</label>
-          <div class="col-md-8">
-            <input type="text" class="form-control pull-right" id="mailFrom" name="mailFrom" placeholder="From">
-          </div>
-        </div>
-
-        <div class="form-group">
+      <form action="{{ route('admin.contact.sendEmail') }}" method="post" class="form-horizontal">
+        <div class="form-group{{ $errors->has('fromName') ? ' has-error' : '' }}">
           <label for="fromName" class="col-md-2 control-label">From Name</label>
           <div class="col-md-8">
-            <input type="text" class="form-control pull-right" id="fromName" name="fromName" placeholder="From Name">
+            <input type="text" class="form-control pull-right" id="fromName" name="fromName" placeholder="From Name" value="{{ Auth::user()->name }}">
           </div>
         </div>
         <hr>
-        <div class="form-group">
+        <div class="form-group{{ $errors->has('mailTo') ? ' has-error' : '' }}">
           <label for="mailTo" class="col-md-2 control-label text-danger">To</label>
           <div class="col-md-8">
-            <input type="text" class="form-control pull-right" id="mailTo" name="mailTo" placeholder="To">
+            <input type="text" class="form-control pull-right" id="mailTo" name="mailTo" placeholder="To" value="{{ old('mailTo') }}">
+          </div>
+        </div>
+        <div class="form-group{{ $errors->has('mailToName') ? ' has-error' : '' }}">
+          <label for="mailFrom" class="col-md-2 control-label">To Name</label>
+          <div class="col-md-8">
+            <input type="text" class="form-control pull-right" id="mailToName" name="mailToName" placeholder="To Name" value="{{ old('mailToName') }}">
           </div>
         </div>
         <hr>
-        <div class="form-group">
+        <div class="form-group{{ $errors->has('toSubject') ? ' has-error' : '' }}">
           <label for="toSubject" class="col-md-2 control-label">Subject</label>
           <div class="col-md-8">
-            <textarea class="form-control pull-right" id="toSubject" name="toSubject" placeholder="Subject" rows="3"></textarea>
+            <textarea class="form-control pull-right" id="toSubject" name="toSubject" placeholder="Subject" rows="3">{{ old('toSubject') }}</textarea>
           </div>
         </div>
 
-        <div class="form-group">
+        <div class="form-group{{ $errors->has('mailBody') ? ' has-error' : '' }}">
           <label for="mailBody" class="col-md-2 control-label">Body</label>
           <div class="col-md-8">
-            <textarea class="form-control pull-right" id="mailBody" name="mailBody" placeholder="Body" rows="10"></textarea>
+            <textarea class="form-control pull-right" id="mailBody" name="mailBody" placeholder="Body" rows="10">{{ old('mailBody') }}</textarea>
           </div>
         </div>
 

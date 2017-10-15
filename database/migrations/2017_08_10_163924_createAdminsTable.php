@@ -19,6 +19,8 @@ class CreateAdminsTable extends Migration
             $table->string('email')->unique();
             $table->string('password');
 
+            $table->string('phoneNo')->nullable();
+
             $table->text('scribblePad')->nullable();
 
             $table->boolean('status')->default(0);

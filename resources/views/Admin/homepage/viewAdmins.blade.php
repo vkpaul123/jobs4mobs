@@ -27,186 +27,46 @@
 			<h3>All Admins</h3>
 		</div>
 		<div class="box-body">
+      @if (Session::has('messageSuccess'))
+        <div class="alert alert-success">{!! Session::get('messageSuccess') !!}
+          <button type="button" class="close" data-dismiss="alert"><i class="fa fa-times"></i></button>
+        </div>
+      @endif
 			<table id="questionnare" class="table table-bordered table-hover">
-                <thead>
-                <tr>
-                  <th><span class="text-danger">ID</span></th>
-                  <th><span class="text-danger">User Name</span></th>
-                  <th><span class="text-danger">Email</span></th>
-                  <th><span class="text-danger">Phone No.</span></th>
-                  <th><span class="text-danger">Options</span></th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr>
-                  
-                  <td>Internet
-                    Explorer 4.0
-                  </td>
-                  <td>Win 95+</td>
-                  <td> 4</td>
-                  <td>X</td>
-                  <td>
-                  	<a href="#"><span class="glyphicon glyphicon-edit"></span></a> | <a href="#"><span class="glyphicon glyphicon-trash"></span></a>
-                  </td>
-                </tr>
-                <tr>
-                  
-                  <td>Internet
-                    Explorer 5.0
-                  </td>
-                  <td>Win 95+</td>
-                  <td>5</td>
-                  <td>C</td>
-                  <td>
-                  	<a href="#"><span class="glyphicon glyphicon-edit"></span></a> | <a href="#"><span class="glyphicon glyphicon-trash"></span></a>
-                  </td>
-                </tr>
-               
-                <tr>
-                  
-                  <td>Internet Explorer 7</td>
-                  <td>Win XP SP2+</td>
-                  <td>7</td>
-                  <td>A</td>
-                  <td>
-                  	<a href="#"><span class="glyphicon glyphicon-edit"></span></a> | <a href="#"><span class="glyphicon glyphicon-trash"></span></a>
-                  </td>
-                </tr>
-                <tr>
-                  
-                  <td>AOL browser (AOL desktop)</td>
-                  <td>Win XP</td>
-                  <td>6</td>
-                  <td>A</td>
-                  <td>
-                  	<a href="#"><span class="glyphicon glyphicon-edit"></span></a> | <a href="#"><span class="glyphicon glyphicon-trash"></span></a>
-                  </td>
-                </tr>
-                <tr>
-                  
-                  <td>Firefox 1.0</td>
-                  <td>Win 98+ / OSX.2+</td>
-                  <td>1.7</td>
-                  <td>A</td>
-                  <td>
-                  	<a href="#"><span class="glyphicon glyphicon-edit"></span></a> | <a href="#"><span class="glyphicon glyphicon-trash"></span></a>
-                  </td>
-                </tr>
-                <tr>
-                  
-                  <td>Firefox 1.5</td>
-                  <td>Win 98+ / OSX.2+</td>
-                  <td>1.8</td>
-                  <td>A</td>
-                  <td>
-                  	<a href="#"><span class="glyphicon glyphicon-edit"></span></a> | <a href="#"><span class="glyphicon glyphicon-trash"></span></a>
-                  </td>
-                </tr>
-                <tr>
-                  
-                  <td>Firefox 2.0</td>
-                  <td>Win 98+ / OSX.2+</td>
-                  <td>1.8</td>
-                  <td>A</td>
-                  <td>
-                  	<a href="#"><span class="glyphicon glyphicon-edit"></span></a> | <a href="#"><span class="glyphicon glyphicon-trash"></span></a>
-                  </td>
-                </tr>
-                <tr>
-                  
-                  <td>Firefox 3.0</td>
-                  <td>Win 2k+ / OSX.3+</td>
-                  <td>1.9</td>
-                  <td>A</td>
-                  <td>
-                  	<a href="#"><span class="glyphicon glyphicon-edit"></span></a> | <a href="#"><span class="glyphicon glyphicon-trash"></span></a>
-                  </td>
-                </tr>
-                <tr>
-                  
-                  <td>Camino 1.0</td>
-                  <td>OSX.2+</td>
-                  <td>1.8</td>
-                  <td>A</td>
-                  <td>
-                  	<a href="#"><span class="glyphicon glyphicon-edit"></span></a> | <a href="#"><span class="glyphicon glyphicon-trash"></span></a>
-                  </td>
-                </tr>
-                <tr>
-                  
-                  <td>Camino 1.5</td>
-                  <td>OSX.3+</td>
-                  <td>1.8</td>
-                  <td>A</td>
-                  <td>
-                  	<a href="#"><span class="glyphicon glyphicon-edit"></span></a> | <a href="#"><span class="glyphicon glyphicon-trash"></span></a>
-                  </td>
-                </tr>
-                <tr>
-                  
-                  <td>Netscape 7.2</td>
-                  <td>Win 95+ / Mac OS 8.6-9.2</td>
-                  <td>1.7</td>
-                  <td>A</td>
-                  <td>
-                  	<a href="#"><span class="glyphicon glyphicon-edit"></span></a> | <a href="#"><span class="glyphicon glyphicon-trash"></span></a>
-                  </td>
-                </tr>
-                <tr>
-                  
-                  <td>Netscape Browser 8</td>
-                  <td>Win 98SE+</td>
-                  <td>1.7</td>
-                  <td>A</td>
-                  <td>
-                  	<a href="#"><span class="glyphicon glyphicon-edit"></span></a> | <a href="#"><span class="glyphicon glyphicon-trash"></span></a>
-                  </td>
-                </tr>
-                <tr>
-                  
-                  <td>Netscape Navigator 9</td>
-                  <td>Win 98+ / OSX.2+</td>
-                  <td>1.8</td>
-                  <td>A</td>
-                  <td>
-                  	<a href="#"><span class="glyphicon glyphicon-edit"></span></a> | <a href="#"><span class="glyphicon glyphicon-trash"></span></a>
-                  </td>
-                </tr>
-                <tr>
-                  
-                  <td>Mozilla 1.0</td>
-                  <td>Win 95+ / OSX.1+</td>
-                  <td>1</td>
-                  <td>A</td>
-                  <td>
-                  	<a href="#"><span class="glyphicon glyphicon-edit"></span></a> | <a href="#"><span class="glyphicon glyphicon-trash"></span></a>
-                  </td>
-                </tr>
-                <tr>
-                  
-                  <td>Mozilla 1.1</td>
-                  <td>Win 95+ / OSX.1+</td>
-                  <td>1.1</td>
-                  <td>A</td>
-                  <td>
-                  	<a href="#"><span class="glyphicon glyphicon-edit"></span></a> | <a href="#"><span class="glyphicon glyphicon-trash"></span></a>
-                  </td>
-                </tr>
-                </tbody>
-                <tfoot>
-                <tr>
-                  <th><span class="text-danger">ID</span></th>
-                  <th><span class="text-danger">User Name</span></th>
-                  <th><span class="text-danger">Email</span></th>
-                  <th><span class="text-danger">Phone No.</span></th>
-                  <th><span class="text-danger">Options</span></th>
-                </tr>
-                </tfoot>
-              </table>
-		</div>
-	</div>
-	<!-- /.box -->
+        <thead>
+          <tr>
+            <th><span class="text-danger">ID</span></th>
+            <th><span class="text-danger">Admin Name</span></th>
+            <th><span class="text-danger">Email</span></th>
+            <th><span class="text-danger">Phone No.</span></th>
+            <th><span class="text-danger">Admin Since</span></th>
+          </tr>
+        </thead>
+        <tbody>
+          @foreach ($admins as $admin)
+          <tr>
+            <td>{{$admin->id}}</td>
+            <td>{{$admin->name}}</td>
+            <td>{{$admin->email}}</td>
+            <td>{{$admin->phoneNo}}</td>
+            <td>{{$admin->created_at->diffForHumans() }}</td>
+          </tr>
+          @endforeach
+
+        </tbody>
+        <tfoot>
+          <tr>
+            <th><span class="text-danger">ID</span></th>
+            <th><span class="text-danger">Admin Name</span></th>
+            <th><span class="text-danger">Email</span></th>
+            <th><span class="text-danger">Phone No.</span></th>
+            <th><span class="text-danger">Admin Since</span></th>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
+  </div>
+  <!-- /.box -->
 
 </section>
 <!-- /.content -->
