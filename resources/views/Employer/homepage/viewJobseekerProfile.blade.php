@@ -34,9 +34,9 @@
         			<div class="col-md-2">
         				@if(isset($user->photo))
         				<img src="{{ $user->photo }}"  class="img-rounded img-responsive" alt="Profile Image">
-        					
-        				</img>
 						@else
+							<img src="{{ asset('assets/staticImages/user.png') }}"  class="img-rounded img-responsive" alt="Profile Image">
+						@endif
         			</div>
         			<div class="col-md-7">
 	        			<div class="row">
