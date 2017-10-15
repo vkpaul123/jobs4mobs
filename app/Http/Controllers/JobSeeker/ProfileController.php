@@ -116,7 +116,7 @@ class ProfileController extends Controller
 
         $address = null;
         if($jobseekerProfile->address_id)
-            $address = Address::find($jobseekerProfile->address_id)->get()->first();
+            $address = Address::where('id', $jobseekerProfile->address_id)->get();
 
         return view('JobSeeker.homepage.viewProfile', ['jobseekerProfile' => $jobseekerProfile])
         ->with(compact('academics'))
