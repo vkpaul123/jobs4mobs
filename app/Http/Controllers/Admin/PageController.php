@@ -2,12 +2,16 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Address;
 use App\Admin;
 use App\Employer;
 use App\Http\Controllers\Controller;
 use App\JobApplication;
 use App\JobCategory;
+use App\JobseekerAcademics;
+use App\JobseekerExperience;
 use App\JobseekerProfile;
+use App\JobseekerSkill;
 use App\Question;
 use App\User;
 use App\Vacancy;
