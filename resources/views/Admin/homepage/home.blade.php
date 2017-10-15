@@ -61,7 +61,7 @@
 
           <div class="col-md-4">
             <div class="info-box">
-              <span class="info-box-icon" style="background-color: #39cbdd;"><i class="fa fa-question"></i></span>
+              <span class="info-box-icon" style="background-color: #39cbdd;"><i class="fa fa-question" style="color: white;"></i></span>
 
               <div class="info-box-content">
                 <span class="info-box-text">Questions</span>

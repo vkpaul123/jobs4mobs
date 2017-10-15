@@ -8,7 +8,7 @@
 @section('body')
 
 <section class="content-header">
-      <h1 id="reportTitle">CATEGORY-WISE VACANCY REPORT</h1>
+      <h1 id="reportTitle">LOCATION-WISE VACANCY REPORT</h1>
       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
         <li><a href="#">Tables</a></li>
