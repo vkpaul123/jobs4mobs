@@ -70,6 +70,8 @@ class ApplyJobVacancyController extends Controller
                 $jobApplication1->jobseeker_profile_id = $request->jobseeker_profile_id;
                 $jobApplication1->vacancy_id = $request->vacancy_id;
                 $jobApplication1->applicationStatus = "Applied for Test";
+                $jobApplication->marks = 0;
+                $jobApplication->testResult = "Pending";
                 $jobApplication1->save();
 
                 $jobApplication2 = JobApplication::all()->last();
@@ -103,6 +105,8 @@ class ApplyJobVacancyController extends Controller
         }
         else {
             $jobApplication->applicationStatus = "Started Test";
+            $jobApplication->testResult = "Pending";
+            $jobApplication->marks = 0;
 
             $questionnaire = Questionnaire::find(Vacancy::find($jobApplication->vacancy_id)->questionnaire_id);
             $questions = Question::where('questionnaire_id', $questionnaire->id)->get();
@@ -139,6 +143,9 @@ class ApplyJobVacancyController extends Controller
             Session::flash('messageFail', 'You refreshed the test page while answering. This is not Allowed and so you have been Disqualified!');
 
             $jobApplication->applicationStatus = "Disqualified";
+            $jobApplication->marks = 0;
+            $jobApplication->testResult = "Fail";
+
             $jobApplication->save();
 
             return redirect(route('jobseeker.test.showTestStart', $jobApplication->id));

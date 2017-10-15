@@ -43,7 +43,11 @@
 
 	        			</div>
 	    				<div class="row">
-		    				<h5>{{ $academics->last()->qualificationText }}</h5>
+		    				<h5>
+		    					@if(count($academics))
+		    					{{ $academics->last()->qualificationText }}
+		    					@endif
+		    				</h5>
 	    				</div>
         			</div>
         			<div class="col-md-3">

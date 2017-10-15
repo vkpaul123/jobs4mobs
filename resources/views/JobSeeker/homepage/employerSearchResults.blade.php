@@ -155,7 +155,7 @@
 		    searchParameters: {
 		    	facets: ['status'],
 		    	facetFilters: [
-		    		["status:1"],
+		    		["status:true"],
 		    	],
 		    }
 		});

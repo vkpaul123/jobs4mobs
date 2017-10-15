@@ -68,13 +68,13 @@
 		</div>
 	</form>
 
-	<div class="social-auth-links text-center">
+	{{-- <div class="social-auth-links text-center">
 		<p>- OR -</p>
 		<a href="#" class="btn btn-block btn-social btn-facebook"><i class="fa fa-facebook"></i> Sign in using Facebook</a>
 		<a href="#" class="btn btn-block btn-social btn-google"><i class="fa fa-google-plus"></i> Sign in using Google+</a>
 		<a href="#" class="btn btn-block btn-social btn-twitter"><i class="fa fa-twitter"></i> Sign in using Twitter</a>
 		<a href="#" class="btn btn-block btn-social btn-linkedin"><i class="fa fa-linkedin"></i> Sign in using LinkedIn</a>
-	</div>
+	</div> --}}
 	<!-- /.social-auth-links -->
 
 </div>
