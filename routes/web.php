@@ -107,6 +107,9 @@ Route::group(['namespace' => 'Admin'], function() {
 		//	Reports
 		Route::get('reports/showReport/vacancyDetails','Reports\ReportsController@showVacancyReport')->name('admin.reports.vacancyDetails');
 		Route::get('reports/showReport/employerDetails','Reports\ReportsController@showEmployerReport')->name('admin.reports.employerDetails');
+		Route::get('reports/showReport/categoryWiseQuestionnaireReport','Reports\ReportsController@categoryWiseQuestionnaireReport')->name('admin.reports.categoryWiseQuestionnaireReport');
+		Route::get('reports/showReport/categoryWiseVacancyReport','Reports\ReportsController@categoryWiseVacancyReport')->name('admin.reports.categoryWiseVacancyReport');
+		Route::get('reports/showReport/locationWiseVacancyReport','Reports\ReportsController@locationWiseVacancyReport')->name('admin.reports.locationWiseVacancyReport');
 		//	Add report routes here
 	});
 });

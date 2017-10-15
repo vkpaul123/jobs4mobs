@@ -15,46 +15,68 @@
 
       <div class="container-fluid">
         <div class="row">
-          <div class="col-md-3">
+          <div class="col-md-4">
             <div class="info-box">
-              <span class="info-box-icon bg-yellow"><i class="fa fa-black-tie"></i></span>
+              <span class="info-box-icon bg-yellow"><i class="fa fa-industry"></i></span>
 
               <div class="info-box-content">
                 <span class="info-box-text">Employers</span>
-                <span class="info-box-number">200</span>
+                <span class="info-box-number">{{ $employerCount }}</span>
               </div>
             </div>
           </div>
 
-          <div class="col-md-3">
+          <div class="col-md-4">
             <div class="info-box">
               <span class="info-box-icon bg-blue"><i class="fa fa-group"></i></span>
 
               <div class="info-box-content">
                 <span class="info-box-text">JobSeekers</span>
-                <span class="info-box-number">35000</span>
+                <span class="info-box-number">{{ $userCount }}</span>
               </div>
             </div>
           </div>
 
-          <div class="col-md-3">
+          <div class="col-md-4">
             <div class="info-box">
-              <span class="info-box-icon bg-green"><i class="fa fa-briefcase"></i></span>
+              <span class="info-box-icon bg-green"><i class="fa fa-black-tie"></i></span>
+
+              <div class="info-box-content">
+                <span class="info-box-text">JobSeeker PRofiles</span>
+                <span class="info-box-number">{{ $jobseekerProfile }}</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-4">
+            <div class="info-box">
+              <span class="info-box-icon bg-red"><i class="fa fa-briefcase"></i></span>
 
               <div class="info-box-content">
                 <span class="info-box-text">Vacancies</span>
-                <span class="info-box-number">5000</span>
+                <span class="info-box-number">{{ $vacancyCount }}</span>
               </div>
             </div>
           </div>
 
-          <div class="col-md-3">
+          <div class="col-md-4">
             <div class="info-box">
-              <span class="info-box-icon bg-red"><i class="fa fa-question"></i></span>
+              <span class="info-box-icon" style="background-color: #39cbdd;"><i class="fa fa-question"></i></span>
 
               <div class="info-box-content">
                 <span class="info-box-text">Questions</span>
-                <span class="info-box-number">55000</span>
+                <span class="info-box-number">{{ $questionsCount }}</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-4">
+            <div class="info-box">
+              <span class="info-box-icon" style="background-color: #dd3979;"><i class="fa fa-file-text-o" style="color: white;"></i></span>
+
+              <div class="info-box-content">
+                <span class="info-box-text">Tests</span>
+                <span class="info-box-number">{{ $testCount }}</span>
               </div>
             </div>
           </div>

@@ -2,13 +2,32 @@
 
 namespace App\Http\Controllers\Admin;
 
-use Illuminate\Http\Request;
+use App\Employer;
 use App\Http\Controllers\Controller;
+use App\JobApplication;
+use App\JobseekerProfile;
+use App\Question;
+use App\User;
+use App\Vacancy;
+use Illuminate\Http\Request;
 
 class PageController extends Controller
 {
     public function index() {
-    	return view('Admin.homepage.home');
+        $employerCount = Employer::all()->count();
+        $userCount = User::all()->count();
+        $jobseekerProfile = JobseekerProfile::all()->count();
+        $testCount = JobApplication::where('testResult', 'Fail')->orWhere('testResult', 'Pass')->orWhere('testResult', 'Pending')->get()->count();
+        $vacancyCount = Vacancy::all()->count();
+        $questionsCount = Question::all()->count();
+
+    	return view('Admin.homepage.home')
+        ->with(compact('employerCount'))
+        ->with(compact('userCount'))
+        ->with(compact('jobseekerProfile'))
+        ->with(compact('testCount'))
+        ->with(compact('vacancyCount'))
+        ->with(compact('questionsCount'));
     }
 
     public function addAdmin() {
