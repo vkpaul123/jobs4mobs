@@ -75,7 +75,7 @@
 <script type="text/javascript" id="hits-temp">
 	<div class="box">
 		<div class="box-header with-border">
-			<h3 class="box-title"><strong><span style="color: #e08e0b;">@{{firstname}} @{{middlename}} @{{lastname}}</span></strong></h3>
+			<h3 class="box-title"><strong><span style="color: #e08e0b;"><span class="text-muted">@{{id}}</span>   @{{firstname}} @{{middlename}} @{{lastname}}</span></strong></h3>
 
 			<div class="box-title pull-right">
 				<i class="glyphicon glyphicon-map-marker"></i>&nbsp @{{address_id.cityName}}

@@ -32,9 +32,11 @@
         	<div class="container-fluid">
         		<div class="row">
         			<div class="col-md-2">
+        				@if(isset($user->photo))
         				<img src="{{ $user->photo }}"  class="img-rounded img-responsive" alt="Profile Image">
         					
         				</img>
+						@else
         			</div>
         			<div class="col-md-7">
 	        			<div class="row">
