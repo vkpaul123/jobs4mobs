@@ -91,7 +91,7 @@ class PageController extends Controller
         if($jobseekerProfile->address_id)
             $address = Address::where('id', $jobseekerProfile->address_id)->get()->first();
 
-        return view('Employer.homepage.viewJobseekerProfile')
+        return view('Admin.homepage.viewJobseekerProfile')
         ->with(compact('jobseekerProfile'))
         ->with(compact('address'))
         ->with(compact('academics'))
@@ -112,7 +112,7 @@ class PageController extends Controller
         if($employer->address_id)
             $address = Address::where('id', $employer->address_id)->get()->first();
 
-        return view('JobSeeker.homepage.viewEmployerProfile')
+        return view('Admin.homepage.viewEmployerProfile')
         ->with(compact('employer'))
         ->with(compact('address'))
         ->with(compact('jobcategories'));

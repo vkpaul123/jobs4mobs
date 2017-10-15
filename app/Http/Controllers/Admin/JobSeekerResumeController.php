@@ -30,7 +30,7 @@ class JobSeekerResumeController extends Controller
         if($resume->address_id)
             $address = Address::where('id', $resume->address_id)->get()->first();
 
-        return view('Employer.homepage.viewJobseekerResume')
+        return view('Admin.homepage.viewJobseekerResume')
         ->with(compact('resume'))
     	->with(compact('jobseekerExperience'))
     	->with(compact('jobseekerAcademics'))
@@ -41,6 +41,6 @@ class JobSeekerResumeController extends Controller
 
     public function showResumeNotFound()
     {
-        return view('Employer.homepage.viewJobseekerResumeNotFound');
+        return view('Admin.homepage.viewJobseekerResumeNotFound');
     }
 }
