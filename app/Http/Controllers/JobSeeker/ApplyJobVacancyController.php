@@ -44,7 +44,11 @@ class ApplyJobVacancyController extends Controller
     		'jobseeker_profile_id' => 'required'
     	]);
 
-    	$jobApplication = JobApplication::where(['jobseeker_profile_id' => $request->jobseeker_profile_id, 'vacancy_id' => $request->vacancy_id])->get();
+
+    	$jobApplication = JobApplication::where([
+            'jobseeker_profile_id' => $request->jobseeker_profile_id,
+            'vacancy_id' => $request->vacancy_id
+        ])->get();
 
     	$jobseekerProfile = JobseekerProfile::find($request->jobseeker_profile_id);
 
