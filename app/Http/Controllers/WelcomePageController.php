@@ -17,4 +17,17 @@ class WelcomePageController extends Controller
     public function contact() {
     	return view('WelcomePage.contact');
     }
+
+    public function faq1() {
+    	return view('WelcomePage.singleproject');
+    }
+    public function faq2() {
+    	return view('WelcomePage.singleproject1');
+    }
+    public function faq3() {
+    	return view('WelcomePage.singleproject2');
+    }
+    public function faq4() {
+    	return view('WelcomePage.singleproject3');
+    }
 }

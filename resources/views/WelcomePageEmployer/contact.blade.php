@@ -7,6 +7,8 @@
 
 @section('body')
 
+
+
 <!-- *****************************************************************************************************************
  BLUE WRAP
  ***************************************************************************************************************** -->
@@ -49,7 +51,7 @@
 	 		});
 	 	}
 	 </script>
-	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAS7wZg-KLMUWnonuxXQLnYd5yHETxrKDQ&callback=loadMap"></script>
+	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDhhJHWbRp_rh15XKRS-t8zwfZLX-KuSIU&callback=loadMap"></script>
  
 <!-- *****************************************************************************************************************
  CONTACT FORMS
@@ -113,21 +115,21 @@
  				@endif>
  				<button type="submit" class="btn btn-theme">Submit</button>
  			</form>
- 		</div><! --/col-lg-8 -->
+ 		</div>
  		
  		<div class="col-lg-4">
  			<h4>Our Address</h4>
  			<div class="hline"></div>
  			<p>
- 				Some Ave, 987,<br/>
- 				23890, New York,<br/>
- 				United States.<br/>
- 			</p>
+               Christ University<br/>
+               Hosur Road,Bengaluru,<br/>
+               Karnataka-560029<br/>
+            </p>
  			<p>
- 				Email: hello@solidtheme.com<br/>
- 				Tel: +34 8493-4893
+ 				Email: contact.jobs4mobs@gmail.com<br/>
+ 				Tel: +91 9969453212
  			</p>
- 			<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.</p>
+ 			<p>India's leading website Jobs4Mobs isn't just online.Feel free to drop in by our office.We'd be more than happy to acknowldege your queries! </p>
  		</div>
  	</div><! --/row -->
  </div><! --/container -->

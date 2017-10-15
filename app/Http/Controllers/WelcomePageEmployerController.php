@@ -18,8 +18,16 @@ class WelcomePageEmployerController extends Controller
     	return view('WelcomePageEmployer.contact');
     }
 
-    // public function __construct()
-    // {
-    //     $this->middleware('auth:employer');
-    // }
+    public function faq1() {
+        return view('WelcomePageEmployer.singleproject');
+    }
+    public function faq2() {
+        return view('WelcomePageEmployer.selectproject1');
+    }
+    public function faq3() {
+        return view('WelcomePageEmployer.selectproject2');
+    }
+    public function faq4() {
+        return view('WelcomePageEmployer.selectproject3');
+    }
 }

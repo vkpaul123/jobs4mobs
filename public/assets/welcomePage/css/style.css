@@ -290,11 +290,12 @@ a:focus {
 #twrap {
 	background: url(../img/t-back.jpg) no-repeat center top;
 	margin-top: 0px;
-	padding-top:60px;
+	padding-top:30px;
+	padding-bottom: 60px;
 	text-align:center;
 	background-attachment: relative;
 	background-position: center center;
-	min-height: 450px;
+	opacity: 1.0;
 	width: 100%;
 	
     -webkit-background-size: 100%;
@@ -316,7 +317,7 @@ a:focus {
 
 #twrap p {
 	color: white;
-	font-size: 15px;
+	font-size: 20px;
 	line-height: 30px;
 }
 
@@ -334,8 +335,8 @@ a:focus {
 
 /* Footer */
 #footerwrap {
-	padding-top: 60px;
-	padding-bottom: 60px;
+	padding-top: 50px;
+	padding-bottom: 40px;
 	background: #384452;
 }
 
@@ -371,32 +372,6 @@ a:focus {
 }
 
 #blue h3 {
-	color: white;
-	margin-left: 15px;
-}
-
-#red {
-	background: #fe4b00;
-	margin-top: 60px;
-	margin-bottom: 60px;
-	padding-top: 25px;
-	padding-bottom: 25px;
-}
-
-#red h3 {
-	color: white;
-	margin-left: 15px;
-}
-
-#green {
-	background: #00b234;
-	margin-top: 60px;
-	margin-bottom: 60px;
-	padding-top: 25px;
-	padding-bottom: 25px;
-}
-
-#green h3 {
 	color: white;
 	margin-left: 15px;
 }

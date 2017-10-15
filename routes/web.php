@@ -36,11 +36,23 @@ Route::get('/', 'WelcomePageController@index');
 Route::get('about', 'WelcomePageController@about');
 Route::get('contact', 'WelcomePageController@contact');
 
+//FAQs Jobseeker
+Route::get('singleproject','WelcomePageController@faq1');
+Route::get('singleproject1','WelcomePageController@faq2');
+Route::get('singleproject2','WelcomePageController@faq3');
+Route::get('singleproject3','WelcomePageController@faq4');
+
 //	Welcome Page for Employer
 Route::prefix('employer')->group(function() {
 	Route::get('/', 'WelcomePageEmployerController@index');
 	Route::get('about', 'WelcomePageEmployerController@about');
 	Route::get('contact', 'WelcomePageEmployerController@contact');
+
+	//FAQs Employer
+	Route::get('singleproject','WelcomePageEmployerController@faq1');
+	Route::get('singleproject1','WelcomePageEmployerController@faq2');
+	Route::get('singleproject2','WelcomePageEmployerController@faq3');
+	Route::get('singleproject3','WelcomePageEmployerController@faq4');
 });
 
 Route::post('contactAdmin', 'UserMessageSendController@sendMessage')->name('allUsers.sendMessage');
@@ -53,6 +65,8 @@ Route::get('verifyEmployer/{email}/{verifyToken}', 'Employer\Auth\RegisterContro
 Route::group(['namespace' => 'Admin'], function() {
 	Route::prefix('admin')->group(function() {
 		Route::get('/', 'PageController@index')->name('admin.home');
+
+		Route::put('/saveNote', 'PageController@saveNote')->name('admin.saveNote');
 		
 		//	Auth
 		Route::get('login', 'Auth\LoginController@showLoginForm')->name('admin.login');

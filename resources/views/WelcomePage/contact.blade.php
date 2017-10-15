@@ -7,13 +7,14 @@
 
 @section('body')
 
+
 <!-- *****************************************************************************************************************
  BLUE WRAP
  ***************************************************************************************************************** -->
  <div id="blue">
  	<div class="container">
  		<div class="row">
- 			<h3>Contact.</h3>
+ 			<h3>Contact Us.</h3>
  		</div><!-- /row -->
  	</div> <!-- /container -->
  </div><!-- /blue -->
@@ -24,32 +25,32 @@
 
  <div id="contactwrap"></div>
  <button type="button" class="btn btn-xs pull-left" onclick="loadMap()"><i class="fa">&#xf021;</i></button>
-	 <script>
-	 	var map;
-	 	function loadMap() {
+ <script>
+ 	var map;
+ 	function loadMap() {
 
-	 		var mapOptions = {
-	 			center:new google.maps.LatLng(12.93443,77.6061315),
-	 			zoom:16,
-	 			draggable: false,
-	 			scrollwheel: false,
-	 		}
+ 		var mapOptions = {
+ 			center:new google.maps.LatLng(12.93443,77.6061315),
+ 			zoom:16,
+ 			draggable: false,
+ 			scrollwheel: false,
+ 		}
 
-	 		var map = new google.maps.Map(document.getElementById("contactwrap"),mapOptions);
+ 		var map = new google.maps.Map(document.getElementById("contactwrap"),mapOptions);
 
-	 		var marker = new google.maps.Marker({
-	 			position: new google.maps.LatLng(12.93443,77.6061315),
-	 			map: map,
-	 		});
+ 		var marker = new google.maps.Marker({
+ 			position: new google.maps.LatLng(12.93443,77.6061315),
+ 			map: map,
+ 		});
 
-	 		google.maps.event.addDomListener(window, "resize", function() {
-	 			var center = map.getCenter();
-	 			google.maps.event.trigger(map, "resize");
-	 			map.setCenter(center);
-	 		});
-	 	}
-	 </script>
-	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAS7wZg-KLMUWnonuxXQLnYd5yHETxrKDQ&callback=loadMap"></script>
+ 		google.maps.event.addDomListener(window, "resize", function() {
+ 			var center = map.getCenter();
+ 			google.maps.event.trigger(map, "resize");
+ 			map.setCenter(center);
+ 		});
+ 	}
+ </script>
+ <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDhhJHWbRp_rh15XKRS-t8zwfZLX-KuSIU&callback=loadMap"></script>
  
 <!-- *****************************************************************************************************************
  CONTACT FORMS
@@ -119,15 +120,15 @@
  			<h4>Our Address</h4>
  			<div class="hline"></div>
  			<p>
- 				Some Ave, 987,<br/>
- 				23890, New York,<br/>
- 				United States.<br/>
+ 				Christ University<br/>
+ 				Hosur Road,Bengaluru,<br/>
+ 				Karnataka-560029<br/>
  			</p>
  			<p>
- 				Email: hello@solidtheme.com<br/>
- 				Tel: +34 8493-4893
+ 				Email: contact.jobs4mobs@gmail.com<br/>
+ 				Tel: +91 9969453212
  			</p>
- 			<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.</p>
+ 			<p>India's leading website Jobs4Mobs isn't just online.Feel free to drop in by our office.We'd be more than happy to acknowldege your queries! </p>
  		</div>
  	</div><! --/row -->
  </div><! --/container -->

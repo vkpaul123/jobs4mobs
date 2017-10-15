@@ -206,7 +206,7 @@ a:focus {
 
 #headerwrap {
 	background-color: #e5b600;
-	min-height: 550px;
+	min-height: 400px;
 	padding-top: 100px;
 	padding-bottom: 0px;
 	text-align: center;
@@ -290,12 +290,13 @@ a:focus {
 #twrap {
 	background: url(../img/t-back.jpg) no-repeat center top;
 	margin-top: 0px;
-	padding-top:60px;
+	padding-top:30px;
+	padding-bottom: 60px;
 	text-align:center;
 	background-attachment: relative;
 	background-position: center center;
-	min-height: 450px;
-	width: 100%;
+	opacity: 1.0;
+	width: 100%;	
 	
     -webkit-background-size: 100%;
     -moz-background-size: 100%;
