@@ -61,8 +61,8 @@
                     <strong>{{ $jobApplication->applicationStatus }}</strong>
                   </span></td>
           <td>
-            <a href="" onclick="approveApp(); document.getElementById('setApplicationStatus-{{ $jobApplication->id }}').submit();"><button class="btn-xs btn btn-success"><strong><i class="fa fa-check"></i>&nbsp Approve</strong></button></a> &nbsp 
-            <a href="" onclick="rejectApp(); document.getElementById('setApplicationStatus-{{ $jobApplication->id }}').submit();"><button class="btn-xs btn btn-danger"><strong><i class="fa fa-close"></i>&nbsp Reject</strong></button></a>
+            <a href="" onclick="approveApp{{ $jobApplication->id }}(); document.getElementById('setApplicationStatus-{{ $jobApplication->id }}').submit();"><button class="btn-xs btn btn-success"><strong><i class="fa fa-check"></i>&nbsp Approve</strong></button></a> &nbsp 
+            <a href="" onclick="rejectApp{{ $jobApplication->id }}(); document.getElementById('setApplicationStatus-{{ $jobApplication->id }}').submit();"><button class="btn-xs btn btn-danger"><strong><i class="fa fa-close"></i>&nbsp Reject</strong></button></a>
 
             <form action="{{ route('vacancy.setApplicationStatus', $jobApplication->id) }}" style="display: none;" id="setApplicationStatus-{{ $jobApplication->id }}" method="post">
               {{csrf_field()}}
@@ -128,13 +128,13 @@
 
 @foreach ($jobApplications as $jobApplication)
   <script>
-    function approveApp() {
+    function approveApp{{ $jobApplication->id }}() {
       event.preventDefault();
       document.getElementById('applicationStatus[{{ $jobApplication->id }}]').value = "Approved";
       document.getElementById('mailBody1[{{ $jobApplication->id }}]').value = "This Mail is regarding your Job Application for the vacancy in {{ Auth::user()->companyname }}. The Employer has Approved your Application. Please Contact the employer for further details.";
     }
 
-    function rejectApp() {
+    function rejectApp{{ $jobApplication->id }}() {
       event.preventDefault();
       document.getElementById('applicationStatus[{{ $jobApplication->id }}]').value = "Rejected";
       document.getElementById('mailBody1[{{ $jobApplication->id }}]').value = "This Mail is regarding your Job Application for the vacancy in {{ Auth::user()->companyname }}. The Employer has Rejected your Application. Please Contact the employer for further details.";
