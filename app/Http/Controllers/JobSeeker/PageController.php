@@ -12,6 +12,7 @@ use App\Questionnaire;
 use App\Vacancy;
 use App\VacancySkill;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class PageController extends Controller
@@ -27,7 +28,16 @@ class PageController extends Controller
     }
 	
     public function index() {
-    	return view('JobSeeker.homepage.home');
+        $popEmployers = Employer::orderByRaw('RAND()')->take(30)->get();
+        $recVacancies = Vacancy::where('employers_id', Auth::user()->id)->orderBy('id', 'desc')->take(30)->get();
+
+        foreach ($recVacancies as $recVacancy) {
+            $recVacancy->employers_id = Employer::where('id', $recVacancy->employers_id)->get()->name;
+        }
+
+    	return view('JobSeeker.homepage.home')
+        ->with(compact('popEmployers'))
+        ->with(compact('recVacancies'));
     }
 
     public function registerProfile() {

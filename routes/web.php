@@ -199,6 +199,7 @@ Route::group(['namespace' => 'Employer'], function() {
 		Route::get('/viewJobseekerResumeNotFound', 'JobSeekerResumeController@showResumeNotFound')->name('employer.viewJobseekerResumeNotFound');
 
 		Route::get('/home/contactAdmin', 'PageController@contactAdmin');
+		Route::put('/home/employerAccount/changePassword', 'UserEditController@editPassword')->name('employer.editPassword');
 
 		//	Reports
 		Route::get('/home/reports/vacancyDetails', 'Reports\ReportsController@showVacancyReport')->name('employer.reports.vacancyDetails');
@@ -263,6 +264,7 @@ Route::group(['namespace' => 'JobSeeker'], function() {
 	Route::get('/home/viewVacancy/{id}', 'PageController@viewVacancy');
 	
 	Route::get('/home/contactAdmin', 'PageController@contactAdmin');
+	Route::put('/home/jobseekerAccount/changePassword', 'UserEditController@editPassword')->name('jobseeker.editPassword');
 
 	//test
 	Route::get('/home/tests/showTestStart/{id}', 'PageController@showTestStart')->name('jobseeker.test.showTestStart');

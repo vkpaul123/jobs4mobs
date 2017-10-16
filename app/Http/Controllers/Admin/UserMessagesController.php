@@ -17,9 +17,11 @@ class UserMessagesController extends Controller
 
     public function loadInbox() {
     	$messages = Contactadmin::all();
+        $newMessagesCount = Contactadmin::where('markMessageRead', null)->get()->count();
 
     	return view('Admin.homepage.adminInbox')
-    	->with(compact('messages'));
+    	->with(compact('messages'))
+        ->with(compact('newMessagesCount'));
     }
 
     public function editMessage($id) {

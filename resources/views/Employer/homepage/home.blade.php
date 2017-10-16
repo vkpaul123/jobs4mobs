@@ -213,17 +213,11 @@
           </div>
           <div class="box-body">
 
-            {{-- @foreach 25--}}
-            <a href="">Nvidia</a> &nbsp &nbsp
-            {{-- @endforeach --}}
-
-            <a href="">Nvidia</a> &nbsp &nbsp
-            <a href="">Nvidia</a> &nbsp &nbsp
-            <a href="">Nvidia</a> &nbsp &nbsp
-            <a href="">Nvidia</a> &nbsp &nbsp
-            <a href="">Nvidia</a> &nbsp &nbsp
-            <a href="">Nvidia</a> &nbsp &nbsp
-            <a href="">Nvidia</a> &nbsp &nbsp
+            @foreach ($recVacancies as $recVacancy)
+            <a href="{{ route('vacancy.show', $recVacancy->id) }}">
+              <button class="btn-lg btn-default">{{ $recVacancy->employers_id }}</button>
+            </a> &nbsp &nbsp
+            @endforeach
           </div>
         </div>
       </div>
@@ -235,17 +229,10 @@
           </div>
           <div class="box-body">
 
-            {{-- @foreach 25--}}
-            <a href="">Nvidia</a> &nbsp &nbsp
-            {{-- @endforeach --}}
+            @foreach ($popEmployers as $popEmployer)
+              <button class="btn btn-lg btn-default">{{ $popEmployer->companyname }}</button> &nbsp &nbsp
+            @endforeach
 
-            <a href="">Nvidia</a> &nbsp &nbsp
-            <a href="">Nvidia</a> &nbsp &nbsp
-            <a href="">Nvidia</a> &nbsp &nbsp
-            <a href="">Nvidia</a> &nbsp &nbsp
-            <a href="">Nvidia</a> &nbsp &nbsp
-            <a href="">Nvidia</a> &nbsp &nbsp
-            <a href="">Nvidia</a> &nbsp &nbsp
           </div>
         </div>
       </div>

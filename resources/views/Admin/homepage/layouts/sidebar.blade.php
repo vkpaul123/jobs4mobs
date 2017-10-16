@@ -25,7 +25,11 @@
           <i class="fa fa-files-o"></i>
           <span>Messaging</span>
           <span class="pull-right-container">
+            @if(isset($newMessagesCount) && $newMessagesCount)
+            <span class="label label-danger pull-right">{{ $newMessagesCount }}</span>
+            @else
             <i class="fa fa-angle-left pull-right"></i>
+            @endif
           </span>
         </a>
         <ul class="treeview-menu">

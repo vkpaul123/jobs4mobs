@@ -3,18 +3,30 @@
 namespace App\Http\Controllers\Employer;
 
 use App\Address;
+use App\Employer;
 use App\Http\Controllers\Controller;
 use App\JobseekerAcademics;
 use App\JobseekerExperience;
 use App\JobseekerProfile;
 use App\JobseekerSkill;
 use App\User;
+use App\Vacancy;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class PageController extends Controller
 {
     public function index() {
-    	return view('Employer.homepage.home');
+        $popEmployers = Employer::orderByRaw('RAND()')->take(20)->get();
+        $recVacancies = Vacancy::where('employers_id', Auth::user()->id)->orderBy('id', 'desc')->take(5)->get();
+
+        foreach ($recVacancies as $recVacancy) {
+            $recVacancy->employers_id = Employer::where('id', $recVacancy->employers_id)->get()->name;
+        }
+
+    	return view('Employer.homepage.home')
+        ->with(compact('popEmployers'))
+        ->with(compact('recVacancies'));
     }
 
     public function registerAddress() {

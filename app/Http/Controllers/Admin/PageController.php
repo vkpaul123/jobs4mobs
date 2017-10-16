@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Address;
 use App\Admin;
+use App\Contactadmin;
 use App\Employer;
 use App\Http\Controllers\Controller;
 use App\JobApplication;
@@ -28,6 +29,7 @@ class PageController extends Controller
         $testCount = JobApplication::where('testResult', 'Fail')->orWhere('testResult', 'Pass')->orWhere('testResult', 'Pending')->get()->count();
         $vacancyCount = Vacancy::all()->count();
         $questionsCount = Question::all()->count();
+        $newMessagesCount = Contactadmin::where('markMessageRead', null)->get()->count();
 
         $employers = Employer::orderBy('id', 'desc')->take(5)->get();
         $vacancies = Vacancy::orderBy('id', 'desc')->take(5)->get();
@@ -35,6 +37,7 @@ class PageController extends Controller
 
     	return view('Admin.homepage.home')
         ->with(compact('employerCount'))
+        ->with(compact('newMessagesCount'))
         ->with(compact('userCount'))
         ->with(compact('jobseekerProfile'))
         ->with(compact('testCount'))

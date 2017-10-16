@@ -28,6 +28,7 @@
 
     <div class="box-body">
       <form action="{{ route('admin.contact.sendEmail') }}" method="post" class="form-horizontal">
+        {{csrf_field()}}
         <div class="form-group{{ $errors->has('fromName') ? ' has-error' : '' }}">
           <label for="fromName" class="col-md-2 control-label">From Name</label>
           <div class="col-md-8">
