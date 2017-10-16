@@ -70,8 +70,7 @@
           </span>
         </a>
         <ul class="treeview-menu">
-          <li><a href="pages/layout/top-nav.html"><i class="fa fa-circle-o"></i> Jobseekers</a></li>
-          <li><a href="pages/layout/top-nav.html"><i class="fa fa-circle-o"></i> Jobseeker Profiles</a></li>
+          <li><a href="{{ route('admin.reports.showJobseekerReport') }}"><i class="fa fa-circle-o"></i> Jobseeker Profiles</a></li>
           <li><a href="{{ route('admin.reports.employerDetails') }}"><i class="fa fa-circle-o"></i> Employer Profiles</a></li>
           <li><a href="{{ route('admin.reports.vacancyDetails') }}"><i class="fa fa-circle-o"></i> Vacancies</a></li>
           <li class="treeview">
@@ -83,8 +82,8 @@
               </span>
             </a>
             <ul class="treeview-menu">
-              <li><a href="pages/layout/top-nav.html"><i class="fa fa-circle-o"></i> Jobseeker Profiles</a></li>
-              <li><a href="pages/layout/boxed.html"><i class="fa fa-circle-o"></i> Employer Profiles</a></li>
+              <li><a href="{{ route('admin.reports.categoryWiseJobseekerProfileReport') }}"><i class="fa fa-circle-o"></i> Jobseeker Profiles</a></li>
+              <li><a href="{{ route('admin.reports.categoryWiseEmployerReport') }}"><i class="fa fa-circle-o"></i> Employer Profiles</a></li>
               <li><a href="{{ route('admin.reports.categoryWiseVacancyReport') }}"><i class="fa fa-circle-o"></i> Vacancies</a></li>
               <li><a href="{{ route('admin.reports.categoryWiseQuestionnaireReport') }}"><i class="fa fa-circle-o"></i> Questionnaire</a></li>
             </ul>
@@ -98,28 +97,27 @@
               </span>
             </a>
             <ul class="treeview-menu">
-              <li><a href="pages/layout/top-nav.html"><i class="fa fa-circle-o"></i> Jobseeker Profiles</a></li>
-              <li><a href="pages/layout/boxed.html"><i class="fa fa-circle-o"></i> Employer Profiles</a></li>
+              <li><a href="{{ route('admin.reports.locationWiseJobseekerProfileReport') }}"><i class="fa fa-circle-o"></i> Jobseeker Profiles</a></li>
+              <li><a href="{{ route('admin.reports.locationWiseEmployerReport') }}"><i class="fa fa-circle-o"></i> Employer Profiles</a></li>
               <li><a href="{{ route('admin.reports.locationWiseVacancyReport') }}"><i class="fa fa-circle-o"></i> Vacancies</a></li>
             </ul>
           </li>
-          <li><a href="pages/layout/boxed.html"><i class="fa fa-circle-o"></i> Test Reports</a></li>
         </ul>
       </li>
       <li class="treeview">
-            <a href="#">
-              <i class="fa fa-files-o"></i>
-              <span>Admins</span>
-              <span class="pull-right-container">
-                <i class="fa fa-angle-left pull-right"></i>
-              </span>
-            </a>
-            <ul class="treeview-menu">
-              <li><a href="{{ route('admin.editPasswordForm') }}"><i class="fa fa-circle-o"></i> Change My Password</a></li>
-              <li><a href="{{ route('admin.viewAdmins') }}"><i class="fa fa-circle-o"></i> View All Admins</a></li>
-              <li><a href="{{ route('admin.addAdmin') }}"><i class="fa fa-circle-o"></i> Add Admin</a></li>
-            </ul>
-          </li>
+        <a href="#">
+          <i class="fa fa-files-o"></i>
+          <span>Admins</span>
+          <span class="pull-right-container">
+            <i class="fa fa-angle-left pull-right"></i>
+          </span>
+        </a>
+        <ul class="treeview-menu">
+          <li><a href="{{ route('admin.editPasswordForm') }}"><i class="fa fa-circle-o"></i> Change My Password</a></li>
+          <li><a href="{{ route('admin.viewAdmins') }}"><i class="fa fa-circle-o"></i> View All Admins</a></li>
+          <li><a href="{{ route('admin.addAdmin') }}"><i class="fa fa-circle-o"></i> Add Admin</a></li>
+        </ul>
+      </li>
     </ul>
   </section>
   <!-- /.sidebar -->

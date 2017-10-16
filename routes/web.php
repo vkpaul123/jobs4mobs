@@ -128,9 +128,14 @@ Route::group(['namespace' => 'Admin'], function() {
 		//	Reports
 		Route::get('reports/showReport/vacancyDetails','Reports\ReportsController@showVacancyReport')->name('admin.reports.vacancyDetails');
 		Route::get('reports/showReport/employerDetails','Reports\ReportsController@showEmployerReport')->name('admin.reports.employerDetails');
+		Route::get('reports/showReport/categoryWiseEmployerReport','Reports\ReportsController@categoryWiseEmployerReport')->name('admin.reports.categoryWiseEmployerReport');
 		Route::get('reports/showReport/categoryWiseQuestionnaireReport','Reports\ReportsController@categoryWiseQuestionnaireReport')->name('admin.reports.categoryWiseQuestionnaireReport');
 		Route::get('reports/showReport/categoryWiseVacancyReport','Reports\ReportsController@categoryWiseVacancyReport')->name('admin.reports.categoryWiseVacancyReport');
 		Route::get('reports/showReport/locationWiseVacancyReport','Reports\ReportsController@locationWiseVacancyReport')->name('admin.reports.locationWiseVacancyReport');
+		Route::get('reports/showReport/locationWiseJobseekerProfileReport','Reports\ReportsController@locationWiseJobseekerProfileReport')->name('admin.reports.locationWiseJobseekerProfileReport');
+		Route::get('reports/showReport/locationWiseEmployerReport','Reports\ReportsController@locationWiseEmployerReport')->name('admin.reports.locationWiseEmployerReport');
+		Route::get('reports/showReport/categoryWiseJobseekerProfileReport','Reports\ReportsController@categoryWiseJobseekerProfileReport')->name('admin.reports.categoryWiseJobseekerProfileReport');
+		Route::get('reports/showReport/showJobseekerReport','Reports\ReportsController@showJobseekerReport')->name('admin.reports.showJobseekerReport');
 		//	Add report routes here
 	});
 });
@@ -203,6 +208,7 @@ Route::group(['namespace' => 'Employer'], function() {
 
 		//	Reports
 		Route::get('/home/reports/vacancyDetails', 'Reports\ReportsController@showVacancyReport')->name('employer.reports.vacancyDetails');
+		Route::get('/home/reports/locationWiseVacancyReport', 'Reports\ReportsController@locationWiseVacancyReport')->name('employer.reports.locationWiseVacancyReport');
 	});
 });
 

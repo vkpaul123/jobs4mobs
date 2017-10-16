@@ -31,7 +31,6 @@
           <li><a href="/home/profile/create"><i class="fa fa-user-plus"></i> Create Profile</a></li>
         </ul>
       </li>
-      <li><a href="/home/resumeBuilder"><i class="fa fa-file-picture-o"></i> <span>Resume Builder</span></a></li>
       <li class="treeview">
         <a href="#">
           <i class="fa fa-search"></i>
