@@ -58,7 +58,7 @@
 	</div>
 	<!-- /.social-auth-links --> --}}
 
-	<a href="{{ route('admin.password.request') }}">I forgot my password</a><br>
+{{-- 	<a href="{{ route('admin.password.request') }}">I forgot my password</a><br>
 	
 	<div class="text-center">
 		<p>- OR -</p>
@@ -66,7 +66,7 @@
 			<button class="btn btn-info">Register a new membership</button>
 		</a>
 	</div>
-
+ --}}
 </div>
 <!-- /.login-box-body -->
 

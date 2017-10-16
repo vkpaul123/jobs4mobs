@@ -6,6 +6,9 @@ use App\Address;
 use App\Employer;
 use App\Http\Controllers\Controller;
 use App\JobCategory;
+use App\JobseekerProfile;
+use App\JobseekerSkill;
+use App\User;
 use App\Vacancy;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -57,5 +60,69 @@ class ReportsController extends Controller
         ->with(compact('vacancies'))
         ->with(compact('addresses'))
         ->with(compact('jobcategories'));
+    }
+
+    //TO BE DONE
+    public function categoryWiseJobseekerProfileReport()
+    {
+        $jobseekers = JobseekerProfile::all();
+        $jobcategories = JobCategory::all();
+
+        foreach ($jobseekers as $jobseekerProfile) {
+            $jobseekerProfile->tagline = User::where('id', $jobseekerProfile->user_id)->get()->first()->email;
+
+            if($jobseekerProfile->address_id)
+                $jobseekerProfile->address_id = Address::find($jobseekerProfile->address_id);
+
+            $jobseekerProfile->languagesSpoken = JobseekerSkill::where('jobseeker_profiles_id', $jobseekerProfile->id)->get();
+        }
+
+        return view('Employer.homepage.reports.categoryWiseJobseekerProfilesReport')
+        ->with(compact('jobseekers'))
+        ->with(compact('jobcategories'));
+    }
+
+    //TO BE DONE
+    public function locationWiseJobseekerProfileReport()
+    {
+        $jobseekers = JobseekerProfile::all();
+        $jobcategories = JobCategory::all();
+
+        $addresses = Address::select('stateName')->distinct()->get();
+
+        foreach ($jobseekers as $jobseekerProfile) {
+            $jobseekerProfile->preferedJobCategoryId1 = JobCategory::find($jobseekerProfile->preferedJobCategoryId1)->name;
+
+            $jobseekerProfile->tagline = User::where('id', $jobseekerProfile->user_id)->get()->first()->email;
+
+            if($jobseekerProfile->address_id)
+                $jobseekerProfile->address_id = Address::find($jobseekerProfile->address_id);
+
+            $jobseekerProfile->languagesSpoken = JobseekerSkill::where('jobseeker_profiles_id', $jobseekerProfile->id)->get();
+        }
+
+        return view('Employer.homepage.reports.locationWiseJobseekerDetailsReport')
+        ->with(compact('jobseekers'))
+        ->with(compact('addresses'))
+        ->with(compact('jobcategories'));
+    }
+
+    //TO BE DONE
+    public function showJobseekerReport() {
+        $jobseekerProfiles = JobseekerProfile::all();
+        
+        foreach ($jobseekerProfiles as $jobseekerProfile) {
+            $jobseekerProfile->preferedJobCategoryId1 = JobCategory::find($jobseekerProfile->preferedJobCategoryId1)->name;
+
+            $jobseekerProfile->tagline = User::where('id', $jobseekerProfile->user_id)->get()->first()->email;
+
+            if($jobseekerProfile->address_id)
+                $jobseekerProfile->address_id = Address::find($jobseekerProfile->address_id);
+
+            $jobseekerProfile->languagesSpoken = JobseekerSkill::where('jobseeker_profiles_id', $jobseekerProfile->id)->get();
+        }
+
+        return view('Employer.homepage.reports.jobseekerDetails')
+        ->with(compact('jobseekerProfiles'));
     }
 }

@@ -59,10 +59,9 @@
         <ul class="treeview-menu">
           <li><a href="{{ route('employer.reports.vacancyDetails') }}"><i class="fa fa-circle-o"></i> My Vacancy Report</a></li>
           <li><a href="{{ route('employer.reports.locationWiseVacancyReport') }}"><i class="fa fa-circle-o"></i> Location-wise Vacancies</a></li>
-          <li><a href="pages/UI/buttons.html"><i class="fa fa-circle-o"></i> Buttons</a></li>
-          <li><a href="pages/UI/sliders.html"><i class="fa fa-circle-o"></i> Sliders</a></li>
-          <li><a href="pages/UI/timeline.html"><i class="fa fa-circle-o"></i> Timeline</a></li>
-          <li><a href="pages/UI/modals.html"><i class="fa fa-circle-o"></i> Modals</a></li>
+          <li><a href="{{ route('employer.reports.showJobseekerReport') }}"><i class="fa fa-circle-o"></i> Jobseeker Profile Report</a></li>
+          <li><a href="{{ route('employer.reports.categoryWiseJobseekerProfileReport') }}"><i class="fa fa-circle-o"></i> Category-wise Jobseekers</a></li>
+          <li><a href="{{ route('employer.reports.locationWiseJobseekerProfileReport') }}"><i class="fa fa-circle-o"></i> Location-wise Jobseekers</a></li>
         </ul>
       </li>
       <li><a href="{{ route('logo.upload', Auth::user()->id ) }}"><i class="fa fa-gear"></i> <span>Account Settings</span></a></li>
