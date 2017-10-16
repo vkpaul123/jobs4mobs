@@ -127,20 +127,19 @@
 </script>
 
 @foreach ($jobApplications as $jobApplication)
-  {{-- expr --}}
-@endforeach
-<script>
-  function approveApp() {
-    event.preventDefault();
-    document.getElementById('applicationStatus[{{ $jobApplication->id }}]').value = "Approved";
-    document.getElementById('mailBody1[{{ $jobApplication->id }}]').value = "This Mail is regarding your Job Application for the vacancy in {{ Auth::user()->companyname }}. The Employer has Approved your Application. Please Contact the employer for further details.";
-  }
+  <script>
+    function approveApp() {
+      event.preventDefault();
+      document.getElementById('applicationStatus[{{ $jobApplication->id }}]').value = "Approved";
+      document.getElementById('mailBody1[{{ $jobApplication->id }}]').value = "This Mail is regarding your Job Application for the vacancy in {{ Auth::user()->companyname }}. The Employer has Approved your Application. Please Contact the employer for further details.";
+    }
 
-  function rejectApp() {
-    event.preventDefault();
-    document.getElementById('applicationStatus[{{ $jobApplication->id }}]').value = "Rejected";
-    document.getElementById('mailBody1[{{ $jobApplication->id }}]').value = "This Mail is regarding your Job Application for the vacancy in {{ Auth::user()->companyname }}. The Employer has Rejected your Application. Please Contact the employer for further details.";
-  }
-</script>
+    function rejectApp() {
+      event.preventDefault();
+      document.getElementById('applicationStatus[{{ $jobApplication->id }}]').value = "Rejected";
+      document.getElementById('mailBody1[{{ $jobApplication->id }}]').value = "This Mail is regarding your Job Application for the vacancy in {{ Auth::user()->companyname }}. The Employer has Rejected your Application. Please Contact the employer for further details.";
+    }
+  </script>
+@endforeach
 
 @endsection
