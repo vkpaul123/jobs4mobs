@@ -7,6 +7,7 @@ use App\Employer;
 use App\Http\Controllers\Controller;
 use App\JobApplication;
 use App\JobCategory;
+use App\JobseekerProfile;
 use App\Question;
 use App\Questionnaire;
 use App\Vacancy;
@@ -43,6 +44,21 @@ class PageController extends Controller
     	return view('JobSeeker.homepage.home')
         ->with(compact('popEmployers'))
         ->with(compact('recVacancies'));
+    }
+
+    public function myJobApplications() {
+        $jobseekerProfiles = JobseekerProfile::where('user_id', Auth::user()->id)->get();
+        $jobApplications = JobApplication::all();
+        
+        foreach ($jobApplications as $jobApplication) {
+            $jobApplication->vacancy_id = $jobApplication->vacancy_id." - ".Employer::find(Vacancy::find($jobApplication->vacancy_id)->employers_id)->companyname;
+
+            $jobApplication->jobseeker_profile_id = $jobApplication->jobseeker_profile_id." - ".JobCategory::find(JobseekerProfile::find($jobApplication->jobseeker_profile_id)->preferedJobCategoryId1)->name;
+        }
+
+        return view('JobSeeker.homepage.myJobApplications')
+        ->with(compact('jobseekerProfiles'))
+        ->with(compact('jobApplications'));
     }
 
     public function registerProfile() {

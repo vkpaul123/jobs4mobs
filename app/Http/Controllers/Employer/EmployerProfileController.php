@@ -66,7 +66,7 @@ class EmployerProfileController extends Controller
 
         $address = null;
         if ($employer->address_id) {
-            $address = Address::find($employer->address_id);
+            $address = Address::where('id', $employer->address_id)->get()->first();
         }
 
         return view('Employer.homepage.viewProfile')

@@ -59,8 +59,14 @@
 					</div>
 				</div>
 				<input type="hidden" id="id" name="id" value="{{ $user->id }}">
+				<center>
+					<p>
+						<b class="text-danger">
+							Please Upload a Square (1:1 aspect ratio) Picture Only.
+						</b>
+					</p>
+				</center>
 				<hr>
-
 				<div class="form-group">
 					<div class="col-md-offset-5 col-md-2">
 						<button type="submit" class="btn btn-primary btn-block pull-right"><strong>Submit</strong></button>

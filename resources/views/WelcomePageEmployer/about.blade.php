@@ -45,20 +45,20 @@
 	 	<div class="row centered">
 		 	<h3 class="mb">MEET OUR TEAM</h3>
 		 	
-		 	<div class="col-lg-3 col-md-3 col-sm-3">
+		 	<div class="col-lg-2 col-md-2 col-sm-2 col-lg-offset-3 col-md-offset-3 col-sm-offset-3">
 				<div class="he-wrap tpl6">
-				<img src="{{asset('assets/welcomePageEmployer/img/team/team01.jpg')}}" alt="">
+				<img src="{{asset('assets/welcomePage/img/team/team01.jpg')}}" alt="">
 					<div class="he-view">
 						
 					</div><!-- he view -->		
 				</div><!-- he wrap -->
-				<h4>Vikramsingh Dantkale</h4>
+				<h4>Vikramsinh Dantkale</h4>
 				<h5 class="ctitle">CEO</h5>
 				<p>Jobs4mobs - Find Your dream job TODAY!</p>
 				<div class="hline"></div>
-		 	</div><! --/col-lg-3 -->
+		 	</div><! --/col-lg-4 -->
 
-		 	<div class="col-lg-3 col-md-3 col-sm-3">
+		 	<div class="col-lg-2 col-md-2 col-sm-2">
 				<div class="he-wrap tpl6">
 				<img src="{{asset('assets/welcomePageEmployer/img/team/team02.jpg')}}" alt="">
 					<div class="he-view">
@@ -69,31 +69,18 @@
 				<h5 class="ctitle">LEAD DESIGNER</h5>
 				<p>Jobs4mobs - Find Your dream job TODAY!</p>
 				<div class="hline"></div>
-		 	</div><! --/col-lg-3 -->
+		 	</div><! --/col-lg-4 -->
 
-		 	<div class="col-lg-3 col-md-3 col-sm-3">
+		 	<div class="col-lg-2 col-md-2 col-sm-2">
 				<div class="he-wrap tpl6">
-				<img src="{{asset('assets/welcomePageEmployer/img/team/team03.jpg')}}" alt="">
+				<img src="{{asset('assets/welcomePage/img/team/team03.jpg')}}" alt="">
 						
 				</div><!-- he wrap -->
 				<h4>Sandeep Jose</h4>
 				<h5 class="ctitle">LEAD DEVELOPER</h5>
 				<p>Jobs4mobs - Find Your dream job TODAY!</p>
 				<div class="hline"></div>
-		 	</div><! --/col-lg-3 -->
-
-		 	<div class="col-lg-3 col-md-3 col-sm-3">
-				<div class="he-wrap tpl6">
-				<img src="{{asset('assets/welcomePageEmployer/img/team/team03.jpg')}}" alt="">
-					<div class="he-view">
-						
-					</div><!-- he view -->		
-				</div><!-- he wrap -->
-				<h4>Martin Blunt</h4>
-				<h5 class="ctitle">MARKETING</h5>
-				<p>Jobs4mobs - Find Your dream job TODAY!</p>
-				<div class="hline"></div>
-		 	</div><! --/col-lg-3 -->		 	
+		 	</div><! --/col-lg-3 -->	 	
 		 	
 	 	</div><! --/row -->
 	 </div><! --/container -->

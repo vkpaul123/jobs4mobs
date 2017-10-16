@@ -58,7 +58,13 @@
 						<input type="file" id="logo" name="logo" class="form-control pull-right">
 					</div>
 				</div>
-
+				<center>
+					<p>
+						<b class="text-danger">
+							Please Upload a Square (1:1 aspect ratio) Picture Only.
+						</b>
+					</p>
+				</center>
 				<hr>
 
 			<div class="form-group">

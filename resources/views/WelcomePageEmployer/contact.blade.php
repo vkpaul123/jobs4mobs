@@ -73,8 +73,7 @@
 					</p>
 				</center>
 			@endif
- 			<div class="hline"></div>
- 			<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.</p>
+ 			<div class="hline"></div><br><br>
  			<form method="post" action="{{ route('allUsers.sendMessage') }}">
  				{{ csrf_field() }}
  				<div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">

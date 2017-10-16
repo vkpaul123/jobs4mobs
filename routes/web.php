@@ -266,6 +266,8 @@ Route::group(['namespace' => 'JobSeeker'], function() {
 	Route::get('/home/contactAdmin', 'PageController@contactAdmin');
 	Route::put('/home/jobseekerAccount/changePassword', 'UserEditController@editPassword')->name('jobseeker.editPassword');
 
+	Route::get('/home/myJobApplications', 'PageController@myJobApplications')->name('jobseeker.myJobApplications');
+
 	//test
 	Route::get('/home/tests/showTestStart/{id}', 'PageController@showTestStart')->name('jobseeker.test.showTestStart');
 	Route::put('/home/tests/showTestStart/{id}/startTest', 'ApplyJobVacancyController@startTest')->name('jobseeker.test.startTest');

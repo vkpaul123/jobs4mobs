@@ -47,7 +47,7 @@
 		 	
 		 	<div class="col-lg-2 col-md-2 col-sm-2 col-lg-offset-3 col-md-offset-3 col-sm-offset-3">
 				<div class="he-wrap tpl6">
-				<img src="assets/welcomePage/img/team/team01.jpg" alt="">
+				<img src="{{asset('assets/welcomePage/img/team/team01.jpg')}}" alt="">
 					<div class="he-view">
 						
 					</div><!-- he view -->		
@@ -60,7 +60,7 @@
 
 		 	<div class="col-lg-2 col-md-2 col-sm-2">
 				<div class="he-wrap tpl6">
-				<img src="assets/welcomePage/img/team/team02.jpg" alt="">
+				<img src="{{asset('assets/welcomePageEmployer/img/team/team02.jpg')}}" alt="">
 					<div class="he-view">
 						
 					</div><!-- he view -->		
