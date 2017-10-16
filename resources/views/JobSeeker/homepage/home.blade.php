@@ -207,7 +207,7 @@
           <div class="box-body">
 
             @foreach ($recVacancies as $recVacancy)
-            <a href="{{ route('vacancy.show', $recVacancy->id) }}">
+            <a href="/home/viewVacancy/{{$recVacancy->id}}">
               <button class="btn-lg btn-default">{{ $recVacancy->employers_id }}</button>
             </a> &nbsp &nbsp
             @endforeach

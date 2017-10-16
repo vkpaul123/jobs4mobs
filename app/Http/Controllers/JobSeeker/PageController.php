@@ -37,7 +37,7 @@ class PageController extends Controller
         $recVacancies = Vacancy::orderBy('id', 'desc')->take(30)->get();
 
         foreach ($recVacancies as $recVacancy) {
-            $recVacancy->employers_id = Employer::where('id', $recVacancy->employers_id)->get()->first()->name;
+            $recVacancy->employers_id = Employer::find($recVacancy->employers_id)->companyname;
         }
 
     	return view('JobSeeker.homepage.home')

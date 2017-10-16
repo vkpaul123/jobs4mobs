@@ -26,7 +26,7 @@ class PageController extends Controller
         $recVacancies = Vacancy::where('employers_id', Auth::user()->id)->orderBy('id', 'desc')->take(5)->get();
 
         foreach ($recVacancies as $recVacancy) {
-            $recVacancy->employers_id = Employer::where('id', $recVacancy->employers_id)->get()->first()->name;
+            $recVacancy->employers_id = Employer::find($recVacancy->employers_id)->companyname;
         }
 
     	return view('Employer.homepage.home')
