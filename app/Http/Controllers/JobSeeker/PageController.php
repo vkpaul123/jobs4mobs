@@ -34,7 +34,7 @@ class PageController extends Controller
         elseif (env('DB_CONNECTION') == "pgsql")
             $popEmployers = Employer::orderByRaw('RANDOM()')->take(30)->get();
 
-        $recVacancies = Vacancy::->orderBy('id', 'desc')->take(30)->get();
+        $recVacancies = Vacancy::orderBy('id', 'desc')->take(30)->get();
 
         foreach ($recVacancies as $recVacancy) {
             $recVacancy->employers_id = Employer::where('id', $recVacancy->employers_id)->get()->first()->name;
