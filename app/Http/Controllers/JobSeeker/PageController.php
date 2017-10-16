@@ -28,7 +28,12 @@ class PageController extends Controller
     }
 	
     public function index() {
-        $popEmployers = Employer::orderByRaw('RAND()')->take(30)->get();
+        $popEmployers = null;
+        if(env('DB_CONNECTION') == "mysql")
+            $popEmployers = Employer::orderByRaw('RAND()')->take(30)->get();
+        elseif (env('DB_CONNECTION') == "pgsql")
+            $popEmployers = Employer::orderByRaw('RANDOM()')->take(30)->get();
+
         $recVacancies = Vacancy::where('employers_id', Auth::user()->id)->orderBy('id', 'desc')->take(30)->get();
 
         foreach ($recVacancies as $recVacancy) {
