@@ -74,7 +74,7 @@
               <input type="hidden" id="mailTo" name="mailTo" value="{{ $jobApplication->jobseeker_profile_id->user_id->email }}">
               <input type="hidden" id="mailToName" name="mailToName" value="{{ $jobApplication->jobseeker_profile_id->firstname }}">
               <input type="hidden" name="toSubject" id="toSubject" value="Job Application Status Update">
-              <input type="hidden" name="mailBody1[{{ $jobApplication->id }}]" id="mailBody[{{ $jobApplication->id }}]" value="">
+              <input type="hidden" name="mailBody1[{{ $jobApplication->id }}]" id="mailBody1[{{ $jobApplication->id }}]" value="">
             </form>
           </td>
         </tr>
