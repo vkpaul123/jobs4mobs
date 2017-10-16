@@ -37,13 +37,27 @@ class PageController extends Controller
 
         $recVacancies = Vacancy::orderBy('id', 'desc')->take(30)->get();
 
+        $jobseekerProfiles = JobseekerProfile::where('user_id', Auth::user()->id)->get();
+        $jobApplications = JobApplication::all();
+
+        $jobseekerProfiles = JobseekerProfile::where('user_id', Auth::user()->id)->get();
+        $jobApplications = JobApplication::all();
+        
+        foreach ($jobApplications as $jobApplication) {
+            $jobApplication->marks = Employer::find(Vacancy::find($jobApplication->vacancy_id)->employers_id)->companyname;
+
+            $jobApplication->testResult = $jobApplication->jobseeker_profile_id." - ".JobCategory::find(JobseekerProfile::find($jobApplication->jobseeker_profile_id)->preferedJobCategoryId1)->name;
+        }
+
         foreach ($recVacancies as $recVacancy) {
             $recVacancy->employers_id = Employer::find($recVacancy->employers_id)->companyname;
         }
 
     	return view('JobSeeker.homepage.home')
         ->with(compact('popEmployers'))
-        ->with(compact('recVacancies'));
+        ->with(compact('recVacancies'))
+        ->with(compact('jobseekerProfiles'))
+        ->with(compact('jobApplications'));
     }
 
     public function myJobApplications() {
@@ -51,9 +65,9 @@ class PageController extends Controller
         $jobApplications = JobApplication::all();
         
         foreach ($jobApplications as $jobApplication) {
-            $jobApplication->vacancy_id = $jobApplication->vacancy_id." - ".Employer::find(Vacancy::find($jobApplication->vacancy_id)->employers_id)->companyname;
+            $jobApplication->marks = $jobApplication->vacancy_id." - ".Employer::find(Vacancy::find($jobApplication->vacancy_id)->employers_id)->companyname;
 
-            $jobApplication->jobseeker_profile_id = $jobApplication->jobseeker_profile_id." - ".JobCategory::find(JobseekerProfile::find($jobApplication->jobseeker_profile_id)->preferedJobCategoryId1)->name;
+            $jobApplication->testResult = $jobApplication->jobseeker_profile_id." - ".JobCategory::find(JobseekerProfile::find($jobApplication->jobseeker_profile_id)->preferedJobCategoryId1)->name;
         }
 
         return view('JobSeeker.homepage.myJobApplications')

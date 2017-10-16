@@ -37,8 +37,7 @@
 								</center>
 							@endif
 				<div class="hline"></div>
-				<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.</p>
-
+<hr>
 				<div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
 					<label for="name" class="col-md-3 control-label">Name</label>
 					<div class="col-md-6">

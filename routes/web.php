@@ -209,9 +209,9 @@ Route::group(['namespace' => 'Employer'], function() {
 		//	Reports
 		Route::get('/home/reports/vacancyDetails', 'Reports\ReportsController@showVacancyReport')->name('employer.reports.vacancyDetails');
 		Route::get('/home/reports/locationWiseVacancyReport', 'Reports\ReportsController@locationWiseVacancyReport')->name('employer.reports.locationWiseVacancyReport');
-		Route::get('/home/reports/showReport/locationWiseJobseekerProfileReport','Reports\ReportsController@locationWiseJobseekerProfileReport')->name('employer.reports.locationWiseJobseekerProfileReport');		//PENDING C
-		Route::get('/home/reports/showReport/categoryWiseJobseekerProfileReport','Reports\ReportsController@categoryWiseJobseekerProfileReport')->name('employer.reports.categoryWiseJobseekerProfileReport');		//PENDING C
-		Route::get('/home/reports/showReport/showJobseekerReport','Reports\ReportsController@showJobseekerReport')->name('employer.reports.showJobseekerReport');														//PENDING
+		Route::get('/home/reports/showReport/locationWiseJobseekerProfileReport','Reports\ReportsController@locationWiseJobseekerProfileReport')->name('employer.reports.locationWiseJobseekerProfileReport');		 
+		Route::get('/home/reports/showReport/categoryWiseJobseekerProfileReport','Reports\ReportsController@categoryWiseJobseekerProfileReport')->name('employer.reports.categoryWiseJobseekerProfileReport');		 
+		Route::get('/home/reports/showReport/showJobseekerReport','Reports\ReportsController@showJobseekerReport')->name('employer.reports.showJobseekerReport');														
 	});	
 });
 

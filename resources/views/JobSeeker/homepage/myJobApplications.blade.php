@@ -33,6 +33,7 @@
               <table id="example2" class="table table-bordered table-hover">
                 <thead>
                 <tr>
+                  <th>ID</th>
                   <th>Vacancy</th>
                   <th>Jobseeker Profile</th>
                   <th>Application Status</th>
@@ -41,13 +42,18 @@
                 <tbody>
 				
 				@forelse($jobApplications as $jobApplication)
+        @foreach ($jobseekerProfiles as $jobseekerProfile)
+          @if ($jobseekerProfile->id == $jobApplication->jobseeker_profile_id)
 	                <tr>
-                    <td>{{ $jobApplication->vacancy_id }}</td>
-                    <td>{{ $jobApplication->jobseeker_profile_id }}</td>
+                    <td>{{ $jobApplication->id }}</td>
+                    <td>{{ $jobApplication->marks }}</td>
+                    <td>{{ $jobApplication->testResult }}</td>
 	                  <td><span class="@if($jobApplication->applicationStatus == 'Applied' || $jobApplication->applicationStatus == 'Finished Test') text-yellow @elseif($jobApplication->applicationStatus == 'Rejected' || $jobApplication->applicationStatus=='Disqualified') text-red @elseif($jobApplication->applicationStatus == 'Approved') text-green @else text-muted @endif">
                     <strong>{{ $jobApplication->applicationStatus }}</strong>
                   </span></td>
 	                </tr>
+          @endif
+        @endforeach
 				@empty
           <tr>
             <td><i>No Data!</i></td>
@@ -57,6 +63,7 @@
                 </tbody>
                 <tfoot>
                 <tr>
+                  <th>ID</th>
                   <th>Vacancy</th>
                   <th>Jobseeker Profile</th>
                   <th>Application Status</th>

@@ -52,7 +52,7 @@
 						
 					</div><!-- he view -->		
 				</div><!-- he wrap -->
-				<h4>Vikramsinh Dantkale</h4>
+				<h4>Vikramsinh<br>Dantkale</h4>
 				<h5 class="ctitle">CEO</h5>
 				<p>Jobs4mobs - Find Your dream job TODAY!</p>
 				<div class="hline"></div>
@@ -65,7 +65,7 @@
 						
 					</div><!-- he view -->		
 				</div><!-- he wrap -->
-				<h4>Amritha AP</h4>
+				<h4>Amritha<br>AP</h4>
 				<h5 class="ctitle">LEAD DESIGNER</h5>
 				<p>Jobs4mobs - Find Your dream job TODAY!</p>
 				<div class="hline"></div>
@@ -76,7 +76,7 @@
 				<img src="assets/welcomePage/img/team/team03.jpg" alt="">
 						
 				</div><!-- he wrap -->
-				<h4>Sandeep Jose</h4>
+				<h4>Sandeep<br>Jose</h4>
 				<h5 class="ctitle">LEAD DEVELOPER</h5>
 				<p>Jobs4mobs - Find Your dream job TODAY!</p>
 				<div class="hline"></div>

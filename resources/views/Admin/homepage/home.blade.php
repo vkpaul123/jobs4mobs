@@ -39,7 +39,7 @@
 
       <div class="col-md-4">
         <div class="info-box">
-          <span class="info-box-icon" style="background-color: #39cbdd;"><i class="fa fa-black-tie" style="color: white;"></i></span>
+          <span class="info-box-icon bg-aqua"><i class="fa fa-black-tie"></i></span>
 
           <div class="info-box-content">
             <span class="info-box-text">JobSeeker PRofiles</span>
@@ -72,7 +72,7 @@
 
       <div class="col-md-4">
         <div class="info-box">
-          <span class="info-box-icon" style="background-color: #dd3979;"><i class="fa fa-file-text-o" style="color: white;"></i></span>
+          <span class="info-box-icon bg-maroon"><i class="fa fa-file-text-o"></i></span>
 
           <div class="info-box-content">
             <span class="info-box-text">Tests</span>
