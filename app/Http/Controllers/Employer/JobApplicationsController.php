@@ -36,8 +36,10 @@ class JobApplicationsController extends Controller
     public function setApplicationStatus(Request $request, $id) {
     	$jobApplication = JobApplication::find($id);
 
-    	$jobApplication->applicationStatus = $request->applicationStatus;
+    	$jobApplication->applicationStatus = $request->applicationStatus[$id];
     	$jobApplication->save();
+
+        $request->mailBody = $request->mailBody1[$id];
 
     	Mail::send(new adminMail());
 

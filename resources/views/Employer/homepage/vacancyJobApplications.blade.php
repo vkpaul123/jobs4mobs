@@ -67,14 +67,14 @@
             <form action="{{ route('vacancy.setApplicationStatus', $jobApplication->id) }}" style="display: none;" id="setApplicationStatus-{{ $jobApplication->id }}" method="post">
               {{csrf_field()}}
               {{method_field('PUT')}}
-              <input type="hidden" name="applicationStatus" id="applicationStatus" value="">
+              <input type="hidden" name="applicationStatus[{{ $jobApplication->id }}]" id="applicationStatus[{{ $jobApplication->id }}]" value="">
 
               <input type="hidden" id="mailFrom" name="mailFrom" value="contact.jobs4mobs@gmail.com">
               <input type="hidden" id="fromName" name="fromName" value="Admin">
               <input type="hidden" id="mailTo" name="mailTo" value="{{ $jobApplication->jobseeker_profile_id->user_id->email }}">
               <input type="hidden" id="mailToName" name="mailToName" value="{{ $jobApplication->jobseeker_profile_id->firstname }}">
               <input type="hidden" name="toSubject" id="toSubject" value="Job Application Status Update">
-              <input type="hidden" name="mailBody" id="mailBody" value="">
+              <input type="hidden" name="mailBody1[{{ $jobApplication->id }}]" id="mailBody[{{ $jobApplication->id }}]" value="">
             </form>
           </td>
         </tr>
@@ -126,17 +126,20 @@
   })
 </script>
 
+@foreach ($jobApplications as $jobApplication)
+  {{-- expr --}}
+@endforeach
 <script>
   function approveApp() {
     event.preventDefault();
-    document.getElementById('applicationStatus').value = "Approved";
-    document.getElementById('mailBody').value = "This Mail is regarding your Job Application for the vacancy in {{ Auth::user()->companyname }}. The Employer has Approved your Application. Please Contact the employer for further details.";
+    document.getElementById('applicationStatus[{{ $jobApplication->id }}]').value = "Approved";
+    document.getElementById('mailBody1[{{ $jobApplication->id }}]').value = "This Mail is regarding your Job Application for the vacancy in {{ Auth::user()->companyname }}. The Employer has Approved your Application. Please Contact the employer for further details.";
   }
 
   function rejectApp() {
     event.preventDefault();
-    document.getElementById('applicationStatus').value = "Rejected";
-    document.getElementById('mailBody').value = "This Mail is regarding your Job Application for the vacancy in {{ Auth::user()->companyname }}. The Employer has Rejected your Application. Please Contact the employer for further details.";
+    document.getElementById('applicationStatus[{{ $jobApplication->id }}]').value = "Rejected";
+    document.getElementById('mailBody1[{{ $jobApplication->id }}]').value = "This Mail is regarding your Job Application for the vacancy in {{ Auth::user()->companyname }}. The Employer has Rejected your Application. Please Contact the employer for further details.";
   }
 </script>
 
