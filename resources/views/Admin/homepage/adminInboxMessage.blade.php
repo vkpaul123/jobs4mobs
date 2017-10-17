@@ -13,10 +13,10 @@
 		<small>messages to the Admin</small>
   </h1>
 
-	<ol class="breadcrumb">
-		<li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-		<li class="active">Admin Inbox Message</li>
-	</ol>
+  <ol class="breadcrumb">
+    <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+    <li class="active">Admin Inbox Message</li>
+  </ol>
 </section>
 
 <!-- Main content -->
@@ -26,7 +26,7 @@
 	<div class="box">
 		<div class="box-body">
 			<h4><span style="color: #d73925;"><strong>Sender</strong></span>
-      <a href="{{ route('admin.contact.inbox') }}"><button class="btn btn-danger pull-right">Back to <strong>Inbox</strong></button></a>
+        <a href="{{ route('admin.contact.inbox') }}"><button class="btn btn-danger pull-right">Back to <strong>Inbox</strong></button></a>
       </h4>
       <div class="row col-md-offset-2">
         <div class="col-md-2"><strong>Name:</strong></div>
@@ -53,11 +53,11 @@
 
       <hr>
       <h4><span style="color: #d73925;"><strong>Message</strong></span></h4>
-        <p>
-          {{ $message->message }} 
-        </p>
-		</div>
-	</div>
+      <p>
+        {{ $message->message }} 
+      </p>
+    </div>
+  </div>
 
   <div class="box box-danger">
     <div class="box-header with-border">
@@ -66,16 +66,21 @@
     
     <div class="box-body">
       @if (Session::has('message'))
-        <div class="alert alert-success">{{ Session::get('message') }}</div>
+      <div class="alert alert-success">{{ Session::get('message') }}</div>
       @endif
       @if(count($errors) > 0)
-        <center>
-          <p class="alert alert-danger">
-            <strong>
-              You Have Errors while submitting. Please Fill up the information in the Fields that are Highlighted in Red.
-            </strong>
-          </p>
-        </center>
+      <center>
+        <div class="alert alert-danger">
+          <button type="button" class="close" data-dismiss="alert"><i class="fa fa-times"></i></button>
+          <strong>
+            You Have Errors while submitting. Please Fill up the information in the Fields that are Highlighted in Red.
+          </strong>
+          <hr>
+          @foreach ($errors->all() as $error)
+          {{ $error }} <br>
+          @endforeach
+        </div>
+      </center>
       @endif
       
       <form action="{{ route('admin.contact.sendEmail') }}" method="post" class="form-horizontal">

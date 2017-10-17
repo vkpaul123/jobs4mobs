@@ -26,15 +26,30 @@
 		</div>
 
 		<div class="box-body">
-		@if(count($errors) > 0)
+			@if (Session::has('messageFail'))
+			<div class="alert alert-danger">{!! Session::get('messageFail') !!}
+				<button type="button" class="close" data-dismiss="alert"><i class="fa fa-times"></i></button>
+			</div>
+			@endif
+			@if (Session::has('messageSuccess'))
+			<div class="alert alert-success">{!! Session::get('messageSuccess') !!}
+				<button type="button" class="close" data-dismiss="alert"><i class="fa fa-times"></i></button>
+			</div>
+			@endif
+			@if(count($errors) > 0)
 			<center>
-				<p class="alert alert-danger">
+				<div class="alert alert-danger">
+					<button type="button" class="close" data-dismiss="alert"><i class="fa fa-times"></i></button>
 					<strong>
 						You Have Errors while submitting. Please Fill up the information in the Fields that are Highlighted in Red.
 					</strong>
-				</p>
+					<hr>
+					@foreach ($errors->all() as $error)
+					{{ $error }} <br>
+					@endforeach
+				</div>
 			</center>
-		@endif
+			@endif
 			<form action="{{ route('employerAddress.update', $address->id) }}" method="post" class="form-horizontal">
 				{{csrf_field()}}
 				{{method_field('put')}}
@@ -44,21 +59,21 @@
 				<div class="form-group{{ $errors->has('primaryPhoneNo') ? ' has-error' : '' }}">
 					<label for="primaryPhoneNo" class="col-md-3 control-label">Primary Phone Number<span class="text-red">*</span></label>
 					<div class="col-md-6">
-						<input type="number" class="form-control pull-right" id="primaryPhoneNo" name="primaryPhoneNo" placeholder="(Phone Number)" min="0" maxlength="16" value="{{ $address->primaryPhoneNo }}">
+						<input type="text" class="form-control pull-right" id="primaryPhoneNo" name="primaryPhoneNo" placeholder="(Phone Number)" min="0" maxlength="16" value="{{ $address->primaryPhoneNo }}">
 					</div>
 				</div>
 
 				<div class="form-group{{ $errors->has('secondaryPhnoeNo') ? ' has-error' : '' }}">
 					<label for="secondaryPhnoeNo" class="col-md-3 control-label">Secondary Phone Number</label>
 					<div class="col-md-6">
-						<input type="number" class="form-control pull-right" id="secondaryPhnoeNo" name="secondaryPhnoeNo" placeholder="(Phone Number)" min="0" maxlength="16" value="{{ $address->secondaryPhnoeNo }}">
+						<input type="text" class="form-control pull-right" id="secondaryPhnoeNo" name="secondaryPhnoeNo" placeholder="(Phone Number)" min="0" maxlength="16" value="{{ $address->secondaryPhnoeNo }}">
 					</div>
 				</div>
 
 				<div class="form-group{{ $errors->has('faxNo') ? ' has-error' : '' }}">
 					<label for="faxNo" class="col-md-3 control-label">FAX Number</label>
 					<div class="col-md-6">
-						<input type="number" class="form-control pull-right" id="faxNo" name="faxNo" placeholder="(Phone Number)" min="0" maxlength="16" value="{{ $address->faxNo }}">
+						<input type="text" class="form-control pull-right" id="faxNo" name="faxNo" placeholder="(Phone Number)" min="0" maxlength="16" value="{{ $address->faxNo }}">
 					</div>
 				</div>
 
@@ -75,7 +90,7 @@
 				<div class="form-group{{ $errors->has('postalCode') ? ' has-error' : '' }}">
 					<label for="postalCode" class="col-md-3 control-label">Postal Code<span class="text-red">*</span></label>
 					<div class="col-md-6">
-						<input type="number" class="form-control pull-right" id="postalCode" name="postalCode" placeholder="(Phone Number)" min="0" maxlength="6" value="{{ $address->postalCode }}">
+						<input type="text" class="form-control pull-right" id="postalCode" name="postalCode" placeholder="(Phone Number)" min="0" maxlength="6" value="{{ $address->postalCode }}">
 					</div>
 				</div>
 
@@ -114,28 +129,28 @@
 				<input type="hidden" name="id" value="{{ Auth::user()->id }}">
 				<div class="form-group{{ $errors->has('remember') ? ' has-error' : '' }}">
 					<div class="col-xs-10 col-md-offset-3">
-					<div class="checkbox icheck col-md-6">
-						<label>
-							<input type="checkbox" name="remember"> &nbsp The Information that is entered is correct!<span class="text-red">*</span>
-						</label>
+						<div class="checkbox icheck col-md-6">
+							<label>
+								<input type="checkbox" name="remember"> &nbsp The Information that is entered is correct!<span class="text-red">*</span>
+							</label>
+						</div>
 					</div>
 				</div>
-			</div>
 
-			<div class="form-group">
-				<div class="col-md-offset-5 col-md-2">
-					<button type="submit" class="btn btn-warning btn-block pull-right">Submit</button>
+				<div class="form-group">
+					<div class="col-md-offset-5 col-md-2">
+						<button type="submit" class="btn btn-warning btn-block pull-right">Submit</button>
+					</div>
 				</div>
-			</div>
-			{{-- end form --}}
-		</form>
+				{{-- end form --}}
+			</form>
+		</div>
+
+		<div class="box-footer">
+			<span class="text-red"><strong>*</strong></span>Required Fields
+		</div>
 	</div>
-	
-	<div class="box-footer">
-		<span class="text-red"><strong>*</strong></span>Required Fields
-	</div>
-</div>
-<!-- /.box -->
+	<!-- /.box -->
 
 </section>
 <!-- /.content -->

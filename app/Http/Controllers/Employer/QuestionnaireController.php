@@ -117,6 +117,7 @@ class QuestionnaireController extends Controller
         $questionnare->job_category_id = $request->job_category_id;
         $questionnare->save();
 
+        Session::flash('messageSuccess', 'Questionnaire updated Successfully.');
         return redirect(route('questionnareBuilder.index'));
     }
 
@@ -134,8 +135,8 @@ class QuestionnaireController extends Controller
     public function updatePassingMarks(Request $request, $id)
     {
         $this->validate($request, [
-            'passingMarks' => 'required',
-            'timelimit' => 'required',
+            'passingMarks' => 'required|numeric',
+            'timelimit' => 'required|numeric',
             ]);
 
         if(($request->questionsCount >= $request->passingMarks) && $request->passingMarks != 0) {

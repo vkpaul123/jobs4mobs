@@ -56,15 +56,30 @@
 		</div>
 
 		<div class="box-body">
-		@if(count($errors) > 0)
-			<center>
-				<p class="alert alert-danger">
-					<strong>
-						You Have Errors while submitting. Please Fill up the information in the Fields that are Highlighted in Red.
-					</strong>
-				</p>
-			</center>
-		@endif
+		@if (Session::has('messageFail'))
+			  <div class="alert alert-danger">{!! Session::get('messageFail') !!}
+			    <button type="button" class="close" data-dismiss="alert"><i class="fa fa-times"></i></button>
+			  </div>
+			@endif
+			@if (Session::has('messageSuccess'))
+			  <div class="alert alert-success">{!! Session::get('messageSuccess') !!}
+			    <button type="button" class="close" data-dismiss="alert"><i class="fa fa-times"></i></button>
+			  </div>
+			@endif
+			@if(count($errors) > 0)
+				<center>
+					<div class="alert alert-danger">
+						<button type="button" class="close" data-dismiss="alert"><i class="fa fa-times"></i></button>
+						<strong>
+							You Have Errors while submitting. Please Fill up the information in the Fields that are Highlighted in Red.
+						</strong>
+						<hr>
+						@foreach ($errors->all() as $error)
+							{{ $error }} <br>
+						@endforeach
+					</div>
+				</center>
+			@endif
 		
 			<form action="{{ route('vacancy.update', $vacancy->id) }}" method="post" class="form-horizontal">
 				{{csrf_field()}}
@@ -148,21 +163,21 @@
 				<div class="form-group{{ $errors->has('preferedworkexp') ? ' has-error' : '' }}">
 					<label for="preferedworkexp" class="col-md-3 control-label">Prefered Experience<span class="text-red">*</span></label>
 					<div class="col-md-6">
-						<input type="number" class="form-control pull-right" id="preferedworkexp" name="preferedworkexp" placeholder="Prefered Experience" min="0" value="{{ $vacancy->preferedworkexp }}">
+						<input type="text" maxlength="2" class="form-control pull-right" id="preferedworkexp" name="preferedworkexp" placeholder="Prefered Experience" min="0" value="{{ $vacancy->preferedworkexp }}">
 					</div>
 				</div>
 
 				<div class="form-group{{ $errors->has('noOfVacancies') ? ' has-error' : '' }}">
 					<label for="noOfVacancies" class="col-md-3 control-label">No of Vacancies<span class="text-red">*</span></label>
 					<div class="col-md-6">
-						<input type="number" class="form-control pull-right" id="noOfVacancies" name="noOfVacancies" placeholder="No of Vacancies" min="0" value="{{ $vacancy->noOfVacancies }}">
+						<input type="text" maxlength="5" class="form-control pull-right" id="noOfVacancies" name="noOfVacancies" placeholder="No of Vacancies" min="0" value="{{ $vacancy->noOfVacancies }}">
 					</div>
 				</div>
 
 				<div class="form-group{{ $errors->has('salary') ? ' has-error' : '' }}">
 					<label for="salary" class="col-md-3 control-label">Salary<span class="text-red">*</span></label>
 					<div class="col-md-6">
-						<input type="number" class="form-control pull-right" id="salary" name="salary" placeholder="Salary" min="0" value="{{ $vacancy->salary }}">
+						<input type="text" maxlength="7" class="form-control pull-right" id="salary" name="salary" placeholder="Salary" min="0" value="{{ $vacancy->salary }}">
 					</div> 
 				</div>
 

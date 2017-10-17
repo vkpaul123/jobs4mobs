@@ -8,6 +8,7 @@ use App\Vacancy;
 use Geocoder\Laravel\Facades\Geocoder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Response;
+use Illuminate\Support\Facades\Session;
 
 class VacancyAddressController extends Controller
 {
@@ -50,12 +51,12 @@ class VacancyAddressController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'primaryPhoneNo' => 'required',
+            'primaryPhoneNo' => 'required|numeric',
             'address' => 'required',
-            'postalCode' => 'required',
-            'cityName' => 'required',
-            'stateName' => 'required',
-            'countryName' => 'required',
+            'postalCode' => 'required|numeric',
+            'cityName' => 'required|regex:/^[\pL\s\-]+$/u',
+            'stateName' => 'required|regex:/^[\pL\s\-]+$/u',
+            'countryName' => 'required|regex:/^[\pL\s\-]+$/u',
 
             'remember' => 'required',
             ]);
@@ -105,7 +106,7 @@ class VacancyAddressController extends Controller
         $vacancy->address()->associate($address);
 
         $vacancy->save();
-
+        Session::flash('messageSuccess', 'Address Added Successfully.');
         return redirect(route('vacancy.show', $request->id));
     }
 
@@ -157,12 +158,12 @@ class VacancyAddressController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate($request, [
-            'primaryPhoneNo' => 'required',
+            'primaryPhoneNo' => 'required|numeric',
             'address' => 'required',
-            'postalCode' => 'required',
-            'cityName' => 'required',
-            'stateName' => 'required',
-            'countryName' => 'required',
+            'postalCode' => 'required|numeric',
+            'cityName' => 'required|regex:/^[\pL\s\-]+$/u',
+            'stateName' => 'required|regex:/^[\pL\s\-]+$/u',
+            'countryName' => 'required|regex:/^[\pL\s\-]+$/u',
 
             'remember' => 'required',
             ]);
@@ -216,6 +217,7 @@ class VacancyAddressController extends Controller
         $vacancy->vacancydescription = $tempDescr;
         $vacancy->save();
 
+        Session::flash('messageSuccess', 'Address updated Successfully.');
         return redirect(route('vacancy.show', $request->id));
     }
 

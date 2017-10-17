@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\JobseekerAchievement;
 use App\JobseekerProfile;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class JobseekerAchievementsController extends Controller
 {
@@ -61,6 +62,7 @@ class JobseekerAchievementsController extends Controller
 
         $jobseekerAchievements->save();
 
+        Session::flash('messageSuccess', 'Achievements Added Successfully.');
         return redirect()->back();
     }
 
@@ -114,6 +116,7 @@ class JobseekerAchievementsController extends Controller
 
         $jobseekerAchievements->save();
 
+        Session::flash('messageSuccess', 'Achievements updated Successfully.');
         return redirect(route('resume.show', $jobseekerAchievements->resume_id));
     }
 
@@ -127,6 +130,7 @@ class JobseekerAchievementsController extends Controller
     {
         JobseekerAchievement::where('id', $id)->delete();
 
+        Session::flash('messageSuccess', 'Achievements Deleted Successfully.');
         return redirect()->back();
     }
 }

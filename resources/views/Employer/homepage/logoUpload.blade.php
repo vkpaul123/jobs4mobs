@@ -21,11 +21,11 @@
 	<!-- Default box -->
 	<div class="box">
 
-	<div class="box-header with-border">
-		<div class="col-md-4 col-md-offset-4">
-			@isset(Auth::user()->photo)
+		<div class="box-header with-border">
+			<div class="col-md-4 col-md-offset-4">
+				@isset(Auth::user()->photo)
 				<img src="{{ Auth::user()->photo }}"  class="img-rounded img-responsive" alt="Profile Image"></img>
-			@else
+				@else
 				<div class="container-fluid">
 					<div class="jumbotron">
 						<center>
@@ -33,21 +33,36 @@
 						</center>
 					</div>
 				</div>
-			@endisset
+				@endisset
+			</div>
 		</div>
-	</div>
 
 		<div class="box-body">
+			@if (Session::has('messageFail'))
+			<div class="alert alert-danger">{!! Session::get('messageFail') !!}
+				<button type="button" class="close" data-dismiss="alert"><i class="fa fa-times"></i></button>
+			</div>
+			@endif
+			@if (Session::has('messageSuccess'))
+			<div class="alert alert-success">{!! Session::get('messageSuccess') !!}
+				<button type="button" class="close" data-dismiss="alert"><i class="fa fa-times"></i></button>
+			</div>
+			@endif
 			@if(count($errors) > 0)
 			<center>
-				<p class="alert alert-danger">
+				<div class="alert alert-danger">
+					<button type="button" class="close" data-dismiss="alert"><i class="fa fa-times"></i></button>
 					<strong>
 						You Have Errors while submitting. Please Fill up the information in the Fields that are Highlighted in Red.
 					</strong>
-				</p>
+					<hr>
+					@foreach ($errors->all() as $error)
+					{{ $error }} <br>
+					@endforeach
+				</div>
 			</center>
 			@endif
-		<br>
+			<br>
 			<form action="{{ route('logo.upload', $employer->id) }}" method="post" class="form-horizontal" enctype="multipart/form-data">
 				{{csrf_field()}}
 				{{ method_field('PUT') }}
@@ -67,19 +82,19 @@
 				</center>
 				<hr>
 
-			<div class="form-group">
-				<div class="col-md-offset-5 col-md-2">
-					<button type="submit" class="btn btn-warning btn-block pull-right"><strong>Submit</strong></button>
+				<div class="form-group">
+					<div class="col-md-offset-5 col-md-2">
+						<button type="submit" class="btn btn-warning btn-block pull-right"><strong>Submit</strong></button>
+					</div>
 				</div>
-			</div>
-			{{-- end form --}}
-		</form>
+				{{-- end form --}}
+			</form>
+		</div>
+
 	</div>
+	<!-- /.box -->
 
-</div>
-<!-- /.box -->
-
-<div class="box">
+	<div class="box">
 		<div class="box-header with-border">
 			<h3 class="box-title"><b>Change existing Password</b></h3>
 		</div>

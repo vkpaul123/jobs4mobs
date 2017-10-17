@@ -5,6 +5,7 @@ namespace App\Http\Controllers\JobSeeker;
 use App\Http\Controllers\Controller;
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
 
 class ProfilePicUploadController extends Controller
@@ -33,7 +34,7 @@ class ProfilePicUploadController extends Controller
     		$user->photo = $filename;
 
     		$user->save();
-    		
+    		Session::flash('messageSuccess', 'Profile Picture Added Successfully.');
     		return redirect()->back();
     	}
     }

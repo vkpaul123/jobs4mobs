@@ -6,6 +6,7 @@ use App\Address;
 use App\Employer;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class EmployerAddressController extends Controller
 {
@@ -48,12 +49,12 @@ class EmployerAddressController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'primaryPhoneNo' => 'required',
+            'primaryPhoneNo' => 'required|numeric',
             'address' => 'required',
-            'postalCode' => 'required',
-            'cityName' => 'required',
-            'stateName' => 'required',
-            'countryName' => 'required',
+            'postalCode' => 'required|numeric',
+            'cityName' => 'required|regex:/^[\pL\s\-]+$/u',
+            'stateName' => 'required|regex:/^[\pL\s\-]+$/u',
+            'countryName' => 'required|regex:/^[\pL\s\-]+$/u',
 
             'remember' => 'required',
             ]);
@@ -76,6 +77,7 @@ class EmployerAddressController extends Controller
 
         $employer->save();
 
+        Session::flash('messageSuccess', 'Address Added Successfully.');
         return redirect(route('employerProfile.show', $request->id));
     }
 
@@ -125,12 +127,12 @@ class EmployerAddressController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate($request, [
-            'primaryPhoneNo' => 'required',
+            'primaryPhoneNo' => 'required|numeric',
             'address' => 'required',
-            'postalCode' => 'required',
-            'cityName' => 'required',
-            'stateName' => 'required',
-            'countryName' => 'required',
+            'postalCode' => 'required|numeric',
+            'cityName' => 'required|regex:/^[\pL\s\-]+$/u',
+            'stateName' => 'required|regex:/^[\pL\s\-]+$/u',
+            'countryName' => 'required|regex:/^[\pL\s\-]+$/u',
 
             'remember' => 'required',
             ]);
@@ -156,6 +158,7 @@ class EmployerAddressController extends Controller
         $employer->description = $tempDescr;
         $employer->save();
 
+        Session::flash('messageSuccess', 'Address Updated Successfully.');
         return redirect(route('employerProfile.show', $request->id));
     }
 

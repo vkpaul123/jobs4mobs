@@ -5,30 +5,30 @@
 <link rel="stylesheet" href="{{asset('assets/userPage/bower_components/select2/dist/css/select2.min.css')}}">
 
 <style type="text/css">
-	[class^='select2'] {
-		border-radius: 0px !important;
-	}
+[class^='select2'] {
+	border-radius: 0px !important;
+}
 
-	.select2-container {
-		padding: 0px;
-		border-width: 0px;
-	}
-	.select2-container .select2-choice {
-		height: 38px;
-		line-height: 38px;
-	}
+.select2-container {
+	padding: 0px;
+	border-width: 0px;
+}
+.select2-container .select2-choice {
+	height: 38px;
+	line-height: 38px;
+}
 
-	.select2-container.form-control {
-		height: auto !important;
-	}
+.select2-container.form-control {
+	height: auto !important;
+}
 
-	.form-control{
-		-webkit-appearance:none;
-		-moz-appearance: none;
-		-ms-appearance: none;
-		-o-appearance: none;
-		appearance: none;
-	}
+.form-control{
+	-webkit-appearance:none;
+	-moz-appearance: none;
+	-ms-appearance: none;
+	-o-appearance: none;
+	appearance: none;
+}
 </style>
 @endsection
 
@@ -57,16 +57,31 @@
 
 		<div class="box-body">
 
-		@if(count($errors) > 0)
+			@if (Session::has('messageFail'))
+			<div class="alert alert-danger">{!! Session::get('messageFail') !!}
+				<button type="button" class="close" data-dismiss="alert"><i class="fa fa-times"></i></button>
+			</div>
+			@endif
+			@if (Session::has('messageSuccess'))
+			<div class="alert alert-success">{!! Session::get('messageSuccess') !!}
+				<button type="button" class="close" data-dismiss="alert"><i class="fa fa-times"></i></button>
+			</div>
+			@endif
+			@if(count($errors) > 0)
 			<center>
-				<p class="alert alert-danger">
+				<div class="alert alert-danger">
+					<button type="button" class="close" data-dismiss="alert"><i class="fa fa-times"></i></button>
 					<strong>
 						You Have Errors while submitting. Please Fill up the information in the Fields that are Highlighted in Red.
 					</strong>
-				</p>
+					<hr>
+					@foreach ($errors->all() as $error)
+					{{ $error }} <br>
+					@endforeach
+				</div>
 			</center>
-		@endif
-		
+			@endif
+
 			<form action="{{ route('address.store') }}" method="post" class="form-horizontal">
 				{{csrf_field()}}
 				
@@ -75,21 +90,21 @@
 				<div class="form-group{{ $errors->has('primaryPhoneNo') ? ' has-error' : '' }}">
 					<label for="primaryPhoneNo" class="col-md-3 control-label">Primary Phone Number<span class="text-red">*</span></label>
 					<div class="col-md-6">
-						<input type="number" class="form-control pull-right" id="primaryPhoneNo" name="primaryPhoneNo" placeholder="(Phone Number)" min="0" maxlength="16" value="{{old('primaryPhoneNo')}}">
+						<input type="text" class="form-control pull-right" id="primaryPhoneNo" name="primaryPhoneNo" placeholder="(Phone Number)" min="0" maxlength="16" value="{{old('primaryPhoneNo')}}">
 					</div>
 				</div>
 
 				<div class="form-group{{ $errors->has('secondaryPhnoeNo') ? ' has-error' : '' }}">
 					<label for="secondaryPhnoeNo" class="col-md-3 control-label">Secondary Phone Number</label>
 					<div class="col-md-6">
-						<input type="number" class="form-control pull-right" id="secondaryPhnoeNo" name="secondaryPhnoeNo" placeholder="(Phone Number)" min="0" maxlength="16" value="{{old('secondaryPhnoeNo')}}">
+						<input type="text" class="form-control pull-right" id="secondaryPhnoeNo" name="secondaryPhnoeNo" placeholder="(Phone Number)" min="0" maxlength="16" value="{{old('secondaryPhnoeNo')}}">
 					</div>
 				</div>
 
 				<div class="form-group{{ $errors->has('faxNo') ? ' has-error' : '' }}">
 					<label for="faxNo" class="col-md-3 control-label">FAX Number</label>
 					<div class="col-md-6">
-						<input type="number" class="form-control pull-right" id="faxNo" name="faxNo" placeholder="(Phone Number)" min="0" maxlength="16" value="{{old('faxNo')}}">
+						<input type="text" class="form-control pull-right" id="faxNo" name="faxNo" placeholder="(Phone Number)" min="0" maxlength="16" value="{{old('faxNo')}}">
 					</div>
 				</div>
 
@@ -106,7 +121,7 @@
 				<div class="form-group{{ $errors->has('postalCode') ? ' has-error' : '' }}">
 					<label for="postalCode" class="col-md-3 control-label">Postal Code<span class="text-red">*</span></label>
 					<div class="col-md-6">
-						<input type="number" class="form-control pull-right" id="postalCode" name="postalCode" placeholder="(Phone Number)" min="0" maxlength="6" value="{{old('postalCode')}}">
+						<input type="text" class="form-control pull-right" id="postalCode" name="postalCode" placeholder="(Phone Number)" min="0" maxlength="6" value="{{old('postalCode')}}">
 					</div>
 				</div>
 
@@ -145,38 +160,38 @@
 				<input type="hidden" name="jobseeker_profiles_id" id="jobseeker_profiles_id" value="{{$id}}">
 				<div class="form-group{{ $errors->has('remember') ? ' has-error' : '' }}">
 					<div class="col-xs-5 col-md-offset-3">
-					<div class="checkbox icheck">
-						<label>
-							<input type="checkbox" id="remember" name="remember"> &nbsp The Information that is entered is correct!<span class="text-red">*</span>
-						</label>
+						<div class="checkbox icheck">
+							<label>
+								<input type="checkbox" id="remember" name="remember"> &nbsp The Information that is entered is correct!<span class="text-red">*</span>
+							</label>
+						</div>
 					</div>
 				</div>
-			</div>
 
-			<div class="form-group">
-				<div class="col-md-offset-5 col-md-2">
-					<button type="submit" class="btn btn-primary btn-block pull-right"><strong>Submit</strong></button>
+				<div class="form-group">
+					<div class="col-md-offset-5 col-md-2">
+						<button type="submit" class="btn btn-primary btn-block pull-right"><strong>Submit</strong></button>
+					</div>
 				</div>
+				{{-- end form --}}
+			</form>
+		</div>
+
+		<div class="box-footer">
+			<span class="text-red"><strong>*</strong></span>Required Fields
+		</div>
+
+		<!-- /.box-body -->
+	</div>
+
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-md-offset-8 col-md-4">
+				<a href="/home/resumeBuilder/viewResume"><button type="button" class="btn btn-success btn-block pull-right btn-lg"><strong>Done</strong></button></a>
 			</div>
-			{{-- end form --}}
-		</form>
-	</div>
-
-	<div class="box-footer">
-		<span class="text-red"><strong>*</strong></span>Required Fields
-	</div>
-
-	<!-- /.box-body -->
-</div>
-
-<div class="container-fluid">
-	<div class="row">
-		<div class="col-md-offset-8 col-md-4">
-			<a href="/home/resumeBuilder/viewResume"><button type="button" class="btn btn-success btn-block pull-right btn-lg"><strong>Done</strong></button></a>
 		</div>
 	</div>
-</div>
-<!-- /.box -->
+	<!-- /.box -->
 
 </section>
 <!-- /.content -->

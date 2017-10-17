@@ -76,6 +76,7 @@ class QuestionsController extends Controller
         $question->questionnaire_id = $request->questionnaire_id;
         $question->save();
 
+        Session::flash('messageSuccess', 'Question Added Successfully.');
         return redirect(route('question.show', $request->questionnaire_id));
     }
 
@@ -146,6 +147,7 @@ class QuestionsController extends Controller
         $question->questionnaire_id = $request->questionnaire_id;
         $question->save();
 
+        Session::flash('messageSuccess', 'Question updated Successfully.');
         return redirect(route('question.show', $request->questionnaire_id));
     }
 

@@ -9,8 +9,10 @@ use App\JobseekerAcademics;
 use App\JobseekerExperience;
 use App\JobseekerProfile;
 use App\JobseekerSkill;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Session;
 
 
 class ProfileController extends Controller
@@ -59,22 +61,24 @@ class ProfileController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'firstname' => 'required',
-            'lastname' => 'required',
-            'dateOfBirth' => 'required',
+            'firstname' => 'required|alpha',
+            'lastname' => 'required|alpha',
+            'dateOfBirth' => 'required|before:'.Carbon::now()->toDateTimeString(),
             'gender' => 'required',
             'educationlevel' => 'required',
-            'experience' => 'required',
+            'experience' => 'required|numeric',
             'preferedJobCategoryId1' => 'required',
             'preferedJobCategoryId2' => 'required',
             'preferedworktype' => 'required',
-            'preferedsalary' => 'required',
-            'preferedcityofwork' => 'required',
-            'preferedcountryofwork' => 'required',
+            'preferedsalary' => 'required|numeric',
+            'preferedcityofwork' => 'required|regex:/^[\pL\s\-]+$/u',
+            'preferedcountryofwork' => 'required|regex:/^[\pL\s\-]+$/u',
             'tagline' => 'required',
 
             'remember' => 'required',
             ]);
+
+
 
         $jobseekerProfile = new JobseekerProfile;
 
@@ -97,6 +101,7 @@ class ProfileController extends Controller
 
         $jobseekerProfile->save();
 
+        Session::flash('messageSuccess', 'Profile Added Successfully.');
         return redirect(route('profile.index', $request->user_id));
        
     }
@@ -150,18 +155,18 @@ class ProfileController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate($request, [
-            'firstname' => 'required',
-            'lastname' => 'required',
-            'dateOfBirth' => 'required',
+            'firstname' => 'required|alpha',
+            'lastname' => 'required|alpha',
+            'dateOfBirth' => 'required|before:'.Carbon::now()->toDateTimeString(),
             'gender' => 'required',
             'educationlevel' => 'required',
-            'experience' => 'required',
+            'experience' => 'required|numeric',
             'preferedJobCategoryId1' => 'required',
             'preferedJobCategoryId2' => 'required',
             'preferedworktype' => 'required',
-            'preferedsalary' => 'required',
-            'preferedcityofwork' => 'required',
-            'preferedcountryofwork' => 'required',
+            'preferedsalary' => 'required|numeric',
+            'preferedcityofwork' => 'required|regex:/^[\pL\s\-]+$/u',
+            'preferedcountryofwork' => 'required|regex:/^[\pL\s\-]+$/u',
             'tagline' => 'required',
 
             'remember' => 'required',
@@ -187,7 +192,7 @@ class ProfileController extends Controller
         $jobseekerProfile->user_id = $request->user_id;
 
         $jobseekerProfile->save();
-
+        Session::flash('messageSuccess', 'Profile updated Successfully.');
         return redirect(route('profile.index', $request->user_id));
     }
 

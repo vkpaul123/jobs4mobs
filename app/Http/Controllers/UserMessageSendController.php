@@ -10,8 +10,8 @@ class UserMessageSendController extends Controller
 {
     public function sendMessage(Request $request) {
     	$this->validate($request, [
-    		'name' => 'required',
-    		'email' => 'required',
+    		'name' => 'required|regex:/^[\pL\s\-]+$/u',
+    		'email' => 'required|email',
     		'subject' => 'required',
     		'message' => 'required',
     	]);

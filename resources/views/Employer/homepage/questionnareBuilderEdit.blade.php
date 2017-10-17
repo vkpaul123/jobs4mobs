@@ -5,30 +5,30 @@
 <link rel="stylesheet" href="{{asset('assets/userPage/bower_components/select2/dist/css/select2.min.css')}}">
 
 <style type="text/css">
-	[class^='select2'] {
-		border-radius: 0px !important;
-	}
+[class^='select2'] {
+	border-radius: 0px !important;
+}
 
-	.select2-container {
-		padding: 0px;
-		border-width: 0px;
-	}
-	.select2-container .select2-choice {
-		height: 38px;
-		line-height: 38px;
-	}
+.select2-container {
+	padding: 0px;
+	border-width: 0px;
+}
+.select2-container .select2-choice {
+	height: 38px;
+	line-height: 38px;
+}
 
-	.select2-container.form-control {
-		height: auto !important;
-	}
+.select2-container.form-control {
+	height: auto !important;
+}
 
-	.form-control{
-		-webkit-appearance:none;
-		-moz-appearance: none;
-		-ms-appearance: none;
-		-o-appearance: none;
-		appearance: none;
-	}
+.form-control{
+	-webkit-appearance:none;
+	-moz-appearance: none;
+	-ms-appearance: none;
+	-o-appearance: none;
+	appearance: none;
+}
 </style>
 @endsection
 
@@ -53,7 +53,7 @@
 
 		<div class="box-body">
 			<br>
-		
+			
 			<div class="container-fluid">
 				<div class="row">
 					<div class="jumbotron">
@@ -65,53 +65,68 @@
 						</center>
 					</div>
 				</div>
+				@if (Session::has('messageFail'))
+				<div class="alert alert-danger">{!! Session::get('messageFail') !!}
+					<button type="button" class="close" data-dismiss="alert"><i class="fa fa-times"></i></button>
+				</div>
+				@endif
+				@if (Session::has('messageSuccess'))
+				<div class="alert alert-success">{!! Session::get('messageSuccess') !!}
+					<button type="button" class="close" data-dismiss="alert"><i class="fa fa-times"></i></button>
+				</div>
+				@endif
 				@if(count($errors) > 0)
-					<center>
-						<p class="alert alert-danger">
-							<strong>
-								You Have Errors while submitting. Please Fill up the information in the Fields that are Highlighted in Red.
-							</strong>
-						</p>
-					</center>
+				<center>
+					<div class="alert alert-danger">
+						<button type="button" class="close" data-dismiss="alert"><i class="fa fa-times"></i></button>
+						<strong>
+							You Have Errors while submitting. Please Fill up the information in the Fields that are Highlighted in Red.
+						</strong>
+						<hr>
+						@foreach ($errors->all() as $error)
+						{{ $error }} <br>
+						@endforeach
+					</div>
+				</center>
 				@endif
 				<form action="{{ route('questionnareBuilder.update', $questionnare->id) }}" id="questionnareBuilderForm" method="post">
 					{{ csrf_field() }}
 					{{ method_field('PUT') }}
 					<input type="hidden" name="employers_id" value="{{ Auth::user()->id }}">
 					<input type="hidden" name="buildOrUpload" id="buildOrUpload" value="">
-				<div class="row">
-					<h4 class="text-warning"><strong>Questionnaire ID: &nbsp </strong>{{ $questionnare->id }}</h4>
-					<hr>
-					<br>
-					<div class="form-group{{ $errors->has('job_category_id') ? ' has-error' : '' }}">
-						<label for="job_category_id" class="col-md-offset-2 col-md-2 control-label">Industry Type<span class="text-red">*</span></label>
-						<div class="col-md-6">
-							<select style="width: 100%;" class="select2 form-control" id="job_category_id" name="job_category_id">
-								<option value="">Choose an industry…</option>
+					<div class="row">
+						<h4 class="text-warning"><strong>Questionnaire ID: &nbsp </strong>{{ $questionnare->id }}</h4>
+						<hr>
+						<br>
+						<div class="form-group{{ $errors->has('job_category_id') ? ' has-error' : '' }}">
+							<label for="job_category_id" class="col-md-offset-2 col-md-2 control-label">Industry Type<span class="text-red">*</span></label>
+							<div class="col-md-6">
+								<select style="width: 100%;" class="select2 form-control" id="job_category_id" name="job_category_id">
+									<option value="">Choose an industry…</option>
 
-								@foreach($jobcategories as $jobcategory)
-								
-								<option value="{{ $jobcategory->id }}">{{ $jobcategory->name }}</option>
+									@foreach($jobcategories as $jobcategory)
+									
+									<option value="{{ $jobcategory->id }}">{{ $jobcategory->name }}</option>
 
-								@endforeach
+									@endforeach
 
-							</select>	
+								</select>	
+							</div>
+						</div>
+						<br><br>
+						<div class="form-group">
+							<div class="col-md-offset-5 col-md-2">
+								<button type="submit" class="btn btn-primary btn-block pull-right"><strong>Submit</strong></button>
+							</div>
 						</div>
 					</div>
-					<br><br>
-					<div class="form-group">
-						<div class="col-md-offset-5 col-md-2">
-							<button type="submit" class="btn btn-primary btn-block pull-right"><strong>Submit</strong></button>
-						</div>
-					</div>
-				</div>
-				
+					
 				</form>
 			</div>
 		</div>
 
 	</div>
-<!-- /.box -->
+	<!-- /.box -->
 
 </section>
 <!-- /.content -->

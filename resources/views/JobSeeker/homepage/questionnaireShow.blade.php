@@ -31,7 +31,7 @@
 					</span>
 				</div>
 				<!-- /.box-header -->
-
+				
 				<form role="form" action="{{ route('jobseeker.test.submitTest', $jobApplication->id) }}" method="post" id="testForm">
 					{{csrf_field()}}
 					{{method_field('PUT')}}

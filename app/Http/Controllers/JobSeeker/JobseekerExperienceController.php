@@ -5,7 +5,9 @@ namespace App\Http\Controllers\JobSeeker;
 use App\Http\Controllers\Controller;
 use App\JobseekerExperience;
 use App\JobseekerProfile;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class JobseekerExperienceController extends Controller
 {
@@ -48,14 +50,23 @@ class JobseekerExperienceController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'companyName' => 'required',
-            'companyLocation' => 'required',
-            'jobTitle' => 'required',
-            'jobTitle' => 'required',
-            'fromMonth' => 'required',
+            'companyName' => 'required|regex:/^[\pL\s\-]+$/u',
+            'companyLocation' => 'required|regex:/^[\pL\s\-]+$/u',
+            'jobTitle' => 'required|regex:/^[\pL\s\-]+$/u',
+            'fromMonth' => 'required|before:'.Carbon::now()->toDateTimeString(),
             'toMonth' => 'required',
-            'jobDescription' => 'required',
+            'jobDescription' => 'required|regex:/^[\pL\s\-]+$/u',
             ]);
+
+        if($request->toMonth != "Present") {
+            $myFrom = Carbon::parse($request->fromMonth);
+            $myTo = Carbon::parse($request->toMonth);
+
+            if($myTo->lte($myFrom)) {
+                Session::flash('messageFail', 'From Month cannot be greater than To Month!');
+                return redirect()->back();
+            }
+        }
 
         $jobseekerExperience = new JobseekerExperience;
         $jobseekerExperience->companyName = $request->companyName;
@@ -77,6 +88,7 @@ class JobseekerExperienceController extends Controller
         $jobseekerResume->tagline = $t;
         $jobseekerResume->save();
 
+        Session::flash('messageSuccess', 'Job Experience added successfully.');
         return redirect()->back();
     }
 
@@ -120,14 +132,23 @@ class JobseekerExperienceController extends Controller
     {
 
         $this->validate($request, [
-            'companyName' => 'required',
-            'companyLocation' => 'required',
-            'jobTitle' => 'required',
-            'jobTitle' => 'required',
-            'fromMonth' => 'required',
+            'companyName' => 'required|regex:/^[\pL\s\-]+$/u',
+            'companyLocation' => 'required|regex:/^[\pL\s\-]+$/u',
+            'jobTitle' => 'required|regex:/^[\pL\s\-]+$/u',
+            'fromMonth' => 'required|before:'.Carbon::now()->toDateTimeString(),
             'toMonth' => 'required',
-            'jobDescription' => 'required',
+            'jobDescription' => 'required|regex:/^[\pL\s\-]+$/u',
             ]);
+
+        if($request->toMonth != "Present") {
+            $myFrom = Carbon::parse($request->fromMonth);
+            $myTo = Carbon::parse($request->toMonth);
+
+            if($myTo->lte($myFrom)) {
+                Session::flash('messageFail', 'From Month cannot be greater than To Month!');
+                return redirect()->back();
+            }
+        }
 
         $jobseekerExperience = JobseekerExperience::find($id);
         $jobseekerExperience->companyName = $request->companyName;
@@ -146,6 +167,7 @@ class JobseekerExperienceController extends Controller
         $jobseekerResume->tagline = $t;
         $jobseekerResume->save();
 
+        Session::flash('messageSuccess', 'Job Experience Added Successfully.');
         return redirect(route('resume.show', $jobseekerExperience->jobseeker_profiles_id));
     }
 

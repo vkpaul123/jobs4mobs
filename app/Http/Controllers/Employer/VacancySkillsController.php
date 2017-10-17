@@ -7,6 +7,7 @@ use App\JobCategory;
 use App\Vacancy;
 use App\VacancySkill;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class VacancySkillsController extends Controller
 {
@@ -68,6 +69,7 @@ class VacancySkillsController extends Controller
         $vacancy->vacancydescription = $vacancydescription;
         $vacancy->save();
 
+        Session::flash('messageSuccess', 'Skill Added Successfully.');
         return redirect()->back();
     }
 
@@ -130,6 +132,7 @@ class VacancySkillsController extends Controller
         $vacancy->vacancydescription = $vacancydescription;
         $vacancy->save();
 
+        Session::flash('messageSuccess', 'Skill updated Successfully.');
         return redirect(route('vacancySkills.show', $id));
     }
 
@@ -151,6 +154,7 @@ class VacancySkillsController extends Controller
 
         VacancySkill::where('id', $id)->delete();
 
+        Session::flash('messageSuccess', 'Skill Deleted Successfully.');
         return redirect()->back();
     }
 }

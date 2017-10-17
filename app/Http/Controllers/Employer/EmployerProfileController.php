@@ -7,6 +7,7 @@ use App\Employer;
 use App\Http\Controllers\Controller;
 use App\JobCategory;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class EmployerProfileController extends Controller
 {
@@ -106,9 +107,9 @@ class EmployerProfileController extends Controller
             'companyType' => 'required',
             'companyCategory' => 'required',
             'jobCategoryId' => 'required',
-            'firstname' => 'required',
-            'lastname' => 'required',
-            'designation' => 'required',
+            'firstname' => 'required|regex:/^[\pL\s\-]+$/u',
+            'lastname' => 'required|regex:/^[\pL\s\-]+$/u',
+            'designation' => 'required|regex:/^[\pL\s\-]+$/u',
             
             'remember' => 'required',
             ]);
@@ -126,7 +127,7 @@ class EmployerProfileController extends Controller
         $employer->description = $request->description;
 
         $employer->save();
-
+        Session::flash('messageSuccess', 'Profile Updated Successfully.');
         return redirect(route('employerProfile.show', $id));
     }
 

@@ -19,9 +19,9 @@ class MailController extends Controller
     public function send(Request $request)
     {
     	$this->validate($request, [
-    		'fromName' => 'required',
-    		'mailTo' => 'required',
-    		'mailToName' => 'required',
+    		'fromName' => 'required|regex:/^[\pL\s\-]+$/u',
+    		'mailTo' => 'required|email',
+    		'mailToName' => 'required|regex:/^[\pL\s\-]+$/u',
     		'toSubject' => 'required',
     		'mailBody' => 'required',
     	]);

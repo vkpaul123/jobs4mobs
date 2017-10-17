@@ -6,6 +6,7 @@ use App\Address;
 use App\Http\Controllers\Controller;
 use App\JobseekerProfile;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class JobseekerAddressController extends Controller
 {
@@ -38,12 +39,12 @@ class JobseekerAddressController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'primaryPhoneNo' => 'required',
+            'primaryPhoneNo' => 'required|numeric',
             'address' => 'required',
-            'postalCode' => 'required',
-            'cityName' => 'required',
-            'stateName' => 'required',
-            'countryName' => 'required',
+            'postalCode' => 'required|numeric',
+            'cityName' => 'required|regex:/^[\pL\s\-]+$/u',
+            'stateName' => 'required|regex:/^[\pL\s\-]+$/u',
+            'countryName' => 'required|regex:/^[\pL\s\-]+$/u',
 
             'remember' => 'required',
             ]);
@@ -66,6 +67,7 @@ class JobseekerAddressController extends Controller
 
         $jobseekerProfile->save();
 
+        Session::flash('messageSuccess', 'Address Added Successfully.');
         return redirect(route('profile.show', $request->jobseeker_profiles_id));
     }
 
@@ -115,12 +117,12 @@ class JobseekerAddressController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate($request, [
-            'primaryPhoneNo' => 'required',
+            'primaryPhoneNo' => 'required|numeric',
             'address' => 'required',
-            'postalCode' => 'required',
-            'cityName' => 'required',
-            'stateName' => 'required',
-            'countryName' => 'required',
+            'postalCode' => 'required|numeric',
+            'cityName' => 'required|regex:/^[\pL\s\-]+$/u',
+            'stateName' => 'required|regex:/^[\pL\s\-]+$/u',
+            'countryName' => 'required|regex:/^[\pL\s\-]+$/u',
 
             'remember' => 'required',
             ]);
@@ -146,6 +148,7 @@ class JobseekerAddressController extends Controller
         $jobseekerProfile->tagline = $tempDescr;
         $jobseekerProfile->save();
 
+        Session::flash('messageSuccess', 'Address Updated Successfully.');
         return redirect()->back();
     }
 

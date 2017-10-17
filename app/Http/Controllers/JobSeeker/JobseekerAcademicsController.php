@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\JobseekerAcademics;
 use App\JobseekerProfile;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class JobseekerAcademicsController extends Controller
 {
@@ -49,10 +50,10 @@ class JobseekerAcademicsController extends Controller
     {
         $this->validate($request, [
             'qualificationText' => 'required',
-            'boardName' => 'required',
+            'boardName' => 'required|regex:/^[\pL\s\-]+$/u',
             'academyName' => 'required',
             'marks' => 'required',
-            'yearOfPassing' => 'required',
+            'yearOfPassing' => 'required|numeric',
             ]);
 
         $jobseekerAcademics = new JobseekerAcademics;
@@ -73,6 +74,7 @@ class JobseekerAcademicsController extends Controller
         $jobseekerResume->tagline = $t;
         $jobseekerResume->save();
 
+        Session::flash('messageSuccess', 'Academics Added Successfully.');
         return redirect()->back();
     }
 
@@ -116,10 +118,10 @@ class JobseekerAcademicsController extends Controller
     {
         $this->validate($request, [
             'qualificationText' => 'required',
-            'boardName' => 'required',
+            'boardName' => 'required|regex:/^[\pL\s\-]+$/u',
             'academyName' => 'required',
             'marks' => 'required',
-            'yearOfPassing' => 'required',
+            'yearOfPassing' => 'required|numeric',
             ]);
 
         $jobseekerAcademics = JobseekerAcademics::find($id);
@@ -138,6 +140,7 @@ class JobseekerAcademicsController extends Controller
         $jobseekerResume->tagline = $t;
         $jobseekerResume->save();
 
+        Session::flash('messageSuccess', 'Academics Updated Successfully.');
         return redirect(route('resume.show', $jobseekerAcademics->jobseeker_profiles_id));
     }
 
@@ -160,6 +163,7 @@ class JobseekerAcademicsController extends Controller
         $jobseekerResume->tagline = $t;
         $jobseekerResume->save();
 
+        Session::flash('messageSuccess', 'Academics Deleted Successfully.');
         return redirect()->back();
     }
 }

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Employer;
 use App\Employer;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
 
 class LogoUploadController extends Controller
@@ -43,7 +44,7 @@ class LogoUploadController extends Controller
     		$user->photo = $filename;
 
     		$user->save();
-    		
+    		Session::flash('messageSuccess', 'Logo Added Successfully.');
     		return redirect()->back();
     	}
     }

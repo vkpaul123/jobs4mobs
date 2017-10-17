@@ -5,30 +5,30 @@
 <link rel="stylesheet" href="{{asset('assets/userPage/bower_components/select2/dist/css/select2.min.css')}}">
 
 <style type="text/css">
-	[class^='select2'] {
-		border-radius: 0px !important;
-	}
+[class^='select2'] {
+	border-radius: 0px !important;
+}
 
-	.select2-container {
-		padding: 0px;
-		border-width: 0px;
-	}
-	.select2-container .select2-choice {
-		height: 38px;
-		line-height: 38px;
-	}
+.select2-container {
+	padding: 0px;
+	border-width: 0px;
+}
+.select2-container .select2-choice {
+	height: 38px;
+	line-height: 38px;
+}
 
-	.select2-container.form-control {
-		height: auto !important;
-	}
+.select2-container.form-control {
+	height: auto !important;
+}
 
-	.form-control{
-		-webkit-appearance:none;
-		-moz-appearance: none;
-		-ms-appearance: none;
-		-o-appearance: none;
-		appearance: none;
-	}
+.form-control{
+	-webkit-appearance:none;
+	-moz-appearance: none;
+	-ms-appearance: none;
+	-o-appearance: none;
+	appearance: none;
+}
 </style>
 @endsection
 
@@ -56,15 +56,30 @@
 
 		<div class="box-body">
 
-		@if(count($errors) > 0)
+			@if (Session::has('messageFail'))
+			<div class="alert alert-danger">{!! Session::get('messageFail') !!}
+				<button type="button" class="close" data-dismiss="alert"><i class="fa fa-times"></i></button>
+			</div>
+			@endif
+			@if (Session::has('messageSuccess'))
+			<div class="alert alert-success">{!! Session::get('messageSuccess') !!}
+				<button type="button" class="close" data-dismiss="alert"><i class="fa fa-times"></i></button>
+			</div>
+			@endif
+			@if(count($errors) > 0)
 			<center>
-				<p class="alert alert-danger">
+				<div class="alert alert-danger">
+					<button type="button" class="close" data-dismiss="alert"><i class="fa fa-times"></i></button>
 					<strong>
 						You Have Errors while submitting. Please Fill up the information in the Fields that are Highlighted in Red.
 					</strong>
-				</p>
+					<hr>
+					@foreach ($errors->all() as $error)
+					{{ $error }} <br>
+					@endforeach
+				</div>
 			</center>
-		@endif
+			@endif
 
 			<form action="{{ route('vacancySkills.store') }}" method="post" class="form-horizontal">
 				{{csrf_field()}}
@@ -130,9 +145,9 @@
 							<div class="row">
 								<div class="col-md-5" id="boardNameShow">
 									@foreach($jobcategories as $jobcategory)
-										@if($jobcategory->id == $skill->jobCategoryId)
-											{{ $jobcategory->name }}
-										@endif
+									@if($jobcategory->id == $skill->jobCategoryId)
+									{{ $jobcategory->name }}
+									@endif
 									@endforeach
 								</div>
 
@@ -160,15 +175,15 @@
 			</div>
 		</div>
 		@empty
-			<div class="row">
-				<div class="col-md-11">
-					<div class="jumbotron">
-						<center>
-						    <h4><span class="fa fa-exclamation-triangle"></span> &nbsp <span class="text-danger">You Don't have any Skills Details.<br><small>Please add your skills details.</small></span></h4>
-						</center>
-					</div>
+		<div class="row">
+			<div class="col-md-11">
+				<div class="jumbotron">
+					<center>
+						<h4><span class="fa fa-exclamation-triangle"></span> &nbsp <span class="text-danger">You Don't have any Skills Details.<br><small>Please add your skills details.</small></span></h4>
+					</center>
 				</div>
 			</div>
+		</div>
 		@endforelse
 
 		<div class="row">

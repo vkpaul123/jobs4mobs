@@ -7,6 +7,7 @@ use App\JobCategory;
 use App\JobseekerProfile;
 use App\JobseekerSkill;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class JobseekerSkillsController extends Controller
 {
@@ -52,7 +53,7 @@ class JobseekerSkillsController extends Controller
         $this->validate($request, [
             'skillName' => 'required',
             'jobCategoryId' => 'required',
-            'proficiencyLevel' => 'required',
+            'proficiencyLevel' => 'required|alpha',
             ]);
 
         $jobseekerSkill = new JobseekerSkill;
@@ -71,6 +72,7 @@ class JobseekerSkillsController extends Controller
         $jobseekerResume->tagline = $t;
         $jobseekerResume->save();
 
+        Session::flash('messageSuccess', 'Skill Added Successfully.');
         return redirect()->back();
     }
 
@@ -119,7 +121,7 @@ class JobseekerSkillsController extends Controller
         $this->validate($request, [
             'skillName' => 'required',
             'jobCategoryId' => 'required',
-            'proficiencyLevel' => 'required',
+            'proficiencyLevel' => 'required|alpha',
             ]);
 
         $jobseekerSkill = JobseekerSkill::find($id);
@@ -136,6 +138,7 @@ class JobseekerSkillsController extends Controller
         $jobseekerResume->tagline = $t;
         $jobseekerResume->save();
 
+        Session::flash('messageSuccess', 'Skill Updated Successfully.');
         return redirect(route('skills.show', $jobseekerSkill->jobseeker_profiles_id));
     }
 
@@ -158,6 +161,7 @@ class JobseekerSkillsController extends Controller
         $jobseekerResume->tagline = $t;
         $jobseekerResume->save();
         
+        Session::flash('messageSuccess', 'Skill Deleted Successfully.');
         return redirect()->back();
     }
 }

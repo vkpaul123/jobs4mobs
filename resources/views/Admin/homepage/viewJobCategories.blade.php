@@ -24,6 +24,30 @@
   <div class="box box-danger">
     <div class="box-header with-border">
       <h4 class="text-danger"><strong>Add/Edit Category</strong></h4>
+      @if (Session::has('messageFail'))
+      <div class="alert alert-danger">{!! Session::get('messageFail') !!}
+        <button type="button" class="close" data-dismiss="alert"><i class="fa fa-times"></i></button>
+      </div>
+      @endif
+      @if (Session::has('messageSuccess'))
+      <div class="alert alert-success">{!! Session::get('messageSuccess') !!}
+        <button type="button" class="close" data-dismiss="alert"><i class="fa fa-times"></i></button>
+      </div>
+      @endif
+      @if(count($errors) > 0)
+      <center>
+        <div class="alert alert-danger">
+          <button type="button" class="close" data-dismiss="alert"><i class="fa fa-times"></i></button>
+          <strong>
+            You Have Errors while submitting. Please Fill up the information in the Fields that are Highlighted in Red.
+          </strong>
+          <hr>
+          @foreach ($errors->all() as $error)
+          {{ $error }} <br>
+          @endforeach
+        </div>
+      </center>
+      @endif
       <form action="{{ route('viewJobCategories.store') }}" method="post" class="form-horizontal">
         {{csrf_field()}}
         <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
@@ -43,9 +67,9 @@
     <div class="box-header with-border">
       <h4 class="text-danger"><strong>Upload Category Excel File</strong></h4>
       @if (Session::has('message'))
-        <div class="alert alert-danger">{!! Session::get('message') !!}
-          <button type="button" class="close" data-dismiss="alert"><i class="fa fa-times"></i></button>
-        </div>
+      <div class="alert alert-danger">{!! Session::get('message') !!}
+        <button type="button" class="close" data-dismiss="alert"><i class="fa fa-times"></i></button>
+      </div>
       @endif
       <form action="{{ route('viewJobCategories.upload') }}" class="form-horizontal" enctype="multipart/form-data" method="post">
         {{csrf_field()}}
@@ -65,53 +89,53 @@
     </div>
   </div>
 
-	<!-- Default box -->
-	<div class="box">
-		<div class="box-header with-border">
-			<h3><strong>All Job Categories</strong></h3>
-		</div>
-		<div class="box-body">
-			<table id="questionnare" class="table table-bordered table-hover">
-        <thead>
-          <tr>
-            <th><span class="text-danger">ID</span></th>
-            <th><span class="text-danger">Category Name</span></th>
-            <th><span class="text-danger">Options</span></th>
-          </tr>
-        </thead>
-        <tbody>
-          @foreach($jobcategories as $jobcategory)
-          <tr>
-            <td>{{ $jobcategory->id }}</td>
-            <td>{{ $jobcategory->name }}</td>
-            <td>
-             <a href="#" onclick="document.getElementById('name').value = '{{$jobcategory->name}}'; document.getElementById('id').value = {{$jobcategory->id }};"><span class="glyphicon glyphicon-edit"></span></a> | <a href="#" onclick="
-                  if(confirm('Are You Sure, you want to delete this record?')) {
-                    event.preventDefault();
-                    document.getElementById('delete-jobcategory-{{ $jobcategory->id }}').submit();
-                  }
-                  else {
-                    event.preventDefault();
-                  }
-                  "><span class="glyphicon glyphicon-trash"></span></a>
-
-                  <form method="post" id="delete-jobcategory-{{ $jobcategory->id }}" action="{{ route('viewJobCategories.destroy', $jobcategory->id) }}" style="display: none;">
-                    {{ csrf_field() }}
-                    {{ method_field('DELETE') }}
-                  </form>
-           </td>
-         </tr>
-         @endforeach
-       </tbody>
-       <tfoot>
+  <!-- Default box -->
+  <div class="box">
+    <div class="box-header with-border">
+     <h3><strong>All Job Categories</strong></h3>
+   </div>
+   <div class="box-body">
+     <table id="questionnare" class="table table-bordered table-hover">
+      <thead>
         <tr>
           <th><span class="text-danger">ID</span></th>
           <th><span class="text-danger">Category Name</span></th>
           <th><span class="text-danger">Options</span></th>
         </tr>
-      </tfoot>
-    </table>
-  </div>
+      </thead>
+      <tbody>
+        @foreach($jobcategories as $jobcategory)
+        <tr>
+          <td>{{ $jobcategory->id }}</td>
+          <td>{{ $jobcategory->name }}</td>
+          <td>
+           <a href="#" onclick="document.getElementById('name').value = '{{$jobcategory->name}}'; document.getElementById('id').value = {{$jobcategory->id }};"><span class="glyphicon glyphicon-edit"></span></a> | <a href="#" onclick="
+           if(confirm('Are You Sure, you want to delete this record?')) {
+            event.preventDefault();
+            document.getElementById('delete-jobcategory-{{ $jobcategory->id }}').submit();
+          }
+          else {
+            event.preventDefault();
+          }
+          "><span class="glyphicon glyphicon-trash"></span></a>
+
+          <form method="post" id="delete-jobcategory-{{ $jobcategory->id }}" action="{{ route('viewJobCategories.destroy', $jobcategory->id) }}" style="display: none;">
+            {{ csrf_field() }}
+            {{ method_field('DELETE') }}
+          </form>
+        </td>
+      </tr>
+      @endforeach
+    </tbody>
+    <tfoot>
+      <tr>
+        <th><span class="text-danger">ID</span></th>
+        <th><span class="text-danger">Category Name</span></th>
+        <th><span class="text-danger">Options</span></th>
+      </tr>
+    </tfoot>
+  </table>
+</div>
 </div>
 <!-- /.box -->
 

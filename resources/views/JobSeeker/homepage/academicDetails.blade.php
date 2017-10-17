@@ -26,15 +26,30 @@
 
 		<div class="box-body">
 
-		@if(count($errors) > 0)
+			@if (Session::has('messageFail'))
+			<div class="alert alert-danger">{!! Session::get('messageFail') !!}
+				<button type="button" class="close" data-dismiss="alert"><i class="fa fa-times"></i></button>
+			</div>
+			@endif
+			@if (Session::has('messageSuccess'))
+			<div class="alert alert-success">{!! Session::get('messageSuccess') !!}
+				<button type="button" class="close" data-dismiss="alert"><i class="fa fa-times"></i></button>
+			</div>
+			@endif
+			@if(count($errors) > 0)
 			<center>
-				<p class="alert alert-danger">
+				<div class="alert alert-danger">
+					<button type="button" class="close" data-dismiss="alert"><i class="fa fa-times"></i></button>
 					<strong>
 						You Have Errors while submitting. Please Fill up the information in the Fields that are Highlighted in Red.
 					</strong>
-				</p>
+					<hr>
+					@foreach ($errors->all() as $error)
+					{{ $error }} <br>
+					@endforeach
+				</div>
 			</center>
-		@endif
+			@endif
 
 			<form action="{{ route('academics.store') }}" method="post" class="form-horizontal">
 				{{csrf_field()}}
@@ -63,7 +78,7 @@
 				<div class="form-group{{ $errors->has('marks') ? ' has-error' : '' }}">
 					<label for="marks" class="col-md-3 control-label">Marks</label>
 					<div class="col-md-6">
-						<input type="number" class="form-control pull-right" id="marks" name="marks" placeholder="Marks Obtained" min="0" value="{{ old('marks') }}">
+						<input type="text" maxlength="6" class="form-control pull-right" id="marks" name="marks" placeholder="Marks Obtained" min="0" value="{{ old('marks') }}">
 					</div>
 				</div>
 
@@ -147,15 +162,15 @@
 			</div>
 		</div>
 		@empty
-			<div class="row">
-				<div class="col-md-11">
-					<div class="jumbotron">
-						<center>
-						    <h4><span class="fa fa-exclamation-triangle"></span> &nbsp <span class="text-danger">You Don't have any Academic Details.<br><small>Please add your academic details.</small></span></h4>
-						</center>
-					</div>
+		<div class="row">
+			<div class="col-md-11">
+				<div class="jumbotron">
+					<center>
+						<h4><span class="fa fa-exclamation-triangle"></span> &nbsp <span class="text-danger">You Don't have any Academic Details.<br><small>Please add your academic details.</small></span></h4>
+					</center>
 				</div>
 			</div>
+		</div>
 		@endforelse
 
 		<div class="row">

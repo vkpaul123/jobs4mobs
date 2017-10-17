@@ -58,6 +58,7 @@ class JobCategoriesController extends Controller
         $jobcategory->name = $request->name;
         $jobcategory->save();
 
+        Session::flash('messageSuccess', 'JobCategory Added Successfully.');
         return redirect()->back();
     }
 

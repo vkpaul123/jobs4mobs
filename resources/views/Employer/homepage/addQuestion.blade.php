@@ -5,30 +5,30 @@
 <link rel="stylesheet" href="{{asset('assets/userPage/bower_components/select2/dist/css/select2.min.css')}}">
 
 <style type="text/css">
-	[class^='select2'] {
-		border-radius: 0px !important;
-	}
+[class^='select2'] {
+	border-radius: 0px !important;
+}
 
-	.select2-container {
-		padding: 0px;
-		border-width: 0px;
-	}
-	.select2-container .select2-choice {
-		height: 38px;
-		line-height: 38px;
-	}
+.select2-container {
+	padding: 0px;
+	border-width: 0px;
+}
+.select2-container .select2-choice {
+	height: 38px;
+	line-height: 38px;
+}
 
-	.select2-container.form-control {
-		height: auto !important;
-	}
+.select2-container.form-control {
+	height: auto !important;
+}
 
-	.form-control{
-		-webkit-appearance:none;
-		-moz-appearance: none;
-		-ms-appearance: none;
-		-o-appearance: none;
-		appearance: none;
-	}
+.form-control{
+	-webkit-appearance:none;
+	-moz-appearance: none;
+	-ms-appearance: none;
+	-o-appearance: none;
+	appearance: none;
+}
 </style>
 @endsection
 
@@ -55,15 +55,30 @@
 		</div>
 
 		<div class="box-body">
-		@if(count($errors) > 0)
+			@if (Session::has('messageFail'))
+			<div class="alert alert-danger">{!! Session::get('messageFail') !!}
+				<button type="button" class="close" data-dismiss="alert"><i class="fa fa-times"></i></button>
+			</div>
+			@endif
+			@if (Session::has('messageSuccess'))
+			<div class="alert alert-success">{!! Session::get('messageSuccess') !!}
+				<button type="button" class="close" data-dismiss="alert"><i class="fa fa-times"></i></button>
+			</div>
+			@endif
+			@if(count($errors) > 0)
 			<center>
-				<p class="alert alert-danger">
+				<div class="alert alert-danger">
+					<button type="button" class="close" data-dismiss="alert"><i class="fa fa-times"></i></button>
 					<strong>
 						You Have Errors while submitting. Please Fill up the information in the Fields that are Highlighted in Red.
 					</strong>
-				</p>
+					<hr>
+					@foreach ($errors->all() as $error)
+					{{ $error }} <br>
+					@endforeach
+				</div>
 			</center>
-		@endif
+			@endif
 			<form action="{{ route('question.store') }}" method="post" class="form-horizontal">
 				{{csrf_field()}}
 				
@@ -128,21 +143,21 @@
 
 				<hr>
 
-			<div class="form-group">
-				<div class="col-md-offset-5 col-md-2">
-					<button type="submit" class="btn btn-warning btn-block pull-right">Submit</button>
+				<div class="form-group">
+					<div class="col-md-offset-5 col-md-2">
+						<button type="submit" class="btn btn-warning btn-block pull-right">Submit</button>
+					</div>
 				</div>
-			</div>
-			{{-- end form --}}
-		</form>
-	</div>
+				{{-- end form --}}
+			</form>
+		</div>
 
-	<div class="box-footer">
-		<span class="text-red"><strong>*</strong></span>Required Fields
+		<div class="box-footer">
+			<span class="text-red"><strong>*</strong></span>Required Fields
+		</div>
+		<!-- /.box-footer-->
 	</div>
-	<!-- /.box-footer-->
-</div>
-<!-- /.box -->
+	<!-- /.box -->
 
 </section>
 <!-- /.content -->

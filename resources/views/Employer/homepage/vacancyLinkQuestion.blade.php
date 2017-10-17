@@ -69,6 +69,20 @@
 			    <button type="button" class="close" data-dismiss="alert"><i class="fa fa-times"></i></button>
 			  </div>
 			@endif
+			@if(count($errors) > 0)
+				<center>
+					<div class="alert alert-danger">
+						<button type="button" class="close" data-dismiss="alert"><i class="fa fa-times"></i></button>
+						<strong>
+							You Have Errors while submitting. Please Fill up the information in the Fields that are Highlighted in Red.
+						</strong>
+						<hr>
+						@foreach ($errors->all() as $error)
+							{{ $error }} <br>
+						@endforeach
+					</div>
+				</center>
+			@endif
 			<form action="{{ route('vacancy.questionnare.storeLink') }}" method="post" class="form-horizontal">
 				{{csrf_field()}}
 

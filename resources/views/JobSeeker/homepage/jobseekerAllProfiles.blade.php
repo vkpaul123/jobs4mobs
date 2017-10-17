@@ -5,30 +5,30 @@
 <link rel="stylesheet" href="{{asset('assets/userPage/bower_components/select2/dist/css/select2.min.css')}}">
 
 <style type="text/css">
-	[class^='select2'] {
-		border-radius: 0px !important;
-	}
+[class^='select2'] {
+	border-radius: 0px !important;
+}
 
-	.select2-container {
-		padding: 0px;
-		border-width: 0px;
-	}
-	.select2-container .select2-choice {
-		height: 38px;
-		line-height: 38px;
-	}
+.select2-container {
+	padding: 0px;
+	border-width: 0px;
+}
+.select2-container .select2-choice {
+	height: 38px;
+	line-height: 38px;
+}
 
-	.select2-container.form-control {
-		height: auto !important;
-	}
+.select2-container.form-control {
+	height: auto !important;
+}
 
-	.form-control{
-		-webkit-appearance:none;
-		-moz-appearance: none;
-		-ms-appearance: none;
-		-o-appearance: none;
-		appearance: none;
-	}
+.form-control{
+	-webkit-appearance:none;
+	-moz-appearance: none;
+	-ms-appearance: none;
+	-o-appearance: none;
+	appearance: none;
+}
 </style>
 @endsection
 
@@ -48,7 +48,16 @@
 
 <!-- Main content -->
 <section class="content">
-	
+	@if (Session::has('messageFail'))
+	<div class="alert alert-danger">{!! Session::get('messageFail') !!}
+		<button type="button" class="close" data-dismiss="alert"><i class="fa fa-times"></i></button>
+	</div>
+	@endif
+	@if (Session::has('messageSuccess'))
+	<div class="alert alert-success">{!! Session::get('messageSuccess') !!}
+		<button type="button" class="close" data-dismiss="alert"><i class="fa fa-times"></i></button>
+	</div>
+	@endif
 	@forelse($jobseekerProfiles as $jobseekerProfile)
 
 	<div class="box">
@@ -75,17 +84,17 @@
 										<br>
 										<b class="fa fa-hand-pointer-o"></b> &nbsp
 										@foreach($jobcategories as $jobcategory)
-											@if($jobcategory->id == $jobseekerProfile->preferedJobCategoryId1)
-												{{ $jobcategory->name }}
-											@endif
+										@if($jobcategory->id == $jobseekerProfile->preferedJobCategoryId1)
+										{{ $jobcategory->name }}
+										@endif
 										@endforeach
 
 										<br>
 										<b class="fa fa-hand-peace-o"></b> &nbsp
 										@foreach($jobcategories as $jobcategory)
-											@if($jobcategory->id == $jobseekerProfile->preferedJobCategoryId2)
-												{{ $jobcategory->name }}
-											@endif
+										@if($jobcategory->id == $jobseekerProfile->preferedJobCategoryId2)
+										{{ $jobcategory->name }}
+										@endif
 										@endforeach
 									</div>
 									<div class="col-md-4">
@@ -115,17 +124,17 @@
 	
 
 	@empty
-		<div class="box">
-			<div class="box-body">
-				<div class="container-fluid">
-					<div class="jumbotron">
-						<center>
-							<h4><span class="fa fa-exclamation-triangle"></span> &nbsp <span class="text-danger">You Don't have any Profiles created.<br><small>Please Create a Profile.</small></span></h4>
-						</center>
-					</div>
+	<div class="box">
+		<div class="box-body">
+			<div class="container-fluid">
+				<div class="jumbotron">
+					<center>
+						<h4><span class="fa fa-exclamation-triangle"></span> &nbsp <span class="text-danger">You Don't have any Profiles created.<br><small>Please Create a Profile.</small></span></h4>
+					</center>
 				</div>
 			</div>
 		</div>
+	</div>
 	@endforelse
 
 	<div class="container">

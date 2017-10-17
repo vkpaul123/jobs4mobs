@@ -5,8 +5,8 @@
 @section('body')
 
 <section class="content-header">
-  <h1><span style="color: #d73925;"><strong>Admin</strong></span> Add New Admin<small> &nbsp create new Sub-Admin</small></h1>
-  <ol class="breadcrumb">
+	<h1><span style="color: #d73925;"><strong>Admin</strong></span> Add New Admin<small> &nbsp create new Sub-Admin</small></h1>
+	<ol class="breadcrumb">
 		<li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
 		<li class="active">Add New Admin</li>
 	</ol>
@@ -22,24 +22,28 @@
 
 		<div class="box-body">
 			@if (Session::has('messageFail'))
-			  <div class="alert alert-danger">{!! Session::get('messageFail') !!}
-			    <button type="button" class="close" data-dismiss="alert"><i class="fa fa-times"></i></button>
-			  </div>
+			<div class="alert alert-danger">{!! Session::get('messageFail') !!}
+				<button type="button" class="close" data-dismiss="alert"><i class="fa fa-times"></i></button>
+			</div>
 			@endif
 			@if (Session::has('messageSuccess'))
-			  <div class="alert alert-success">{!! Session::get('messageSuccess') !!}
-			    <button type="button" class="close" data-dismiss="alert"><i class="fa fa-times"></i></button>
-			  </div>
+			<div class="alert alert-success">{!! Session::get('messageSuccess') !!}
+				<button type="button" class="close" data-dismiss="alert"><i class="fa fa-times"></i></button>
+			</div>
 			@endif
 			@if(count($errors) > 0)
-				<center>
-					<p class="alert alert-danger">
-						<strong>
-							You Have Errors while submitting. Please Fill up the information in the Fields that are Highlighted in Red.
-						</strong>
-						<button type="button" class="close" data-dismiss="alert"><i class="fa fa-times"></i></button>
-					</p>
-				</center>
+			<center>
+				<div class="alert alert-danger">
+					<button type="button" class="close" data-dismiss="alert"><i class="fa fa-times"></i></button>
+					<strong>
+						You Have Errors while submitting. Please Fill up the information in the Fields that are Highlighted in Red.
+					</strong>
+					<hr>
+					@foreach ($errors->all() as $error)
+					{{ $error }} <br>
+					@endforeach
+				</div>
+			</center>
 			@endif
 			<form action="{{ route('admin.addAdmin.add') }}" method="post" class="form-horizontal">
 				{{csrf_field()}}
@@ -107,26 +111,26 @@
 
 				<div class="form-group">
 					<div class="col-xs-10 col-md-offset-3">
-					<div class="checkbox icheck col-md-6">
-						<label>
-							<input type="checkbox" name="remember"> &nbsp The Information that is entered is correct!
-						</label>
+						<div class="checkbox icheck col-md-6">
+							<label>
+								<input type="checkbox" name="remember"> &nbsp The Information that is entered is correct!
+							</label>
+						</div>
 					</div>
 				</div>
-			</div>
 
-			<div class="form-group">
-				<div class="col-md-offset-5 col-md-2">
-					<button type="submit" class="btn btn-danger btn-block pull-right">Submit</button>
+				<div class="form-group">
+					<div class="col-md-offset-5 col-md-2">
+						<button type="submit" class="btn btn-danger btn-block pull-right">Submit</button>
+					</div>
 				</div>
-			</div>
-			{{-- end form --}}
-		</form>
-	</div>
+				{{-- end form --}}
+			</form>
+		</div>
 
-	<!-- /.box-body -->
-</div>
-<!-- /.box -->
+		<!-- /.box-body -->
+	</div>
+	<!-- /.box -->
 
 </section>
 

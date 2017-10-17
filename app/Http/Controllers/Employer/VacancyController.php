@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\JobCategory;
 use App\Vacancy;
 use App\VacancySkill;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 
@@ -60,13 +61,13 @@ class VacancyController extends Controller
         $this->validate($request, [
             'jobcategoryId' => 'required',
             'preferedworktype' => 'required',
-            'openingDate' => 'required',
-            'closingDate' => 'required',
+            'openingDate' => 'required|after:'.Carbon::now()->subDay()->toDateTimeString(),
+            'closingDate' => 'required|after:'.Carbon::now()->toDateTimeString(),
             'preferedednlevel' => 'required',
-            'preferedworkexp' => 'required',
-            'salary' => 'required',
-            'noOfVacancies' => 'required',
-            'jobdesignation' => 'required',
+            'preferedworkexp' => 'required|numeric',
+            'salary' => 'required|numeric',
+            'noOfVacancies' => 'required|numeric',
+            'jobdesignation' => 'required|regex:/^[\pL\s\-]+$/u',
             'jobSpecification' => 'required',
             'jobDescription' => 'required',
         
@@ -92,6 +93,7 @@ class VacancyController extends Controller
 
         $vacancy->save();
 
+        Session::flash('messageSuccess', 'Vacancy created Successfully.');
         return redirect(route('vacancies.index', $request->id));
     }
 
@@ -146,13 +148,13 @@ class VacancyController extends Controller
         $this->validate($request, [
             'jobcategoryId' => 'required',
             'preferedworktype' => 'required',
-            'openingDate' => 'required',
-            'closingDate' => 'required',
+            'openingDate' => 'required|after:'.Carbon::now()->subDay()->toDateTimeString(),
+            'closingDate' => 'required|after:'.Carbon::now()->toDateTimeString(),
             'preferedednlevel' => 'required',
-            'preferedworkexp' => 'required',
-            'salary' => 'required',
-            'noOfVacancies' => 'required',
-            'jobdesignation' => 'required',
+            'preferedworkexp' => 'required|numeric',
+            'salary' => 'required|numeric',
+            'noOfVacancies' => 'required|numeric',
+            'jobdesignation' => 'required|regex:/^[\pL\s\-]+$/u',
             'jobSpecification' => 'required',
             'jobDescription' => 'required',
         
@@ -176,7 +178,7 @@ class VacancyController extends Controller
         $vacancy->vacancydescription = $request->vacancydescription;
 
         $vacancy->save();
-
+        Session::flash('messageSuccess', 'Vacancy updated Successfully.');
         return redirect(route('vacancy.show', $id));
     }
 
